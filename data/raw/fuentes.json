@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "ultima_actualizacion": "2024-12-31",
+  "fuentes": [
+    {
+      "id": "dane_ipc",
+      "nombre": "Índice de Precios al Consumidor (IPC)",
+      "entidad": "DANE — Departamento Administrativo Nacional de Estadística",
+      "url_fuente": "https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc",
+      "archivo_procesado": "data/processed/ipc_colombia.csv",
+      "cobertura_temporal": "2000-01 a 2024-12",
+      "frecuencia": "Mensual",
+      "descripcion": "IPC base diciembre 2018=100. Mide la variación porcentual promedio de los precios al por menor de una canasta de bienes y servicios de los hogares colombianos.",
+      "licencia": "Datos públicos del gobierno colombiano — uso libre con atribución",
+      "fecha_descarga": "2024-12-31",
+      "notas": "Serie empalme 2000-2018 ajustada a base 2018=100 para comparabilidad histórica"
+    },
+    {
+      "id": "banrep_trm",
+      "nombre": "Tasa Representativa del Mercado (TRM) COP/USD",
+      "entidad": "Banco de la República de Colombia",
+      "url_fuente": "https://www.banrep.gov.co/es/estadisticas/trm",
+      "archivo_procesado": "data/processed/tasa_cambio_usd_cop.csv",
+      "cobertura_temporal": "2010-01 a 2024-12",
+      "frecuencia": "Mensual (promedio del mes)",
+      "descripcion": "Precio del dólar estadounidense en pesos colombianos. La TRM es calculada por la Superintendencia Financiera de Colombia con base en las operaciones de compraventa de divisas entre intermediarios del mercado cambiario.",
+      "licencia": "Datos públicos del Banco de la República — uso libre con atribución",
+      "fecha_descarga": "2024-12-31",
+      "notas": "Valores corresponden al promedio mensual de la TRM diaria certificada por la Superfinanciera"
+    },
+    {
+      "id": "dane_desempleo",
+      "nombre": "Tasa de Desempleo por Ciudad",
+      "entidad": "DANE — Gran Encuesta Integrada de Hogares (GEIH)",
+      "url_fuente": "https://www.dane.gov.co/index.php/estadisticas-por-tema/mercado-laboral/empleo-y-desempleo",
+      "archivo_procesado": "data/processed/desempleo_colombia_2015_2024.csv",
+      "cobertura_temporal": "2015-T1 a 2024-T4",
+      "frecuencia": "Trimestral",
+      "descripcion": "Tasa de desempleo (TD) por ciudad principal y total nacional. Definida como el porcentaje de la población económicamente activa que no tiene empleo pero lo está buscando activamente.",
+      "licencia": "Datos públicos del gobierno colombiano — uso libre con atribución",
+      "fecha_descarga": "2024-12-31",
+      "notas": "Ciudades incluidas: Bogotá, Medellín AM, Cali AM, Barranquilla AM, Bucaramanga AM, Cartagena, Cúcuta AM, Manizales AM, Pereira AM. TD Nacional incluye cabeceras y centros poblados."
+    }
+  ]
+}
