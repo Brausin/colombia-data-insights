@@ -1,0 +1,19 @@
+{
+  "proyecto": "colombia-data-insights",
+  "ultima_actualizacion": "2026-06-07",
+  "periodos_ipc": 53,
+  "periodos_desempleo": 16,
+  "periodos_pib": 16,
+  "indicadores": [
+    "IPC",
+    "Desempleo",
+    "PIB",
+    "Tasa de intervención Banrep"
+  ],
+  "fuentes": [
+    "DANE",
+    "Banco de la República",
+    "datos.gov.co"
+  ],
+  "contacto": "juansvargasb@gmail.com"
+}
