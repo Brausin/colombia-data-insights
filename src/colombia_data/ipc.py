@@ -107,13 +107,15 @@ def variacion_ipc(
     df = get_ipc(anio_inicio=anio_inicio, anio_fin=anio_fin, ciudad=ciudad)
 
     col_variacion = next(
-        (c for c in df.columns if "variacion_anual" in c.lower() or "variacion" in c.lower()),
-        None
+        (c for c in df.columns if "variacion_anual" in c.lower()),
+        next((c for c in df.columns if "variacion" in c.lower()), None)
     )
     if col_variacion is None:
         raise ValueError("No se encontró columna de variación en el dataset de IPC.")
 
-    col_anio = next((c for c in df.columns if "anio" in c.lower()), "anio")
+    col_anio = next((c for c in df.columns if "anio" in c.lower() or "año" in c.lower() or "year" in c.lower()), None)
+    if col_anio is None:
+        raise ValueError("No se encontró columna de año en el dataset de IPC.")
     df_agrupado = df.groupby(col_anio)[col_variacion].mean()
 
     # Cálculo de variación acumulada compuesta

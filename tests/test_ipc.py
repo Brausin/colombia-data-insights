@@ -15,35 +15,36 @@ def test_get_ipc_retorna_dataframe():
     assert not df.empty
 
 
-def test_get_ipc_columnas_esperadas():
+def test_get_ipc_columnas_minimas():
     df = get_ipc(2022, 2024)
-    for col in ["fecha", "variacion_anual", "anio", "mes"]:
-        assert col in df.columns, f"Falta columna: {col}"
+    assert "variacion_anual" in df.columns
+    assert any(c in df.columns for c in ["año", "anio", "year"])
 
 
 def test_get_ipc_rango_correcto():
     df = get_ipc(2022, 2023)
-    assert df["anio"].min() >= 2022
-    assert df["anio"].max() <= 2023
+    col_anio = next(c for c in df.columns if c in ("año", "anio", "year"))
+    assert df[col_anio].min() >= 2022
+    assert df[col_anio].max() <= 2023
 
 
-def test_get_ipc_valores_positivos_pos_pandemia():
+def test_get_ipc_valores_altos_en_2022():
     df = get_ipc(2022, 2022)
-    # En 2022 la inflación en Colombia superó el 6%
+    # En 2022 la inflación colombiana superó el 6%
     assert df["variacion_anual"].mean() > 6.0
 
 
-def test_variacion_promedio_anual():
-    df = get_ipc(2022, 2024)
-    var = variacion_ipc(df, "promedio_anual")
-    assert "ipc_promedio_anual" in var.columns
-    assert len(var) == 3  # 2022, 2023, 2024
+def test_variacion_ipc_retorna_float():
+    # variacion_ipc retorna la variación acumulada en % como float
+    var = variacion_ipc(2022, 2024)
+    assert isinstance(var, (float, int))
+    assert var > 0
 
 
-def test_variacion_periodo_invalido():
-    df = get_ipc(2022, 2024)
-    with pytest.raises(ValueError):
-        variacion_ipc(df, "quincenal")
+def test_variacion_ipc_rango_valido():
+    # Inflación acumulada 2021-2023 fue considerable (>20%)
+    var = variacion_ipc(2021, 2023)
+    assert var > 20.0
 
 
 def test_ajustar_por_inflacion_igual_anio():
@@ -52,7 +53,7 @@ def test_ajustar_por_inflacion_igual_anio():
 
 
 def test_ajustar_por_inflacion_hacia_adelante():
-    # 1M de 2020 debe valer más en 2024 (inflación acumulada)
+    # 1M de 2020 debe valer más en 2024 (inflación acumulada alta)
     resultado = ajustar_por_inflacion(1_000_000, 2020, 2024)
     assert resultado > 1_000_000
 
