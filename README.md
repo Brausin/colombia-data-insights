@@ -42,7 +42,7 @@ Los análisis están escritos en **español**, orientados a audiencias técnicas
 |----------|-------------|--------|
 | [01 — Exploración Inflación 2020–2024](notebooks/01_exploracion_inflacion.ipynb) | Análisis histórico del IPC, pandemia y pico inflacionario de 2022 | DANE / Banco de la República |
 | *(próximamente)* Índices de Precios Productor | IPP vs IPC, transmisión de precios | DANE |
-| *(próximamente)* Mercado Laboral | Desempleo, informalidad por región | DANE GEIH |
+| [02 — Mercado Laboral 2015–2024](notebooks/02_mercado_laboral_colombiano.ipynb) | Desempleo trimestral, comparación por ciudad, impacto pandemia | DANE GEIH |
 
 ---
 
@@ -61,7 +61,8 @@ colombia-data-insights/
 │   └── processed/                     # Datos limpios y transformados
 │
 ├── notebooks/
-│   └── 01_exploracion_inflacion.ipynb # Análisis de inflación colombiana
+│   ├── 01_exploracion_inflacion.ipynb # Análisis de inflación colombiana
+│   └── 02_mercado_laboral_colombiano.ipynb # Mercado laboral y desempleo
 │
 ├── src/
 │   └── colombia_data/
