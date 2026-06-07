@@ -1,0 +1,161 @@
+anio,ciudad,grupo,producto,precio_promedio_cop,variacion_anual_pct
+2020,Bogotá,Alimentos,Arroz (kg),2850,3.2
+2020,Bogotá,Alimentos,Leche (litro),2200,1.8
+2020,Bogotá,Alimentos,Pollo (kg),8900,2.1
+2020,Bogotá,Alimentos,Huevos (docena),4200,5.3
+2020,Bogotá,Alimentos,Papa (kg),1800,8.7
+2020,Bogotá,Vivienda,Arriendo estrato 3 (mensual),850000,4.5
+2020,Bogotá,Transporte,Bus SITP (pasaje),2550,0.0
+2020,Bogotá,Salud,Consulta médica general,42000,5.0
+2020,Medellín,Alimentos,Arroz (kg),2700,2.8
+2020,Medellín,Alimentos,Leche (litro),2100,1.5
+2020,Medellín,Alimentos,Pollo (kg),8500,1.8
+2020,Medellín,Alimentos,Huevos (docena),4000,4.9
+2020,Medellín,Alimentos,Papa (kg),1650,7.2
+2020,Medellín,Vivienda,Arriendo estrato 3 (mensual),780000,4.2
+2020,Medellín,Transporte,Metro (pasaje),2700,0.0
+2020,Medellín,Salud,Consulta médica general,40000,4.8
+2020,Cali,Alimentos,Arroz (kg),2600,2.5
+2020,Cali,Alimentos,Leche (litro),2000,1.2
+2020,Cali,Alimentos,Pollo (kg),8200,1.5
+2020,Cali,Alimentos,Huevos (docena),3900,4.6
+2020,Cali,Alimentos,Papa (kg),1700,8.1
+2020,Cali,Vivienda,Arriendo estrato 3 (mensual),720000,3.8
+2020,Cali,Transporte,Bus MIO (pasaje),2400,0.0
+2020,Cali,Salud,Consulta médica general,38000,4.5
+2020,Barranquilla,Alimentos,Arroz (kg),2500,2.3
+2020,Barranquilla,Alimentos,Leche (litro),1950,1.0
+2020,Barranquilla,Alimentos,Pollo (kg),8100,1.4
+2020,Barranquilla,Alimentos,Huevos (docena),3800,4.3
+2020,Barranquilla,Alimentos,Papa (kg),1900,9.2
+2020,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),700000,3.5
+2020,Barranquilla,Transporte,Bus Transmetro (pasaje),2250,0.0
+2020,Barranquilla,Salud,Consulta médica general,36000,4.2
+2021,Bogotá,Alimentos,Arroz (kg),3100,8.8
+2021,Bogotá,Alimentos,Leche (litro),2350,6.8
+2021,Bogotá,Alimentos,Pollo (kg),9800,10.1
+2021,Bogotá,Alimentos,Huevos (docena),4800,14.3
+2021,Bogotá,Alimentos,Papa (kg),2300,27.8
+2021,Bogotá,Vivienda,Arriendo estrato 3 (mensual),880000,3.5
+2021,Bogotá,Transporte,Bus SITP (pasaje),2550,0.0
+2021,Bogotá,Salud,Consulta médica general,44500,5.9
+2021,Medellín,Alimentos,Arroz (kg),2920,8.1
+2021,Medellín,Alimentos,Leche (litro),2230,6.2
+2021,Medellín,Alimentos,Pollo (kg),9300,9.4
+2021,Medellín,Alimentos,Huevos (docena),4550,13.8
+2021,Medellín,Alimentos,Papa (kg),2100,27.3
+2021,Medellín,Vivienda,Arriendo estrato 3 (mensual),810000,3.8
+2021,Medellín,Transporte,Metro (pasaje),2700,0.0
+2021,Medellín,Salud,Consulta médica general,42200,5.5
+2021,Cali,Alimentos,Arroz (kg),2810,8.1
+2021,Cali,Alimentos,Leche (litro),2130,6.5
+2021,Cali,Alimentos,Pollo (kg),9000,9.8
+2021,Cali,Alimentos,Huevos (docena),4400,12.8
+2021,Cali,Alimentos,Papa (kg),2180,28.2
+2021,Cali,Vivienda,Arriendo estrato 3 (mensual),750000,4.2
+2021,Cali,Transporte,Bus MIO (pasaje),2400,0.0
+2021,Cali,Salud,Consulta médica general,40000,5.3
+2021,Barranquilla,Alimentos,Arroz (kg),2720,8.8
+2021,Barranquilla,Alimentos,Leche (litro),2080,6.7
+2021,Barranquilla,Alimentos,Pollo (kg),8900,9.9
+2021,Barranquilla,Alimentos,Huevos (docena),4300,13.2
+2021,Barranquilla,Alimentos,Papa (kg),2120,11.6
+2021,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),730000,4.3
+2021,Barranquilla,Transporte,Bus Transmetro (pasaje),2250,0.0
+2021,Barranquilla,Salud,Consulta médica general,38000,5.6
+2022,Bogotá,Alimentos,Arroz (kg),3850,24.2
+2022,Bogotá,Alimentos,Leche (litro),3100,31.9
+2022,Bogotá,Alimentos,Pollo (kg),12500,27.6
+2022,Bogotá,Alimentos,Huevos (docena),6800,41.7
+2022,Bogotá,Alimentos,Papa (kg),3200,39.1
+2022,Bogotá,Vivienda,Arriendo estrato 3 (mensual),970000,10.2
+2022,Bogotá,Transporte,Bus SITP (pasaje),2700,5.9
+2022,Bogotá,Salud,Consulta médica general,50000,12.4
+2022,Medellín,Alimentos,Arroz (kg),3620,24.0
+2022,Medellín,Alimentos,Leche (litro),2920,30.9
+2022,Medellín,Alimentos,Pollo (kg),11900,27.9
+2022,Medellín,Alimentos,Huevos (docena),6400,40.7
+2022,Medellín,Alimentos,Papa (kg),2980,42.0
+2022,Medellín,Vivienda,Arriendo estrato 3 (mensual),890000,9.9
+2022,Medellín,Transporte,Metro (pasaje),2850,5.6
+2022,Medellín,Salud,Consulta médica general,47000,11.4
+2022,Cali,Alimentos,Arroz (kg),3490,24.2
+2022,Cali,Alimentos,Leche (litro),2800,31.5
+2022,Cali,Alimentos,Pollo (kg),11400,26.7
+2022,Cali,Alimentos,Huevos (docena),6200,40.9
+2022,Cali,Alimentos,Papa (kg),3050,39.9
+2022,Cali,Vivienda,Arriendo estrato 3 (mensual),840000,12.0
+2022,Cali,Transporte,Bus MIO (pasaje),2550,6.3
+2022,Cali,Salud,Consulta médica general,45000,12.5
+2022,Barranquilla,Alimentos,Arroz (kg),3380,24.3
+2022,Barranquilla,Alimentos,Leche (litro),2720,30.8
+2022,Barranquilla,Alimentos,Pollo (kg),11200,25.8
+2022,Barranquilla,Alimentos,Huevos (docena),6000,39.5
+2022,Barranquilla,Alimentos,Papa (kg),2850,34.4
+2022,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),820000,12.3
+2022,Barranquilla,Transporte,Bus Transmetro (pasaje),2450,8.9
+2022,Barranquilla,Salud,Consulta médica general,43000,13.2
+2023,Bogotá,Alimentos,Arroz (kg),4200,9.1
+2023,Bogotá,Alimentos,Leche (litro),3450,11.3
+2023,Bogotá,Alimentos,Pollo (kg),13200,5.6
+2023,Bogotá,Alimentos,Huevos (docena),7100,4.4
+2023,Bogotá,Alimentos,Papa (kg),2900,-9.4
+2023,Bogotá,Vivienda,Arriendo estrato 3 (mensual),1080000,11.3
+2023,Bogotá,Transporte,Bus SITP (pasaje),2900,7.4
+2023,Bogotá,Salud,Consulta médica general,56000,12.0
+2023,Medellín,Alimentos,Arroz (kg),3950,9.1
+2023,Medellín,Alimentos,Leche (litro),3240,11.0
+2023,Medellín,Alimentos,Pollo (kg),12500,5.0
+2023,Medellín,Alimentos,Huevos (docena),6750,5.5
+2023,Medellín,Alimentos,Papa (kg),2720,-8.7
+2023,Medellín,Vivienda,Arriendo estrato 3 (mensual),990000,11.2
+2023,Medellín,Transporte,Metro (pasaje),3050,7.0
+2023,Medellín,Salud,Consulta médica general,52500,11.7
+2023,Cali,Alimentos,Arroz (kg),3810,9.2
+2023,Cali,Alimentos,Leche (litro),3100,10.7
+2023,Cali,Alimentos,Pollo (kg),12000,5.3
+2023,Cali,Alimentos,Huevos (docena),6550,5.6
+2023,Cali,Alimentos,Papa (kg),2780,-8.9
+2023,Cali,Vivienda,Arriendo estrato 3 (mensual),940000,11.9
+2023,Cali,Transporte,Bus MIO (pasaje),2750,7.8
+2023,Cali,Salud,Consulta médica general,50000,11.1
+2023,Barranquilla,Alimentos,Arroz (kg),3680,8.9
+2023,Barranquilla,Alimentos,Leche (litro),3010,10.7
+2023,Barranquilla,Alimentos,Pollo (kg),11800,5.4
+2023,Barranquilla,Alimentos,Huevos (docena),6350,5.8
+2023,Barranquilla,Alimentos,Papa (kg),2600,-8.8
+2023,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),910000,11.0
+2023,Barranquilla,Transporte,Bus Transmetro (pasaje),2650,8.2
+2023,Barranquilla,Salud,Consulta médica general,48000,11.6
+2024,Bogotá,Alimentos,Arroz (kg),4480,6.7
+2024,Bogotá,Alimentos,Leche (litro),3720,7.8
+2024,Bogotá,Alimentos,Pollo (kg),13800,4.5
+2024,Bogotá,Alimentos,Huevos (docena),7500,5.6
+2024,Bogotá,Alimentos,Papa (kg),3100,6.9
+2024,Bogotá,Vivienda,Arriendo estrato 3 (mensual),1180000,9.3
+2024,Bogotá,Transporte,Bus SITP (pasaje),3100,6.9
+2024,Bogotá,Salud,Consulta médica general,61000,8.9
+2024,Medellín,Alimentos,Arroz (kg),4210,6.6
+2024,Medellín,Alimentos,Leche (litro),3490,7.7
+2024,Medellín,Alimentos,Pollo (kg),13100,4.8
+2024,Medellín,Alimentos,Huevos (docena),7100,5.2
+2024,Medellín,Alimentos,Papa (kg),2900,6.6
+2024,Medellín,Vivienda,Arriendo estrato 3 (mensual),1080000,9.1
+2024,Medellín,Transporte,Metro (pasaje),3250,6.6
+2024,Medellín,Salud,Consulta médica general,57200,9.0
+2024,Cali,Alimentos,Arroz (kg),4060,6.6
+2024,Cali,Alimentos,Leche (litro),3340,7.7
+2024,Cali,Alimentos,Pollo (kg),12600,5.0
+2024,Cali,Alimentos,Huevos (docena),6920,5.6
+2024,Cali,Alimentos,Papa (kg),2960,6.5
+2024,Cali,Vivienda,Arriendo estrato 3 (mensual),1030000,9.6
+2024,Cali,Transporte,Bus MIO (pasaje),2940,6.9
+2024,Cali,Salud,Consulta médica general,54500,9.0
+2024,Barranquilla,Alimentos,Arroz (kg),3920,6.5
+2024,Barranquilla,Alimentos,Leche (litro),3240,7.6
+2024,Barranquilla,Alimentos,Pollo (kg),12400,5.1
+2024,Barranquilla,Alimentos,Huevos (docena),6710,5.7
+2024,Barranquilla,Alimentos,Papa (kg),2790,7.3
+2024,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),990000,8.8
+2024,Barranquilla,Transporte,Bus Transmetro (pasaje),2860,7.9
+2024,Barranquilla,Salud,Consulta médica general,52000,8.3

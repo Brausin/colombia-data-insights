@@ -1,0 +1,171 @@
+anio,sector,pib_billones_cop,variacion_anual_pct,participacion_pct
+2000,Agropecuario,18.2,1.2,7.8
+2000,Minería,9.4,5.3,4.0
+2000,Industria manufacturera,38.1,-0.5,16.4
+2000,Construcción,8.3,-12.3,3.6
+2000,Comercio y turismo,28.4,2.1,12.2
+2000,Transporte,12.1,1.8,5.2
+2000,Financiero,22.3,4.0,9.6
+2000,Servicios públicos,11.2,2.2,4.8
+2000,Administración pública,19.8,0.9,8.5
+2000,Otros servicios,64.5,2.3,27.7
+2005,Agropecuario,25.1,2.3,7.4
+2005,Minería,16.2,8.1,4.8
+2005,Industria manufacturera,52.8,4.6,15.6
+2005,Construcción,13.4,9.2,4.0
+2005,Comercio y turismo,41.3,5.1,12.2
+2005,Transporte,17.8,4.5,5.3
+2005,Financiero,32.1,6.2,9.5
+2005,Servicios públicos,15.4,3.1,4.5
+2005,Administración pública,27.2,2.1,8.0
+2005,Otros servicios,97.3,4.8,28.7
+2010,Agropecuario,32.1,0.8,6.5
+2010,Minería,28.4,11.1,5.8
+2010,Industria manufacturera,64.3,4.5,13.1
+2010,Construcción,19.2,6.0,3.9
+2010,Comercio y turismo,58.7,5.0,12.0
+2010,Transporte,24.1,4.1,4.9
+2010,Financiero,48.2,5.0,9.8
+2010,Servicios públicos,20.1,2.8,4.1
+2010,Administración pública,36.4,3.2,7.4
+2010,Otros servicios,161.1,5.1,32.8
+2011,Agropecuario,33.8,2.4,6.3
+2011,Minería,32.1,14.3,6.0
+2011,Industria manufacturera,67.1,4.3,12.5
+2011,Construcción,22.1,15.2,4.1
+2011,Comercio y turismo,63.2,7.6,11.8
+2011,Transporte,25.8,5.9,4.8
+2011,Financiero,51.9,5.8,9.7
+2011,Servicios públicos,21.2,4.1,3.9
+2011,Administración pública,37.9,3.8,7.0
+2011,Otros servicios,181.0,6.5,33.7
+2012,Agropecuario,35.1,2.6,6.0
+2012,Minería,34.2,5.9,5.9
+2012,Industria manufacturera,67.8,0.8,11.6
+2012,Construcción,25.3,5.6,4.3
+2012,Comercio y turismo,67.1,4.2,11.5
+2012,Transporte,27.3,4.2,4.7
+2012,Financiero,56.2,5.4,9.6
+2012,Servicios públicos,22.4,2.8,3.8
+2012,Administración pública,39.8,4.1,6.8
+2012,Otros servicios,208.5,5.2,35.7
+2013,Agropecuario,36.8,5.1,5.9
+2013,Minería,33.5,4.5,5.4
+2013,Industria manufacturera,68.4,0.9,11.0
+2013,Construcción,28.7,12.7,4.6
+2013,Comercio y turismo,71.4,4.6,11.5
+2013,Transporte,28.9,4.2,4.7
+2013,Financiero,60.8,6.5,9.8
+2013,Servicios públicos,23.8,3.1,3.8
+2013,Administración pública,41.2,3.4,6.6
+2013,Otros servicios,227.3,4.8,36.6
+2014,Agropecuario,38.5,2.4,5.8
+2014,Minería,33.1,0.6,5.0
+2014,Industria manufacturera,70.1,0.8,10.6
+2014,Construcción,31.8,9.9,4.8
+2014,Comercio y turismo,75.9,4.8,11.4
+2014,Transporte,30.5,4.3,4.6
+2014,Financiero,66.1,6.8,9.9
+2014,Servicios públicos,25.2,3.8,3.8
+2014,Administración pública,43.1,3.4,6.5
+2014,Otros servicios,249.7,4.5,37.6
+2015,Agropecuario,39.4,2.5,5.7
+2015,Minería,30.8,-3.3,4.5
+2015,Industria manufacturera,71.2,1.2,10.3
+2015,Construcción,34.1,3.9,4.9
+2015,Comercio y turismo,79.3,4.1,11.5
+2015,Transporte,31.8,3.9,4.6
+2015,Financiero,71.3,6.1,10.3
+2015,Servicios públicos,26.3,4.2,3.8
+2015,Administración pública,45.1,3.8,6.5
+2015,Otros servicios,261.7,3.8,37.9
+2016,Agropecuario,39.8,1.0,5.6
+2016,Minería,26.9,-6.5,3.8
+2016,Industria manufacturera,69.8,-1.4,9.8
+2016,Construcción,34.2,1.2,4.8
+2016,Comercio y turismo,80.8,1.8,11.3
+2016,Transporte,32.1,0.9,4.5
+2016,Financiero,74.5,4.6,10.5
+2016,Servicios públicos,27.1,3.2,3.8
+2016,Administración pública,46.4,2.8,6.5
+2016,Otros servicios,280.4,2.8,39.4
+2017,Agropecuario,41.4,4.3,5.6
+2017,Minería,26.4,0.3,3.6
+2017,Industria manufacturera,71.2,1.1,9.7
+2017,Construcción,33.8,-0.7,4.6
+2017,Comercio y turismo,84.2,2.0,11.4
+2017,Transporte,33.5,3.4,4.5
+2017,Financiero,78.3,5.1,10.6
+2017,Servicios públicos,28.3,4.1,3.8
+2017,Administración pública,47.9,3.1,6.5
+2017,Otros servicios,294.0,4.1,39.9
+2018,Agropecuario,42.9,1.7,5.5
+2018,Minería,27.8,1.6,3.6
+2018,Industria manufacturera,73.1,2.8,9.4
+2018,Construcción,35.5,2.8,4.6
+2018,Comercio y turismo,89.8,4.5,11.5
+2018,Transporte,35.6,5.6,4.6
+2018,Financiero,83.9,5.7,10.8
+2018,Servicios públicos,29.2,3.1,3.7
+2018,Administración pública,50.0,3.2,6.4
+2018,Otros servicios,311.2,4.2,40.0
+2019,Agropecuario,44.3,3.4,5.5
+2019,Minería,28.5,3.1,3.5
+2019,Industria manufacturera,74.9,1.9,9.3
+2019,Construcción,36.4,2.8,4.5
+2019,Comercio y turismo,93.8,4.2,11.6
+2019,Transporte,37.4,4.5,4.6
+2019,Financiero,89.7,5.9,11.1
+2019,Servicios públicos,30.4,3.8,3.8
+2019,Administración pública,51.9,3.6,6.4
+2019,Otros servicios,319.7,3.2,39.6
+2020,Agropecuario,46.1,3.9,6.2
+2020,Minería,22.9,-15.8,3.1
+2020,Industria manufacturera,66.5,-8.1,9.0
+2020,Construcción,29.5,-27.7,4.0
+2020,Comercio y turismo,72.5,-23.2,9.8
+2020,Transporte,31.8,-13.4,4.3
+2020,Financiero,87.3,-1.4,11.8
+2020,Servicios públicos,29.5,-3.0,4.0
+2020,Administración pública,51.3,-0.8,6.9
+2020,Otros servicios,302.6,-4.2,40.9
+2021,Agropecuario,48.9,4.2,5.7
+2021,Minería,26.8,9.8,3.1
+2021,Industria manufacturera,77.3,13.1,9.0
+2021,Construcción,38.4,22.4,4.5
+2021,Comercio y turismo,93.8,22.1,10.9
+2021,Transporte,37.8,15.9,4.4
+2021,Financiero,94.5,7.2,11.0
+2021,Servicios públicos,30.8,3.5,3.6
+2021,Administración pública,53.8,4.8,6.3
+2021,Otros servicios,358.9,9.5,41.7
+2022,Agropecuario,51.2,3.5,5.4
+2022,Minería,30.1,12.1,3.2
+2022,Industria manufacturera,82.4,5.7,8.7
+2022,Construcción,42.1,9.4,4.4
+2022,Comercio y turismo,106.3,12.3,11.2
+2022,Transporte,42.8,11.6,4.5
+2022,Financiero,102.3,7.2,10.8
+2022,Servicios públicos,32.3,4.5,3.4
+2022,Administración pública,57.1,4.5,6.0
+2022,Otros servicios,401.4,8.0,42.4
+2023,Agropecuario,52.4,1.3,5.5
+2023,Minería,30.8,0.8,3.2
+2023,Industria manufacturera,80.1,-2.7,8.4
+2023,Construcción,42.8,1.2,4.5
+2023,Comercio y turismo,107.8,1.0,11.3
+2023,Transporte,43.9,2.3,4.6
+2023,Financiero,106.5,4.0,11.2
+2023,Servicios públicos,33.1,2.3,3.5
+2023,Administración pública,58.4,2.2,6.1
+2023,Otros servicios,396.2,0.1,41.6
+2024,Agropecuario,53.8,2.5,5.5
+2024,Minería,31.4,1.8,3.2
+2024,Industria manufacturera,82.3,2.1,8.4
+2024,Construcción,44.9,4.2,4.6
+2024,Comercio y turismo,112.1,3.4,11.4
+2024,Transporte,45.6,3.6,4.6
+2024,Financiero,111.8,4.8,11.4
+2024,Servicios públicos,34.2,3.2,3.5
+2024,Administración pública,60.1,2.9,6.1
+2024,Otros servicios,403.8,1.9,41.2
