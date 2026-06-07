@@ -1,785 +1,161 @@
-anio,ciudad,articulo,categoria,precio_cop
-2018,Bogotá,Arroz (kg),Alimentos,3255
-2018,Bogotá,Pollo entero (kg),Alimentos,9489
-2018,Bogotá,Leche entera (litro),Alimentos,3201
-2018,Bogotá,Pan tajado (500g),Alimentos,4575
-2018,Bogotá,Aceite vegetal (1L),Alimentos,7422
-2018,Bogotá,Huevos (docena),Alimentos,14092
-2018,Bogotá,Papa (kg),Alimentos,2743
-2018,Bogotá,Tomate (kg),Alimentos,3341
-2018,Bogotá,Transporte urbano (pasaje),Transporte,2832
-2018,Bogotá,Gas natural (m3),Servicios,1711
-2018,Bogotá,Energía eléctrica (kWh),Servicios,637
-2018,Bogotá,Arriendo cuarto (mes),Vivienda,461105
-2018,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1185293
-2018,Bogotá,Internet banda ancha (mes),Servicios,64962
-2018,Medellín,Arroz (kg),Alimentos,3070
-2018,Medellín,Pollo entero (kg),Alimentos,8649
-2018,Medellín,Leche entera (litro),Alimentos,2987
-2018,Medellín,Pan tajado (500g),Alimentos,4427
-2018,Medellín,Aceite vegetal (1L),Alimentos,6355
-2018,Medellín,Huevos (docena),Alimentos,13284
-2018,Medellín,Papa (kg),Alimentos,2502
-2018,Medellín,Tomate (kg),Alimentos,3237
-2018,Medellín,Transporte urbano (pasaje),Transporte,2432
-2018,Medellín,Gas natural (m3),Servicios,1708
-2018,Medellín,Energía eléctrica (kWh),Servicios,589
-2018,Medellín,Arriendo cuarto (mes),Vivienda,402473
-2018,Medellín,Arriendo apartamento 2h (mes),Vivienda,1119990
-2018,Medellín,Internet banda ancha (mes),Servicios,57379
-2018,Cali,Arroz (kg),Alimentos,2855
-2018,Cali,Pollo entero (kg),Alimentos,8205
-2018,Cali,Leche entera (litro),Alimentos,2691
-2018,Cali,Pan tajado (500g),Alimentos,4196
-2018,Cali,Aceite vegetal (1L),Alimentos,6465
-2018,Cali,Huevos (docena),Alimentos,12068
-2018,Cali,Papa (kg),Alimentos,2453
-2018,Cali,Tomate (kg),Alimentos,2995
-2018,Cali,Transporte urbano (pasaje),Transporte,2527
-2018,Cali,Gas natural (m3),Servicios,1628
-2018,Cali,Energía eléctrica (kWh),Servicios,539
-2018,Cali,Arriendo cuarto (mes),Vivienda,422370
-2018,Cali,Arriendo apartamento 2h (mes),Vivienda,1084545
-2018,Cali,Internet banda ancha (mes),Servicios,55819
-2018,Barranquilla,Arroz (kg),Alimentos,2823
-2018,Barranquilla,Pollo entero (kg),Alimentos,8477
-2018,Barranquilla,Leche entera (litro),Alimentos,2810
-2018,Barranquilla,Pan tajado (500g),Alimentos,4365
-2018,Barranquilla,Aceite vegetal (1L),Alimentos,6179
-2018,Barranquilla,Huevos (docena),Alimentos,12897
-2018,Barranquilla,Papa (kg),Alimentos,2456
-2018,Barranquilla,Tomate (kg),Alimentos,3007
-2018,Barranquilla,Transporte urbano (pasaje),Transporte,2388
-2018,Barranquilla,Gas natural (m3),Servicios,1565
-2018,Barranquilla,Energía eléctrica (kWh),Servicios,529
-2018,Barranquilla,Arriendo cuarto (mes),Vivienda,412452
-2018,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1102377
-2018,Barranquilla,Internet banda ancha (mes),Servicios,59130
-2018,Bucaramanga,Arroz (kg),Alimentos,2765
-2018,Bucaramanga,Pollo entero (kg),Alimentos,8444
-2018,Bucaramanga,Leche entera (litro),Alimentos,2792
-2018,Bucaramanga,Pan tajado (500g),Alimentos,4000
-2018,Bucaramanga,Aceite vegetal (1L),Alimentos,6208
-2018,Bucaramanga,Huevos (docena),Alimentos,12352
-2018,Bucaramanga,Papa (kg),Alimentos,2552
-2018,Bucaramanga,Tomate (kg),Alimentos,3108
-2018,Bucaramanga,Transporte urbano (pasaje),Transporte,2381
-2018,Bucaramanga,Gas natural (m3),Servicios,1520
-2018,Bucaramanga,Energía eléctrica (kWh),Servicios,528
-2018,Bucaramanga,Arriendo cuarto (mes),Vivienda,378189
-2018,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1023531
-2018,Bucaramanga,Internet banda ancha (mes),Servicios,57786
-2018,Manizales,Arroz (kg),Alimentos,2845
-2018,Manizales,Pollo entero (kg),Alimentos,7684
-2018,Manizales,Leche entera (litro),Alimentos,2586
-2018,Manizales,Pan tajado (500g),Alimentos,3896
-2018,Manizales,Aceite vegetal (1L),Alimentos,6349
-2018,Manizales,Huevos (docena),Alimentos,12131
-2018,Manizales,Papa (kg),Alimentos,2458
-2018,Manizales,Tomate (kg),Alimentos,3099
-2018,Manizales,Transporte urbano (pasaje),Transporte,2215
-2018,Manizales,Gas natural (m3),Servicios,1525
-2018,Manizales,Energía eléctrica (kWh),Servicios,529
-2018,Manizales,Arriendo cuarto (mes),Vivienda,383122
-2018,Manizales,Arriendo apartamento 2h (mes),Vivienda,1042483
-2018,Manizales,Internet banda ancha (mes),Servicios,57032
-2018,Pereira,Arroz (kg),Alimentos,2617
-2018,Pereira,Pollo entero (kg),Alimentos,7665
-2018,Pereira,Leche entera (litro),Alimentos,2634
-2018,Pereira,Pan tajado (500g),Alimentos,3929
-2018,Pereira,Aceite vegetal (1L),Alimentos,6246
-2018,Pereira,Huevos (docena),Alimentos,11719
-2018,Pereira,Papa (kg),Alimentos,2397
-2018,Pereira,Tomate (kg),Alimentos,2897
-2018,Pereira,Transporte urbano (pasaje),Transporte,2178
-2018,Pereira,Gas natural (m3),Servicios,1482
-2018,Pereira,Energía eléctrica (kWh),Servicios,503
-2018,Pereira,Arriendo cuarto (mes),Vivienda,367901
-2018,Pereira,Arriendo apartamento 2h (mes),Vivienda,1012477
-2018,Pereira,Internet banda ancha (mes),Servicios,53808
-2018,Cúcuta,Arroz (kg),Alimentos,2688
-2018,Cúcuta,Pollo entero (kg),Alimentos,7905
-2018,Cúcuta,Leche entera (litro),Alimentos,2611
-2018,Cúcuta,Pan tajado (500g),Alimentos,4050
-2018,Cúcuta,Aceite vegetal (1L),Alimentos,5920
-2018,Cúcuta,Huevos (docena),Alimentos,11200
-2018,Cúcuta,Papa (kg),Alimentos,2410
-2018,Cúcuta,Tomate (kg),Alimentos,2757
-2018,Cúcuta,Transporte urbano (pasaje),Transporte,2195
-2018,Cúcuta,Gas natural (m3),Servicios,1425
-2018,Cúcuta,Energía eléctrica (kWh),Servicios,509
-2018,Cúcuta,Arriendo cuarto (mes),Vivienda,380324
-2018,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,981517
-2018,Cúcuta,Internet banda ancha (mes),Servicios,52949
-2019,Bogotá,Arroz (kg),Alimentos,3272
-2019,Bogotá,Pollo entero (kg),Alimentos,9462
-2019,Bogotá,Leche entera (litro),Alimentos,3296
-2019,Bogotá,Pan tajado (500g),Alimentos,5117
-2019,Bogotá,Aceite vegetal (1L),Alimentos,7574
-2019,Bogotá,Huevos (docena),Alimentos,15146
-2019,Bogotá,Papa (kg),Alimentos,2805
-2019,Bogotá,Tomate (kg),Alimentos,3531
-2019,Bogotá,Transporte urbano (pasaje),Transporte,2906
-2019,Bogotá,Gas natural (m3),Servicios,1902
-2019,Bogotá,Energía eléctrica (kWh),Servicios,646
-2019,Bogotá,Arriendo cuarto (mes),Vivienda,480757
-2019,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1282498
-2019,Bogotá,Internet banda ancha (mes),Servicios,67971
-2019,Medellín,Arroz (kg),Alimentos,3120
-2019,Medellín,Pollo entero (kg),Alimentos,8862
-2019,Medellín,Leche entera (litro),Alimentos,3026
-2019,Medellín,Pan tajado (500g),Alimentos,4546
-2019,Medellín,Aceite vegetal (1L),Alimentos,6970
-2019,Medellín,Huevos (docena),Alimentos,13530
-2019,Medellín,Papa (kg),Alimentos,2709
-2019,Medellín,Tomate (kg),Alimentos,3417
-2019,Medellín,Transporte urbano (pasaje),Transporte,2474
-2019,Medellín,Gas natural (m3),Servicios,1673
-2019,Medellín,Energía eléctrica (kWh),Servicios,581
-2019,Medellín,Arriendo cuarto (mes),Vivienda,450627
-2019,Medellín,Arriendo apartamento 2h (mes),Vivienda,1166257
-2019,Medellín,Internet banda ancha (mes),Servicios,60165
-2019,Cali,Arroz (kg),Alimentos,3050
-2019,Cali,Pollo entero (kg),Alimentos,9195
-2019,Cali,Leche entera (litro),Alimentos,3018
-2019,Cali,Pan tajado (500g),Alimentos,4362
-2019,Cali,Aceite vegetal (1L),Alimentos,7041
-2019,Cali,Huevos (docena),Alimentos,12752
-2019,Cali,Papa (kg),Alimentos,2530
-2019,Cali,Tomate (kg),Alimentos,3319
-2019,Cali,Transporte urbano (pasaje),Transporte,2410
-2019,Cali,Gas natural (m3),Servicios,1735
-2019,Cali,Energía eléctrica (kWh),Servicios,560
-2019,Cali,Arriendo cuarto (mes),Vivienda,403783
-2019,Cali,Arriendo apartamento 2h (mes),Vivienda,1159028
-2019,Cali,Internet banda ancha (mes),Servicios,63659
-2019,Barranquilla,Arroz (kg),Alimentos,3005
-2019,Barranquilla,Pollo entero (kg),Alimentos,8972
-2019,Barranquilla,Leche entera (litro),Alimentos,2961
-2019,Barranquilla,Pan tajado (500g),Alimentos,4355
-2019,Barranquilla,Aceite vegetal (1L),Alimentos,6470
-2019,Barranquilla,Huevos (docena),Alimentos,13078
-2019,Barranquilla,Papa (kg),Alimentos,2595
-2019,Barranquilla,Tomate (kg),Alimentos,3262
-2019,Barranquilla,Transporte urbano (pasaje),Transporte,2524
-2019,Barranquilla,Gas natural (m3),Servicios,1683
-2019,Barranquilla,Energía eléctrica (kWh),Servicios,552
-2019,Barranquilla,Arriendo cuarto (mes),Vivienda,394675
-2019,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1098284
-2019,Barranquilla,Internet banda ancha (mes),Servicios,62106
-2019,Bucaramanga,Arroz (kg),Alimentos,2963
-2019,Bucaramanga,Pollo entero (kg),Alimentos,8307
-2019,Bucaramanga,Leche entera (litro),Alimentos,2683
-2019,Bucaramanga,Pan tajado (500g),Alimentos,4379
-2019,Bucaramanga,Aceite vegetal (1L),Alimentos,6569
-2019,Bucaramanga,Huevos (docena),Alimentos,12888
-2019,Bucaramanga,Papa (kg),Alimentos,2468
-2019,Bucaramanga,Tomate (kg),Alimentos,3151
-2019,Bucaramanga,Transporte urbano (pasaje),Transporte,2492
-2019,Bucaramanga,Gas natural (m3),Servicios,1573
-2019,Bucaramanga,Energía eléctrica (kWh),Servicios,543
-2019,Bucaramanga,Arriendo cuarto (mes),Vivienda,404669
-2019,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1058669
-2019,Bucaramanga,Internet banda ancha (mes),Servicios,61279
-2019,Manizales,Arroz (kg),Alimentos,2741
-2019,Manizales,Pollo entero (kg),Alimentos,8314
-2019,Manizales,Leche entera (litro),Alimentos,2827
-2019,Manizales,Pan tajado (500g),Alimentos,4047
-2019,Manizales,Aceite vegetal (1L),Alimentos,6472
-2019,Manizales,Huevos (docena),Alimentos,11775
-2019,Manizales,Papa (kg),Alimentos,2581
-2019,Manizales,Tomate (kg),Alimentos,2975
-2019,Manizales,Transporte urbano (pasaje),Transporte,2304
-2019,Manizales,Gas natural (m3),Servicios,1608
-2019,Manizales,Energía eléctrica (kWh),Servicios,567
-2019,Manizales,Arriendo cuarto (mes),Vivienda,395269
-2019,Manizales,Arriendo apartamento 2h (mes),Vivienda,1057128
-2019,Manizales,Internet banda ancha (mes),Servicios,59392
-2019,Pereira,Arroz (kg),Alimentos,2798
-2019,Pereira,Pollo entero (kg),Alimentos,8267
-2019,Pereira,Leche entera (litro),Alimentos,2652
-2019,Pereira,Pan tajado (500g),Alimentos,4136
-2019,Pereira,Aceite vegetal (1L),Alimentos,6182
-2019,Pereira,Huevos (docena),Alimentos,12315
-2019,Pereira,Papa (kg),Alimentos,2515
-2019,Pereira,Tomate (kg),Alimentos,3125
-2019,Pereira,Transporte urbano (pasaje),Transporte,2401
-2019,Pereira,Gas natural (m3),Servicios,1640
-2019,Pereira,Energía eléctrica (kWh),Servicios,562
-2019,Pereira,Arriendo cuarto (mes),Vivienda,409819
-2019,Pereira,Arriendo apartamento 2h (mes),Vivienda,1000312
-2019,Pereira,Internet banda ancha (mes),Servicios,56181
-2019,Cúcuta,Arroz (kg),Alimentos,2752
-2019,Cúcuta,Pollo entero (kg),Alimentos,8071
-2019,Cúcuta,Leche entera (litro),Alimentos,2691
-2019,Cúcuta,Pan tajado (500g),Alimentos,4293
-2019,Cúcuta,Aceite vegetal (1L),Alimentos,5927
-2019,Cúcuta,Huevos (docena),Alimentos,11740
-2019,Cúcuta,Papa (kg),Alimentos,2496
-2019,Cúcuta,Tomate (kg),Alimentos,2963
-2019,Cúcuta,Transporte urbano (pasaje),Transporte,2283
-2019,Cúcuta,Gas natural (m3),Servicios,1592
-2019,Cúcuta,Energía eléctrica (kWh),Servicios,505
-2019,Cúcuta,Arriendo cuarto (mes),Vivienda,369159
-2019,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,985157
-2019,Cúcuta,Internet banda ancha (mes),Servicios,58145
-2020,Bogotá,Arroz (kg),Alimentos,3319
-2020,Bogotá,Pollo entero (kg),Alimentos,10175
-2020,Bogotá,Leche entera (litro),Alimentos,3484
-2020,Bogotá,Pan tajado (500g),Alimentos,5132
-2020,Bogotá,Aceite vegetal (1L),Alimentos,7417
-2020,Bogotá,Huevos (docena),Alimentos,15020
-2020,Bogotá,Papa (kg),Alimentos,2902
-2020,Bogotá,Tomate (kg),Alimentos,3820
-2020,Bogotá,Transporte urbano (pasaje),Transporte,2911
-2020,Bogotá,Gas natural (m3),Servicios,1919
-2020,Bogotá,Energía eléctrica (kWh),Servicios,694
-2020,Bogotá,Arriendo cuarto (mes),Vivienda,506693
-2020,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1297318
-2020,Bogotá,Internet banda ancha (mes),Servicios,69935
-2020,Medellín,Arroz (kg),Alimentos,3317
-2020,Medellín,Pollo entero (kg),Alimentos,9811
-2020,Medellín,Leche entera (litro),Alimentos,3192
-2020,Medellín,Pan tajado (500g),Alimentos,4845
-2020,Medellín,Aceite vegetal (1L),Alimentos,7187
-2020,Medellín,Huevos (docena),Alimentos,14579
-2020,Medellín,Papa (kg),Alimentos,2728
-2020,Medellín,Tomate (kg),Alimentos,3415
-2020,Medellín,Transporte urbano (pasaje),Transporte,2580
-2020,Medellín,Gas natural (m3),Servicios,1774
-2020,Medellín,Energía eléctrica (kWh),Servicios,618
-2020,Medellín,Arriendo cuarto (mes),Vivienda,430047
-2020,Medellín,Arriendo apartamento 2h (mes),Vivienda,1174329
-2020,Medellín,Internet banda ancha (mes),Servicios,64178
-2020,Cali,Arroz (kg),Alimentos,3267
-2020,Cali,Pollo entero (kg),Alimentos,9689
-2020,Cali,Leche entera (litro),Alimentos,2902
-2020,Cali,Pan tajado (500g),Alimentos,4631
-2020,Cali,Aceite vegetal (1L),Alimentos,7209
-2020,Cali,Huevos (docena),Alimentos,13784
-2020,Cali,Papa (kg),Alimentos,2782
-2020,Cali,Tomate (kg),Alimentos,3529
-2020,Cali,Transporte urbano (pasaje),Transporte,2590
-2020,Cali,Gas natural (m3),Servicios,1787
-2020,Cali,Energía eléctrica (kWh),Servicios,612
-2020,Cali,Arriendo cuarto (mes),Vivienda,419025
-2020,Cali,Arriendo apartamento 2h (mes),Vivienda,1187373
-2020,Cali,Internet banda ancha (mes),Servicios,60433
-2020,Barranquilla,Arroz (kg),Alimentos,2963
-2020,Barranquilla,Pollo entero (kg),Alimentos,8690
-2020,Barranquilla,Leche entera (litro),Alimentos,2871
-2020,Barranquilla,Pan tajado (500g),Alimentos,4775
-2020,Barranquilla,Aceite vegetal (1L),Alimentos,7100
-2020,Barranquilla,Huevos (docena),Alimentos,13049
-2020,Barranquilla,Papa (kg),Alimentos,2786
-2020,Barranquilla,Tomate (kg),Alimentos,3205
-2020,Barranquilla,Transporte urbano (pasaje),Transporte,2488
-2020,Barranquilla,Gas natural (m3),Servicios,1705
-2020,Barranquilla,Energía eléctrica (kWh),Servicios,564
-2020,Barranquilla,Arriendo cuarto (mes),Vivienda,424498
-2020,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1150157
-2020,Barranquilla,Internet banda ancha (mes),Servicios,63592
-2020,Bucaramanga,Arroz (kg),Alimentos,3091
-2020,Bucaramanga,Pollo entero (kg),Alimentos,9386
-2020,Bucaramanga,Leche entera (litro),Alimentos,2926
-2020,Bucaramanga,Pan tajado (500g),Alimentos,4667
-2020,Bucaramanga,Aceite vegetal (1L),Alimentos,6926
-2020,Bucaramanga,Huevos (docena),Alimentos,13528
-2020,Bucaramanga,Papa (kg),Alimentos,2580
-2020,Bucaramanga,Tomate (kg),Alimentos,3315
-2020,Bucaramanga,Transporte urbano (pasaje),Transporte,2619
-2020,Bucaramanga,Gas natural (m3),Servicios,1701
-2020,Bucaramanga,Energía eléctrica (kWh),Servicios,604
-2020,Bucaramanga,Arriendo cuarto (mes),Vivienda,423619
-2020,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1101167
-2020,Bucaramanga,Internet banda ancha (mes),Servicios,58788
-2020,Manizales,Arroz (kg),Alimentos,2871
-2020,Manizales,Pollo entero (kg),Alimentos,8837
-2020,Manizales,Leche entera (litro),Alimentos,2839
-2020,Manizales,Pan tajado (500g),Alimentos,4519
-2020,Manizales,Aceite vegetal (1L),Alimentos,6538
-2020,Manizales,Huevos (docena),Alimentos,13219
-2020,Manizales,Papa (kg),Alimentos,2528
-2020,Manizales,Tomate (kg),Alimentos,3371
-2020,Manizales,Transporte urbano (pasaje),Transporte,2432
-2020,Manizales,Gas natural (m3),Servicios,1715
-2020,Manizales,Energía eléctrica (kWh),Servicios,566
-2020,Manizales,Arriendo cuarto (mes),Vivienda,403160
-2020,Manizales,Arriendo apartamento 2h (mes),Vivienda,1153745
-2020,Manizales,Internet banda ancha (mes),Servicios,59111
-2020,Pereira,Arroz (kg),Alimentos,2971
-2020,Pereira,Pollo entero (kg),Alimentos,8343
-2020,Pereira,Leche entera (litro),Alimentos,2947
-2020,Pereira,Pan tajado (500g),Alimentos,4203
-2020,Pereira,Aceite vegetal (1L),Alimentos,6787
-2020,Pereira,Huevos (docena),Alimentos,12102
-2020,Pereira,Papa (kg),Alimentos,2497
-2020,Pereira,Tomate (kg),Alimentos,3172
-2020,Pereira,Transporte urbano (pasaje),Transporte,2506
-2020,Pereira,Gas natural (m3),Servicios,1668
-2020,Pereira,Energía eléctrica (kWh),Servicios,551
-2020,Pereira,Arriendo cuarto (mes),Vivienda,391462
-2020,Pereira,Arriendo apartamento 2h (mes),Vivienda,1046334
-2020,Pereira,Internet banda ancha (mes),Servicios,56103
-2020,Cúcuta,Arroz (kg),Alimentos,2913
-2020,Cúcuta,Pollo entero (kg),Alimentos,8119
-2020,Cúcuta,Leche entera (litro),Alimentos,2836
-2020,Cúcuta,Pan tajado (500g),Alimentos,4162
-2020,Cúcuta,Aceite vegetal (1L),Alimentos,6179
-2020,Cúcuta,Huevos (docena),Alimentos,12372
-2020,Cúcuta,Papa (kg),Alimentos,2542
-2020,Cúcuta,Tomate (kg),Alimentos,3212
-2020,Cúcuta,Transporte urbano (pasaje),Transporte,2400
-2020,Cúcuta,Gas natural (m3),Servicios,1563
-2020,Cúcuta,Energía eléctrica (kWh),Servicios,546
-2020,Cúcuta,Arriendo cuarto (mes),Vivienda,417265
-2020,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,1096386
-2020,Cúcuta,Internet banda ancha (mes),Servicios,56971
-2021,Bogotá,Arroz (kg),Alimentos,3670
-2021,Bogotá,Pollo entero (kg),Alimentos,10607
-2021,Bogotá,Leche entera (litro),Alimentos,3584
-2021,Bogotá,Pan tajado (500g),Alimentos,5284
-2021,Bogotá,Aceite vegetal (1L),Alimentos,8030
-2021,Bogotá,Huevos (docena),Alimentos,15937
-2021,Bogotá,Papa (kg),Alimentos,3041
-2021,Bogotá,Tomate (kg),Alimentos,4027
-2021,Bogotá,Transporte urbano (pasaje),Transporte,3088
-2021,Bogotá,Gas natural (m3),Servicios,2123
-2021,Bogotá,Energía eléctrica (kWh),Servicios,713
-2021,Bogotá,Arriendo cuarto (mes),Vivienda,512464
-2021,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1361648
-2021,Bogotá,Internet banda ancha (mes),Servicios,74222
-2021,Medellín,Arroz (kg),Alimentos,3463
-2021,Medellín,Pollo entero (kg),Alimentos,9448
-2021,Medellín,Leche entera (litro),Alimentos,3333
-2021,Medellín,Pan tajado (500g),Alimentos,4879
-2021,Medellín,Aceite vegetal (1L),Alimentos,7082
-2021,Medellín,Huevos (docena),Alimentos,14104
-2021,Medellín,Papa (kg),Alimentos,2905
-2021,Medellín,Tomate (kg),Alimentos,3641
-2021,Medellín,Transporte urbano (pasaje),Transporte,2807
-2021,Medellín,Gas natural (m3),Servicios,1880
-2021,Medellín,Energía eléctrica (kWh),Servicios,612
-2021,Medellín,Arriendo cuarto (mes),Vivienda,488942
-2021,Medellín,Arriendo apartamento 2h (mes),Vivienda,1232708
-2021,Medellín,Internet banda ancha (mes),Servicios,64977
-2021,Cali,Arroz (kg),Alimentos,3150
-2021,Cali,Pollo entero (kg),Alimentos,9831
-2021,Cali,Leche entera (litro),Alimentos,3086
-2021,Cali,Pan tajado (500g),Alimentos,4890
-2021,Cali,Aceite vegetal (1L),Alimentos,7619
-2021,Cali,Huevos (docena),Alimentos,14124
-2021,Cali,Papa (kg),Alimentos,2852
-2021,Cali,Tomate (kg),Alimentos,3476
-2021,Cali,Transporte urbano (pasaje),Transporte,2796
-2021,Cali,Gas natural (m3),Servicios,1862
-2021,Cali,Energía eléctrica (kWh),Servicios,621
-2021,Cali,Arriendo cuarto (mes),Vivienda,449966
-2021,Cali,Arriendo apartamento 2h (mes),Vivienda,1236096
-2021,Cali,Internet banda ancha (mes),Servicios,66954
-2021,Barranquilla,Arroz (kg),Alimentos,3278
-2021,Barranquilla,Pollo entero (kg),Alimentos,9846
-2021,Barranquilla,Leche entera (litro),Alimentos,3006
-2021,Barranquilla,Pan tajado (500g),Alimentos,4676
-2021,Barranquilla,Aceite vegetal (1L),Alimentos,7029
-2021,Barranquilla,Huevos (docena),Alimentos,13961
-2021,Barranquilla,Papa (kg),Alimentos,2713
-2021,Barranquilla,Tomate (kg),Alimentos,3498
-2021,Barranquilla,Transporte urbano (pasaje),Transporte,2681
-2021,Barranquilla,Gas natural (m3),Servicios,1727
-2021,Barranquilla,Energía eléctrica (kWh),Servicios,631
-2021,Barranquilla,Arriendo cuarto (mes),Vivienda,457320
-2021,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1139455
-2021,Barranquilla,Internet banda ancha (mes),Servicios,64922
-2021,Bucaramanga,Arroz (kg),Alimentos,3175
-2021,Bucaramanga,Pollo entero (kg),Alimentos,8925
-2021,Bucaramanga,Leche entera (litro),Alimentos,2948
-2021,Bucaramanga,Pan tajado (500g),Alimentos,4806
-2021,Bucaramanga,Aceite vegetal (1L),Alimentos,6856
-2021,Bucaramanga,Huevos (docena),Alimentos,13277
-2021,Bucaramanga,Papa (kg),Alimentos,2630
-2021,Bucaramanga,Tomate (kg),Alimentos,3435
-2021,Bucaramanga,Transporte urbano (pasaje),Transporte,2773
-2021,Bucaramanga,Gas natural (m3),Servicios,1758
-2021,Bucaramanga,Energía eléctrica (kWh),Servicios,625
-2021,Bucaramanga,Arriendo cuarto (mes),Vivienda,454965
-2021,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1176442
-2021,Bucaramanga,Internet banda ancha (mes),Servicios,61461
-2021,Manizales,Arroz (kg),Alimentos,2951
-2021,Manizales,Pollo entero (kg),Alimentos,9294
-2021,Manizales,Leche entera (litro),Alimentos,3048
-2021,Manizales,Pan tajado (500g),Alimentos,4553
-2021,Manizales,Aceite vegetal (1L),Alimentos,6914
-2021,Manizales,Huevos (docena),Alimentos,13333
-2021,Manizales,Papa (kg),Alimentos,2656
-2021,Manizales,Tomate (kg),Alimentos,3456
-2021,Manizales,Transporte urbano (pasaje),Transporte,2555
-2021,Manizales,Gas natural (m3),Servicios,1751
-2021,Manizales,Energía eléctrica (kWh),Servicios,567
-2021,Manizales,Arriendo cuarto (mes),Vivienda,414105
-2021,Manizales,Arriendo apartamento 2h (mes),Vivienda,1116469
-2021,Manizales,Internet banda ancha (mes),Servicios,62789
-2021,Pereira,Arroz (kg),Alimentos,2996
-2021,Pereira,Pollo entero (kg),Alimentos,9178
-2021,Pereira,Leche entera (litro),Alimentos,2852
-2021,Pereira,Pan tajado (500g),Alimentos,4748
-2021,Pereira,Aceite vegetal (1L),Alimentos,6871
-2021,Pereira,Huevos (docena),Alimentos,13751
-2021,Pereira,Papa (kg),Alimentos,2547
-2021,Pereira,Tomate (kg),Alimentos,3223
-2021,Pereira,Transporte urbano (pasaje),Transporte,2546
-2021,Pereira,Gas natural (m3),Servicios,1715
-2021,Pereira,Energía eléctrica (kWh),Servicios,595
-2021,Pereira,Arriendo cuarto (mes),Vivienda,404599
-2021,Pereira,Arriendo apartamento 2h (mes),Vivienda,1170545
-2021,Pereira,Internet banda ancha (mes),Servicios,62976
-2021,Cúcuta,Arroz (kg),Alimentos,3094
-2021,Cúcuta,Pollo entero (kg),Alimentos,8549
-2021,Cúcuta,Leche entera (litro),Alimentos,2911
-2021,Cúcuta,Pan tajado (500g),Alimentos,4510
-2021,Cúcuta,Aceite vegetal (1L),Alimentos,6643
-2021,Cúcuta,Huevos (docena),Alimentos,12433
-2021,Cúcuta,Papa (kg),Alimentos,2521
-2021,Cúcuta,Tomate (kg),Alimentos,3389
-2021,Cúcuta,Transporte urbano (pasaje),Transporte,2602
-2021,Cúcuta,Gas natural (m3),Servicios,1701
-2021,Cúcuta,Energía eléctrica (kWh),Servicios,582
-2021,Cúcuta,Arriendo cuarto (mes),Vivienda,431260
-2021,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,1080794
-2021,Cúcuta,Internet banda ancha (mes),Servicios,57832
-2022,Bogotá,Arroz (kg),Alimentos,3895
-2022,Bogotá,Pollo entero (kg),Alimentos,11989
-2022,Bogotá,Leche entera (litro),Alimentos,4095
-2022,Bogotá,Pan tajado (500g),Alimentos,6056
-2022,Bogotá,Aceite vegetal (1L),Alimentos,9365
-2022,Bogotá,Huevos (docena),Alimentos,18243
-2022,Bogotá,Papa (kg),Alimentos,3471
-2022,Bogotá,Tomate (kg),Alimentos,4377
-2022,Bogotá,Transporte urbano (pasaje),Transporte,3281
-2022,Bogotá,Gas natural (m3),Servicios,2318
-2022,Bogotá,Energía eléctrica (kWh),Servicios,821
-2022,Bogotá,Arriendo cuarto (mes),Vivienda,556728
-2022,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1553507
-2022,Bogotá,Internet banda ancha (mes),Servicios,82639
-2022,Medellín,Arroz (kg),Alimentos,3590
-2022,Medellín,Pollo entero (kg),Alimentos,11422
-2022,Medellín,Leche entera (litro),Alimentos,3503
-2022,Medellín,Pan tajado (500g),Alimentos,5459
-2022,Medellín,Aceite vegetal (1L),Alimentos,8313
-2022,Medellín,Huevos (docena),Alimentos,16331
-2022,Medellín,Papa (kg),Alimentos,3366
-2022,Medellín,Tomate (kg),Alimentos,4048
-2022,Medellín,Transporte urbano (pasaje),Transporte,3131
-2022,Medellín,Gas natural (m3),Servicios,2011
-2022,Medellín,Energía eléctrica (kWh),Servicios,750
-2022,Medellín,Arriendo cuarto (mes),Vivienda,513229
-2022,Medellín,Arriendo apartamento 2h (mes),Vivienda,1383729
-2022,Medellín,Internet banda ancha (mes),Servicios,77594
-2022,Cali,Arroz (kg),Alimentos,3570
-2022,Cali,Pollo entero (kg),Alimentos,10484
-2022,Cali,Leche entera (litro),Alimentos,3543
-2022,Cali,Pan tajado (500g),Alimentos,5486
-2022,Cali,Aceite vegetal (1L),Alimentos,7866
-2022,Cali,Huevos (docena),Alimentos,16500
-2022,Cali,Papa (kg),Alimentos,3053
-2022,Cali,Tomate (kg),Alimentos,4152
-2022,Cali,Transporte urbano (pasaje),Transporte,3206
-2022,Cali,Gas natural (m3),Servicios,2131
-2022,Cali,Energía eléctrica (kWh),Servicios,730
-2022,Cali,Arriendo cuarto (mes),Vivienda,524307
-2022,Cali,Arriendo apartamento 2h (mes),Vivienda,1405226
-2022,Cali,Internet banda ancha (mes),Servicios,72561
-2022,Barranquilla,Arroz (kg),Alimentos,3417
-2022,Barranquilla,Pollo entero (kg),Alimentos,10440
-2022,Barranquilla,Leche entera (litro),Alimentos,3321
-2022,Barranquilla,Pan tajado (500g),Alimentos,5504
-2022,Barranquilla,Aceite vegetal (1L),Alimentos,7643
-2022,Barranquilla,Huevos (docena),Alimentos,16340
-2022,Barranquilla,Papa (kg),Alimentos,3095
-2022,Barranquilla,Tomate (kg),Alimentos,4082
-2022,Barranquilla,Transporte urbano (pasaje),Transporte,3052
-2022,Barranquilla,Gas natural (m3),Servicios,2092
-2022,Barranquilla,Energía eléctrica (kWh),Servicios,694
-2022,Barranquilla,Arriendo cuarto (mes),Vivienda,508659
-2022,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1385769
-2022,Barranquilla,Internet banda ancha (mes),Servicios,70563
-2022,Bucaramanga,Arroz (kg),Alimentos,3399
-2022,Bucaramanga,Pollo entero (kg),Alimentos,10893
-2022,Bucaramanga,Leche entera (litro),Alimentos,3407
-2022,Bucaramanga,Pan tajado (500g),Alimentos,5033
-2022,Bucaramanga,Aceite vegetal (1L),Alimentos,7745
-2022,Bucaramanga,Huevos (docena),Alimentos,15065
-2022,Bucaramanga,Papa (kg),Alimentos,2962
-2022,Bucaramanga,Tomate (kg),Alimentos,4018
-2022,Bucaramanga,Transporte urbano (pasaje),Transporte,2878
-2022,Bucaramanga,Gas natural (m3),Servicios,1985
-2022,Bucaramanga,Energía eléctrica (kWh),Servicios,651
-2022,Bucaramanga,Arriendo cuarto (mes),Vivienda,503125
-2022,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1376778
-2022,Bucaramanga,Internet banda ancha (mes),Servicios,71674
-2022,Manizales,Arroz (kg),Alimentos,3485
-2022,Manizales,Pollo entero (kg),Alimentos,10552
-2022,Manizales,Leche entera (litro),Alimentos,3403
-2022,Manizales,Pan tajado (500g),Alimentos,5000
-2022,Manizales,Aceite vegetal (1L),Alimentos,7376
-2022,Manizales,Huevos (docena),Alimentos,15755
-2022,Manizales,Papa (kg),Alimentos,3025
-2022,Manizales,Tomate (kg),Alimentos,3863
-2022,Manizales,Transporte urbano (pasaje),Transporte,2877
-2022,Manizales,Gas natural (m3),Servicios,1911
-2022,Manizales,Energía eléctrica (kWh),Servicios,645
-2022,Manizales,Arriendo cuarto (mes),Vivienda,500473
-2022,Manizales,Arriendo apartamento 2h (mes),Vivienda,1331152
-2022,Manizales,Internet banda ancha (mes),Servicios,67054
-2022,Pereira,Arroz (kg),Alimentos,3387
-2022,Pereira,Pollo entero (kg),Alimentos,10208
-2022,Pereira,Leche entera (litro),Alimentos,3429
-2022,Pereira,Pan tajado (500g),Alimentos,5006
-2022,Pereira,Aceite vegetal (1L),Alimentos,7668
-2022,Pereira,Huevos (docena),Alimentos,14720
-2022,Pereira,Papa (kg),Alimentos,2884
-2022,Pereira,Tomate (kg),Alimentos,3695
-2022,Pereira,Transporte urbano (pasaje),Transporte,2741
-2022,Pereira,Gas natural (m3),Servicios,1983
-2022,Pereira,Energía eléctrica (kWh),Servicios,679
-2022,Pereira,Arriendo cuarto (mes),Vivienda,472179
-2022,Pereira,Arriendo apartamento 2h (mes),Vivienda,1264010
-2022,Pereira,Internet banda ancha (mes),Servicios,69038
-2022,Cúcuta,Arroz (kg),Alimentos,3410
-2022,Cúcuta,Pollo entero (kg),Alimentos,10321
-2022,Cúcuta,Leche entera (litro),Alimentos,3104
-2022,Cúcuta,Pan tajado (500g),Alimentos,5160
-2022,Cúcuta,Aceite vegetal (1L),Alimentos,7265
-2022,Cúcuta,Huevos (docena),Alimentos,15060
-2022,Cúcuta,Papa (kg),Alimentos,2807
-2022,Cúcuta,Tomate (kg),Alimentos,3646
-2022,Cúcuta,Transporte urbano (pasaje),Transporte,2857
-2022,Cúcuta,Gas natural (m3),Servicios,1905
-2022,Cúcuta,Energía eléctrica (kWh),Servicios,645
-2022,Cúcuta,Arriendo cuarto (mes),Vivienda,489296
-2022,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,1260044
-2022,Cúcuta,Internet banda ancha (mes),Servicios,69451
-2023,Bogotá,Arroz (kg),Alimentos,3785
-2023,Bogotá,Pollo entero (kg),Alimentos,11095
-2023,Bogotá,Leche entera (litro),Alimentos,3845
-2023,Bogotá,Pan tajado (500g),Alimentos,5869
-2023,Bogotá,Aceite vegetal (1L),Alimentos,8490
-2023,Bogotá,Huevos (docena),Alimentos,16468
-2023,Bogotá,Papa (kg),Alimentos,3554
-2023,Bogotá,Tomate (kg),Alimentos,4057
-2023,Bogotá,Transporte urbano (pasaje),Transporte,3240
-2023,Bogotá,Gas natural (m3),Servicios,2082
-2023,Bogotá,Energía eléctrica (kWh),Servicios,738
-2023,Bogotá,Arriendo cuarto (mes),Vivienda,565762
-2023,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1426256
-2023,Bogotá,Internet banda ancha (mes),Servicios,77478
-2023,Medellín,Arroz (kg),Alimentos,3538
-2023,Medellín,Pollo entero (kg),Alimentos,10859
-2023,Medellín,Leche entera (litro),Alimentos,3372
-2023,Medellín,Pan tajado (500g),Alimentos,5350
-2023,Medellín,Aceite vegetal (1L),Alimentos,7679
-2023,Medellín,Huevos (docena),Alimentos,15533
-2023,Medellín,Papa (kg),Alimentos,2996
-2023,Medellín,Tomate (kg),Alimentos,3849
-2023,Medellín,Transporte urbano (pasaje),Transporte,2902
-2023,Medellín,Gas natural (m3),Servicios,2110
-2023,Medellín,Energía eléctrica (kWh),Servicios,660
-2023,Medellín,Arriendo cuarto (mes),Vivienda,508911
-2023,Medellín,Arriendo apartamento 2h (mes),Vivienda,1286596
-2023,Medellín,Internet banda ancha (mes),Servicios,71860
-2023,Cali,Arroz (kg),Alimentos,3606
-2023,Cali,Pollo entero (kg),Alimentos,10163
-2023,Cali,Leche entera (litro),Alimentos,3512
-2023,Cali,Pan tajado (500g),Alimentos,5237
-2023,Cali,Aceite vegetal (1L),Alimentos,7605
-2023,Cali,Huevos (docena),Alimentos,14923
-2023,Cali,Papa (kg),Alimentos,3051
-2023,Cali,Tomate (kg),Alimentos,3975
-2023,Cali,Transporte urbano (pasaje),Transporte,2849
-2023,Cali,Gas natural (m3),Servicios,1911
-2023,Cali,Energía eléctrica (kWh),Servicios,680
-2023,Cali,Arriendo cuarto (mes),Vivienda,507811
-2023,Cali,Arriendo apartamento 2h (mes),Vivienda,1351537
-2023,Cali,Internet banda ancha (mes),Servicios,72381
-2023,Barranquilla,Arroz (kg),Alimentos,3312
-2023,Barranquilla,Pollo entero (kg),Alimentos,10313
-2023,Barranquilla,Leche entera (litro),Alimentos,3419
-2023,Barranquilla,Pan tajado (500g),Alimentos,5185
-2023,Barranquilla,Aceite vegetal (1L),Alimentos,7790
-2023,Barranquilla,Huevos (docena),Alimentos,15577
-2023,Barranquilla,Papa (kg),Alimentos,2861
-2023,Barranquilla,Tomate (kg),Alimentos,3600
-2023,Barranquilla,Transporte urbano (pasaje),Transporte,2987
-2023,Barranquilla,Gas natural (m3),Servicios,1892
-2023,Barranquilla,Energía eléctrica (kWh),Servicios,669
-2023,Barranquilla,Arriendo cuarto (mes),Vivienda,475168
-2023,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1265096
-2023,Barranquilla,Internet banda ancha (mes),Servicios,71185
-2023,Bucaramanga,Arroz (kg),Alimentos,3310
-2023,Bucaramanga,Pollo entero (kg),Alimentos,10070
-2023,Bucaramanga,Leche entera (litro),Alimentos,3381
-2023,Bucaramanga,Pan tajado (500g),Alimentos,5325
-2023,Bucaramanga,Aceite vegetal (1L),Alimentos,7273
-2023,Bucaramanga,Huevos (docena),Alimentos,14764
-2023,Bucaramanga,Papa (kg),Alimentos,2983
-2023,Bucaramanga,Tomate (kg),Alimentos,3589
-2023,Bucaramanga,Transporte urbano (pasaje),Transporte,2887
-2023,Bucaramanga,Gas natural (m3),Servicios,1938
-2023,Bucaramanga,Energía eléctrica (kWh),Servicios,680
-2023,Bucaramanga,Arriendo cuarto (mes),Vivienda,494721
-2023,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1304468
-2023,Bucaramanga,Internet banda ancha (mes),Servicios,68296
-2023,Manizales,Arroz (kg),Alimentos,3351
-2023,Manizales,Pollo entero (kg),Alimentos,9882
-2023,Manizales,Leche entera (litro),Alimentos,3057
-2023,Manizales,Pan tajado (500g),Alimentos,4770
-2023,Manizales,Aceite vegetal (1L),Alimentos,7724
-2023,Manizales,Huevos (docena),Alimentos,14330
-2023,Manizales,Papa (kg),Alimentos,2879
-2023,Manizales,Tomate (kg),Alimentos,3641
-2023,Manizales,Transporte urbano (pasaje),Transporte,2719
-2023,Manizales,Gas natural (m3),Servicios,1897
-2023,Manizales,Energía eléctrica (kWh),Servicios,645
-2023,Manizales,Arriendo cuarto (mes),Vivienda,444441
-2023,Manizales,Arriendo apartamento 2h (mes),Vivienda,1268687
-2023,Manizales,Internet banda ancha (mes),Servicios,67520
-2023,Pereira,Arroz (kg),Alimentos,3281
-2023,Pereira,Pollo entero (kg),Alimentos,10188
-2023,Pereira,Leche entera (litro),Alimentos,3075
-2023,Pereira,Pan tajado (500g),Alimentos,4819
-2023,Pereira,Aceite vegetal (1L),Alimentos,7491
-2023,Pereira,Huevos (docena),Alimentos,13967
-2023,Pereira,Papa (kg),Alimentos,2995
-2023,Pereira,Tomate (kg),Alimentos,3690
-2023,Pereira,Transporte urbano (pasaje),Transporte,2703
-2023,Pereira,Gas natural (m3),Servicios,1924
-2023,Pereira,Energía eléctrica (kWh),Servicios,646
-2023,Pereira,Arriendo cuarto (mes),Vivienda,455352
-2023,Pereira,Arriendo apartamento 2h (mes),Vivienda,1283162
-2023,Pereira,Internet banda ancha (mes),Servicios,64867
-2023,Cúcuta,Arroz (kg),Alimentos,3277
-2023,Cúcuta,Pollo entero (kg),Alimentos,9603
-2023,Cúcuta,Leche entera (litro),Alimentos,3178
-2023,Cúcuta,Pan tajado (500g),Alimentos,4775
-2023,Cúcuta,Aceite vegetal (1L),Alimentos,7196
-2023,Cúcuta,Huevos (docena),Alimentos,13288
-2023,Cúcuta,Papa (kg),Alimentos,2868
-2023,Cúcuta,Tomate (kg),Alimentos,3344
-2023,Cúcuta,Transporte urbano (pasaje),Transporte,2659
-2023,Cúcuta,Gas natural (m3),Servicios,1771
-2023,Cúcuta,Energía eléctrica (kWh),Servicios,644
-2023,Cúcuta,Arriendo cuarto (mes),Vivienda,435442
-2023,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,1247313
-2023,Cúcuta,Internet banda ancha (mes),Servicios,62344
-2024,Bogotá,Arroz (kg),Alimentos,4149
-2024,Bogotá,Pollo entero (kg),Alimentos,11595
-2024,Bogotá,Leche entera (litro),Alimentos,4069
-2024,Bogotá,Pan tajado (500g),Alimentos,6185
-2024,Bogotá,Aceite vegetal (1L),Alimentos,9528
-2024,Bogotá,Huevos (docena),Alimentos,16941
-2024,Bogotá,Papa (kg),Alimentos,3454
-2024,Bogotá,Tomate (kg),Alimentos,4447
-2024,Bogotá,Transporte urbano (pasaje),Transporte,3319
-2024,Bogotá,Gas natural (m3),Servicios,2200
-2024,Bogotá,Energía eléctrica (kWh),Servicios,812
-2024,Bogotá,Arriendo cuarto (mes),Vivienda,580774
-2024,Bogotá,Arriendo apartamento 2h (mes),Vivienda,1483954
-2024,Bogotá,Internet banda ancha (mes),Servicios,81329
-2024,Medellín,Arroz (kg),Alimentos,3829
-2024,Medellín,Pollo entero (kg),Alimentos,11163
-2024,Medellín,Leche entera (litro),Alimentos,3583
-2024,Medellín,Pan tajado (500g),Alimentos,5751
-2024,Medellín,Aceite vegetal (1L),Alimentos,8020
-2024,Medellín,Huevos (docena),Alimentos,16079
-2024,Medellín,Papa (kg),Alimentos,3246
-2024,Medellín,Tomate (kg),Alimentos,4210
-2024,Medellín,Transporte urbano (pasaje),Transporte,3150
-2024,Medellín,Gas natural (m3),Servicios,2188
-2024,Medellín,Energía eléctrica (kWh),Servicios,691
-2024,Medellín,Arriendo cuarto (mes),Vivienda,549999
-2024,Medellín,Arriendo apartamento 2h (mes),Vivienda,1465328
-2024,Medellín,Internet banda ancha (mes),Servicios,78003
-2024,Cali,Arroz (kg),Alimentos,3781
-2024,Cali,Pollo entero (kg),Alimentos,11214
-2024,Cali,Leche entera (litro),Alimentos,3407
-2024,Cali,Pan tajado (500g),Alimentos,5701
-2024,Cali,Aceite vegetal (1L),Alimentos,8343
-2024,Cali,Huevos (docena),Alimentos,16098
-2024,Cali,Papa (kg),Alimentos,3344
-2024,Cali,Tomate (kg),Alimentos,3888
-2024,Cali,Transporte urbano (pasaje),Transporte,3226
-2024,Cali,Gas natural (m3),Servicios,2151
-2024,Cali,Energía eléctrica (kWh),Servicios,736
-2024,Cali,Arriendo cuarto (mes),Vivienda,499553
-2024,Cali,Arriendo apartamento 2h (mes),Vivienda,1299419
-2024,Cali,Internet banda ancha (mes),Servicios,73476
-2024,Barranquilla,Arroz (kg),Alimentos,3711
-2024,Barranquilla,Pollo entero (kg),Alimentos,10885
-2024,Barranquilla,Leche entera (litro),Alimentos,3361
-2024,Barranquilla,Pan tajado (500g),Alimentos,5267
-2024,Barranquilla,Aceite vegetal (1L),Alimentos,8017
-2024,Barranquilla,Huevos (docena),Alimentos,15425
-2024,Barranquilla,Papa (kg),Alimentos,3248
-2024,Barranquilla,Tomate (kg),Alimentos,3867
-2024,Barranquilla,Transporte urbano (pasaje),Transporte,2940
-2024,Barranquilla,Gas natural (m3),Servicios,1997
-2024,Barranquilla,Energía eléctrica (kWh),Servicios,698
-2024,Barranquilla,Arriendo cuarto (mes),Vivienda,502599
-2024,Barranquilla,Arriendo apartamento 2h (mes),Vivienda,1384486
-2024,Barranquilla,Internet banda ancha (mes),Servicios,71001
-2024,Bucaramanga,Arroz (kg),Alimentos,3688
-2024,Bucaramanga,Pollo entero (kg),Alimentos,10738
-2024,Bucaramanga,Leche entera (litro),Alimentos,3347
-2024,Bucaramanga,Pan tajado (500g),Alimentos,5388
-2024,Bucaramanga,Aceite vegetal (1L),Alimentos,8320
-2024,Bucaramanga,Huevos (docena),Alimentos,16078
-2024,Bucaramanga,Papa (kg),Alimentos,3138
-2024,Bucaramanga,Tomate (kg),Alimentos,3728
-2024,Bucaramanga,Transporte urbano (pasaje),Transporte,2901
-2024,Bucaramanga,Gas natural (m3),Servicios,1958
-2024,Bucaramanga,Energía eléctrica (kWh),Servicios,692
-2024,Bucaramanga,Arriendo cuarto (mes),Vivienda,496215
-2024,Bucaramanga,Arriendo apartamento 2h (mes),Vivienda,1306871
-2024,Bucaramanga,Internet banda ancha (mes),Servicios,70189
-2024,Manizales,Arroz (kg),Alimentos,3321
-2024,Manizales,Pollo entero (kg),Alimentos,10469
-2024,Manizales,Leche entera (litro),Alimentos,3255
-2024,Manizales,Pan tajado (500g),Alimentos,4957
-2024,Manizales,Aceite vegetal (1L),Alimentos,7552
-2024,Manizales,Huevos (docena),Alimentos,14464
-2024,Manizales,Papa (kg),Alimentos,3102
-2024,Manizales,Tomate (kg),Alimentos,3671
-2024,Manizales,Transporte urbano (pasaje),Transporte,2801
-2024,Manizales,Gas natural (m3),Servicios,1893
-2024,Manizales,Energía eléctrica (kWh),Servicios,695
-2024,Manizales,Arriendo cuarto (mes),Vivienda,489427
-2024,Manizales,Arriendo apartamento 2h (mes),Vivienda,1331841
-2024,Manizales,Internet banda ancha (mes),Servicios,72792
-2024,Pereira,Arroz (kg),Alimentos,3531
-2024,Pereira,Pollo entero (kg),Alimentos,10355
-2024,Pereira,Leche entera (litro),Alimentos,3262
-2024,Pereira,Pan tajado (500g),Alimentos,5133
-2024,Pereira,Aceite vegetal (1L),Alimentos,7526
-2024,Pereira,Huevos (docena),Alimentos,14569
-2024,Pereira,Papa (kg),Alimentos,2983
-2024,Pereira,Tomate (kg),Alimentos,3599
-2024,Pereira,Transporte urbano (pasaje),Transporte,2973
-2024,Pereira,Gas natural (m3),Servicios,1915
-2024,Pereira,Energía eléctrica (kWh),Servicios,685
-2024,Pereira,Arriendo cuarto (mes),Vivienda,459758
-2024,Pereira,Arriendo apartamento 2h (mes),Vivienda,1232176
-2024,Pereira,Internet banda ancha (mes),Servicios,68744
-2024,Cúcuta,Arroz (kg),Alimentos,3362
-2024,Cúcuta,Pollo entero (kg),Alimentos,10007
-2024,Cúcuta,Leche entera (litro),Alimentos,3347
-2024,Cúcuta,Pan tajado (500g),Alimentos,5142
-2024,Cúcuta,Aceite vegetal (1L),Alimentos,7621
-2024,Cúcuta,Huevos (docena),Alimentos,14572
-2024,Cúcuta,Papa (kg),Alimentos,2902
-2024,Cúcuta,Tomate (kg),Alimentos,3651
-2024,Cúcuta,Transporte urbano (pasaje),Transporte,2889
-2024,Cúcuta,Gas natural (m3),Servicios,1828
-2024,Cúcuta,Energía eléctrica (kWh),Servicios,668
-2024,Cúcuta,Arriendo cuarto (mes),Vivienda,461019
-2024,Cúcuta,Arriendo apartamento 2h (mes),Vivienda,1220016
-2024,Cúcuta,Internet banda ancha (mes),Servicios,69716
+anio,ciudad,grupo,producto,precio_promedio_cop,variacion_anual_pct
+2020,Bogotá,Alimentos,Arroz (kg),2850,3.2
+2020,Bogotá,Alimentos,Leche (litro),2200,1.8
+2020,Bogotá,Alimentos,Pollo (kg),8900,2.1
+2020,Bogotá,Alimentos,Huevos (docena),4200,5.3
+2020,Bogotá,Alimentos,Papa (kg),1800,8.7
+2020,Bogotá,Vivienda,Arriendo estrato 3 (mensual),850000,4.5
+2020,Bogotá,Transporte,Bus SITP (pasaje),2550,0.0
+2020,Bogotá,Salud,Consulta médica general,42000,5.0
+2020,Medellín,Alimentos,Arroz (kg),2700,2.8
+2020,Medellín,Alimentos,Leche (litro),2100,1.5
+2020,Medellín,Alimentos,Pollo (kg),8500,1.8
+2020,Medellín,Alimentos,Huevos (docena),4000,4.9
+2020,Medellín,Alimentos,Papa (kg),1650,7.2
+2020,Medellín,Vivienda,Arriendo estrato 3 (mensual),780000,4.2
+2020,Medellín,Transporte,Metro (pasaje),2700,0.0
+2020,Medellín,Salud,Consulta médica general,40000,4.8
+2020,Cali,Alimentos,Arroz (kg),2600,2.5
+2020,Cali,Alimentos,Leche (litro),2000,1.2
+2020,Cali,Alimentos,Pollo (kg),8200,1.5
+2020,Cali,Alimentos,Huevos (docena),3900,4.6
+2020,Cali,Alimentos,Papa (kg),1700,8.1
+2020,Cali,Vivienda,Arriendo estrato 3 (mensual),720000,3.8
+2020,Cali,Transporte,Bus MIO (pasaje),2400,0.0
+2020,Cali,Salud,Consulta médica general,38000,4.5
+2020,Barranquilla,Alimentos,Arroz (kg),2500,2.3
+2020,Barranquilla,Alimentos,Leche (litro),1950,1.0
+2020,Barranquilla,Alimentos,Pollo (kg),8100,1.4
+2020,Barranquilla,Alimentos,Huevos (docena),3800,4.3
+2020,Barranquilla,Alimentos,Papa (kg),1900,9.2
+2020,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),700000,3.5
+2020,Barranquilla,Transporte,Bus Transmetro (pasaje),2250,0.0
+2020,Barranquilla,Salud,Consulta médica general,36000,4.2
+2021,Bogotá,Alimentos,Arroz (kg),3100,8.8
+2021,Bogotá,Alimentos,Leche (litro),2350,6.8
+2021,Bogotá,Alimentos,Pollo (kg),9800,10.1
+2021,Bogotá,Alimentos,Huevos (docena),4800,14.3
+2021,Bogotá,Alimentos,Papa (kg),2300,27.8
+2021,Bogotá,Vivienda,Arriendo estrato 3 (mensual),880000,3.5
+2021,Bogotá,Transporte,Bus SITP (pasaje),2550,0.0
+2021,Bogotá,Salud,Consulta médica general,44500,5.9
+2021,Medellín,Alimentos,Arroz (kg),2920,8.1
+2021,Medellín,Alimentos,Leche (litro),2230,6.2
+2021,Medellín,Alimentos,Pollo (kg),9300,9.4
+2021,Medellín,Alimentos,Huevos (docena),4550,13.8
+2021,Medellín,Alimentos,Papa (kg),2100,27.3
+2021,Medellín,Vivienda,Arriendo estrato 3 (mensual),810000,3.8
+2021,Medellín,Transporte,Metro (pasaje),2700,0.0
+2021,Medellín,Salud,Consulta médica general,42200,5.5
+2021,Cali,Alimentos,Arroz (kg),2810,8.1
+2021,Cali,Alimentos,Leche (litro),2130,6.5
+2021,Cali,Alimentos,Pollo (kg),9000,9.8
+2021,Cali,Alimentos,Huevos (docena),4400,12.8
+2021,Cali,Alimentos,Papa (kg),2180,28.2
+2021,Cali,Vivienda,Arriendo estrato 3 (mensual),750000,4.2
+2021,Cali,Transporte,Bus MIO (pasaje),2400,0.0
+2021,Cali,Salud,Consulta médica general,40000,5.3
+2021,Barranquilla,Alimentos,Arroz (kg),2720,8.8
+2021,Barranquilla,Alimentos,Leche (litro),2080,6.7
+2021,Barranquilla,Alimentos,Pollo (kg),8900,9.9
+2021,Barranquilla,Alimentos,Huevos (docena),4300,13.2
+2021,Barranquilla,Alimentos,Papa (kg),2120,11.6
+2021,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),730000,4.3
+2021,Barranquilla,Transporte,Bus Transmetro (pasaje),2250,0.0
+2021,Barranquilla,Salud,Consulta médica general,38000,5.6
+2022,Bogotá,Alimentos,Arroz (kg),3850,24.2
+2022,Bogotá,Alimentos,Leche (litro),3100,31.9
+2022,Bogotá,Alimentos,Pollo (kg),12500,27.6
+2022,Bogotá,Alimentos,Huevos (docena),6800,41.7
+2022,Bogotá,Alimentos,Papa (kg),3200,39.1
+2022,Bogotá,Vivienda,Arriendo estrato 3 (mensual),970000,10.2
+2022,Bogotá,Transporte,Bus SITP (pasaje),2700,5.9
+2022,Bogotá,Salud,Consulta médica general,50000,12.4
+2022,Medellín,Alimentos,Arroz (kg),3620,24.0
+2022,Medellín,Alimentos,Leche (litro),2920,30.9
+2022,Medellín,Alimentos,Pollo (kg),11900,27.9
+2022,Medellín,Alimentos,Huevos (docena),6400,40.7
+2022,Medellín,Alimentos,Papa (kg),2980,42.0
+2022,Medellín,Vivienda,Arriendo estrato 3 (mensual),890000,9.9
+2022,Medellín,Transporte,Metro (pasaje),2850,5.6
+2022,Medellín,Salud,Consulta médica general,47000,11.4
+2022,Cali,Alimentos,Arroz (kg),3490,24.2
+2022,Cali,Alimentos,Leche (litro),2800,31.5
+2022,Cali,Alimentos,Pollo (kg),11400,26.7
+2022,Cali,Alimentos,Huevos (docena),6200,40.9
+2022,Cali,Alimentos,Papa (kg),3050,39.9
+2022,Cali,Vivienda,Arriendo estrato 3 (mensual),840000,12.0
+2022,Cali,Transporte,Bus MIO (pasaje),2550,6.3
+2022,Cali,Salud,Consulta médica general,45000,12.5
+2022,Barranquilla,Alimentos,Arroz (kg),3380,24.3
+2022,Barranquilla,Alimentos,Leche (litro),2720,30.8
+2022,Barranquilla,Alimentos,Pollo (kg),11200,25.8
+2022,Barranquilla,Alimentos,Huevos (docena),6000,39.5
+2022,Barranquilla,Alimentos,Papa (kg),2850,34.4
+2022,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),820000,12.3
+2022,Barranquilla,Transporte,Bus Transmetro (pasaje),2450,8.9
+2022,Barranquilla,Salud,Consulta médica general,43000,13.2
+2023,Bogotá,Alimentos,Arroz (kg),4200,9.1
+2023,Bogotá,Alimentos,Leche (litro),3450,11.3
+2023,Bogotá,Alimentos,Pollo (kg),13200,5.6
+2023,Bogotá,Alimentos,Huevos (docena),7100,4.4
+2023,Bogotá,Alimentos,Papa (kg),2900,-9.4
+2023,Bogotá,Vivienda,Arriendo estrato 3 (mensual),1080000,11.3
+2023,Bogotá,Transporte,Bus SITP (pasaje),2900,7.4
+2023,Bogotá,Salud,Consulta médica general,56000,12.0
+2023,Medellín,Alimentos,Arroz (kg),3950,9.1
+2023,Medellín,Alimentos,Leche (litro),3240,11.0
+2023,Medellín,Alimentos,Pollo (kg),12500,5.0
+2023,Medellín,Alimentos,Huevos (docena),6750,5.5
+2023,Medellín,Alimentos,Papa (kg),2720,-8.7
+2023,Medellín,Vivienda,Arriendo estrato 3 (mensual),990000,11.2
+2023,Medellín,Transporte,Metro (pasaje),3050,7.0
+2023,Medellín,Salud,Consulta médica general,52500,11.7
+2023,Cali,Alimentos,Arroz (kg),3810,9.2
+2023,Cali,Alimentos,Leche (litro),3100,10.7
+2023,Cali,Alimentos,Pollo (kg),12000,5.3
+2023,Cali,Alimentos,Huevos (docena),6550,5.6
+2023,Cali,Alimentos,Papa (kg),2780,-8.9
+2023,Cali,Vivienda,Arriendo estrato 3 (mensual),940000,11.9
+2023,Cali,Transporte,Bus MIO (pasaje),2750,7.8
+2023,Cali,Salud,Consulta médica general,50000,11.1
+2023,Barranquilla,Alimentos,Arroz (kg),3680,8.9
+2023,Barranquilla,Alimentos,Leche (litro),3010,10.7
+2023,Barranquilla,Alimentos,Pollo (kg),11800,5.4
+2023,Barranquilla,Alimentos,Huevos (docena),6350,5.8
+2023,Barranquilla,Alimentos,Papa (kg),2600,-8.8
+2023,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),910000,11.0
+2023,Barranquilla,Transporte,Bus Transmetro (pasaje),2650,8.2
+2023,Barranquilla,Salud,Consulta médica general,48000,11.6
+2024,Bogotá,Alimentos,Arroz (kg),4480,6.7
+2024,Bogotá,Alimentos,Leche (litro),3720,7.8
+2024,Bogotá,Alimentos,Pollo (kg),13800,4.5
+2024,Bogotá,Alimentos,Huevos (docena),7500,5.6
+2024,Bogotá,Alimentos,Papa (kg),3100,6.9
+2024,Bogotá,Vivienda,Arriendo estrato 3 (mensual),1180000,9.3
+2024,Bogotá,Transporte,Bus SITP (pasaje),3100,6.9
+2024,Bogotá,Salud,Consulta médica general,61000,8.9
+2024,Medellín,Alimentos,Arroz (kg),4210,6.6
+2024,Medellín,Alimentos,Leche (litro),3490,7.7
+2024,Medellín,Alimentos,Pollo (kg),13100,4.8
+2024,Medellín,Alimentos,Huevos (docena),7100,5.2
+2024,Medellín,Alimentos,Papa (kg),2900,6.6
+2024,Medellín,Vivienda,Arriendo estrato 3 (mensual),1080000,9.1
+2024,Medellín,Transporte,Metro (pasaje),3250,6.6
+2024,Medellín,Salud,Consulta médica general,57200,9.0
+2024,Cali,Alimentos,Arroz (kg),4060,6.6
+2024,Cali,Alimentos,Leche (litro),3340,7.7
+2024,Cali,Alimentos,Pollo (kg),12600,5.0
+2024,Cali,Alimentos,Huevos (docena),6920,5.6
+2024,Cali,Alimentos,Papa (kg),2960,6.5
+2024,Cali,Vivienda,Arriendo estrato 3 (mensual),1030000,9.6
+2024,Cali,Transporte,Bus MIO (pasaje),2940,6.9
+2024,Cali,Salud,Consulta médica general,54500,9.0
+2024,Barranquilla,Alimentos,Arroz (kg),3920,6.5
+2024,Barranquilla,Alimentos,Leche (litro),3240,7.6
+2024,Barranquilla,Alimentos,Pollo (kg),12400,5.1
+2024,Barranquilla,Alimentos,Huevos (docena),6710,5.7
+2024,Barranquilla,Alimentos,Papa (kg),2790,7.3
+2024,Barranquilla,Vivienda,Arriendo estrato 3 (mensual),990000,8.8
+2024,Barranquilla,Transporte,Bus Transmetro (pasaje),2860,7.9
+2024,Barranquilla,Salud,Consulta médica general,52000,8.3

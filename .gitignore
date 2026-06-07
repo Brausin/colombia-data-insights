@@ -22,7 +22,7 @@ build/
 data/raw/*.csv
 data/raw/*.xlsx
 data/raw/*.parquet
-data/processed/*.csv
+
 data/processed/*.parquet
 !data/raw/.gitkeep
 !data/processed/.gitkeep
@@ -46,3 +46,6 @@ secrets.yaml
 .pytest_cache/
 htmlcov/
 .coverage
+
+# Herramientas internas de desarrollo
+.claude/

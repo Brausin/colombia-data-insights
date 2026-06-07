@@ -1,158 +1,187 @@
 """
 utils.py
 ========
-Utilidades generales para formatear y analizar datos económicos colombianos.
+Funciones utilitarias para formatear y calcular indicadores económicos colombianos.
 """
 
 from __future__ import annotations
 
-import pandas as pd
+from typing import Optional, Union
 
 
-def formatear_pesos(valor: float, decimales: int = 0) -> str:
+def formatear_pesos(
+    valor: Union[int, float],
+    decimales: int = 0,
+    abreviar: bool = False,
+) -> str:
     """
-    Formatea un valor numérico como moneda colombiana (COP).
+    Formatea un valor numérico como pesos colombianos (COP).
 
     Parámetros
     ----------
-    valor : float
+    valor : int or float
         Monto en pesos colombianos.
     decimales : int
-        Número de decimales a mostrar (por defecto 0).
+        Número de decimales a mostrar. Por defecto 0.
+    abreviar : bool
+        Si True, abrevia grandes valores (M = millones, B = billones).
 
     Retorna
     -------
     str
-        Valor formateado, p. ej. '$ 1.250.000'.
+        Cadena formateada como peso colombiano.
 
     Ejemplo
     -------
-    >>> formatear_pesos(1250000)
-    '$ 1.250.000'
-    >>> formatear_pesos(15750.5, decimales=2)
-    '$ 15.750,50'
+    >>> from colombia_data.utils import formatear_pesos
+    >>> formatear_pesos(1_500_000)
+    '$1.500.000'
+    >>> formatear_pesos(2_300_000_000, abreviar=True)
+    '$2.300 M'
     """
-    if decimales == 0:
-        entero = round(valor)
-        return f"$ {entero:,.0f}".replace(",", ".")
+    if abreviar:
+        if abs(valor) >= 1_000_000_000_000:
+            return f"${valor / 1_000_000_000_000:,.{decimales}f} B".replace(",", ".")
+        elif abs(valor) >= 1_000_000:
+            return f"${valor / 1_000_000:,.{decimales}f} M".replace(",", ".")
+        elif abs(valor) >= 1_000:
+            return f"${valor / 1_000:,.{decimales}f} K".replace(",", ".")
+
+    # Formato con separador de miles colombiano (punto) y decimal (coma)
+    if decimales > 0:
+        resultado = f"{valor:,.{decimales}f}"
+        # Intercambiar separadores: coma→punto, punto→coma
+        resultado = resultado.replace(",", "X").replace(".", ",").replace("X", ".")
     else:
-        fmt = f"{valor:,.{decimales}f}"
-        # Separador de miles con punto, decimales con coma (estilo colombiano)
-        partes = fmt.split(".")
-        parte_entera = partes[0].replace(",", ".")
-        return f"$ {parte_entera},{partes[1]}"
+        resultado = f"{int(round(valor)):,}".replace(",", ".")
+
+    return f"${resultado}"
 
 
 def calcular_poder_adquisitivo(
-    salario: float,
-    canasta_basica: float,
+    salario_actual: float,
+    inflacion_acumulada_pct: float,
 ) -> dict:
     """
-    Calcula el poder adquisitivo de un salario respecto a la canasta básica.
+    Calcula el poder adquisitivo real dado un salario y la inflación acumulada.
 
     Parámetros
     ----------
-    salario : float
-        Ingreso mensual en COP.
-    canasta_basica : float
-        Costo mensual de la canasta básica familiar en COP.
+    salario_actual : float
+        Salario nominal actual en pesos colombianos.
+    inflacion_acumulada_pct : float
+        Inflación acumulada en el período (porcentaje, ej: 25.3 para 25.3%).
 
     Retorna
     -------
     dict
-        Indicadores de poder adquisitivo: ratio, excedente, cobertura_pct.
+        Diccionario con:
+        - salario_nominal: valor original
+        - salario_real: valor a precios constantes
+        - perdida_poder_adquisitivo_pct: porcentaje de pérdida
+        - se_necesita_para_mantener: salario necesario para mantener poder adquisitivo
 
     Ejemplo
     -------
-    >>> resultado = calcular_poder_adquisitivo(1_300_000, 980_000)
-    >>> print(resultado["cobertura_pct"])
-    132.65
+    >>> from colombia_data.utils import calcular_poder_adquisitivo
+    >>> resultado = calcular_poder_adquisitivo(3_500_000, 45.2)
+    >>> print(f"Pérdida de poder adquisitivo: {resultado['perdida_poder_adquisitivo_pct']:.1f}%")
     """
-    ratio = salario / canasta_basica if canasta_basica > 0 else 0
-    excedente = salario - canasta_basica
-    cobertura_pct = round(ratio * 100, 2)
+    factor = 1 + inflacion_acumulada_pct / 100
+    salario_real = salario_actual / factor
+    perdida_pct = ((salario_actual - salario_real) / salario_actual) * 100
+    salario_necesario = salario_actual * factor
 
     return {
-        "salario": salario,
-        "canasta_basica": canasta_basica,
-        "ratio": round(ratio, 4),
-        "excedente_cop": round(excedente, 0),
-        "cobertura_pct": cobertura_pct,
-        "cubre_canasta": salario >= canasta_basica,
+        "salario_nominal": round(salario_actual, 2),
+        "salario_real": round(salario_real, 2),
+        "perdida_poder_adquisitivo_pct": round(perdida_pct, 2),
+        "se_necesita_para_mantener": round(salario_necesario, 2),
     }
 
 
-def smmlv(anio: int = 2024) -> int:
+def smmlv_a_usd(
+    smmlv: float,
+    trm: float,
+    anios_smmlv: Optional[int] = None,
+) -> dict:
     """
-    Retorna el Salario Mínimo Mensual Legal Vigente (SMMLV) para el año dado.
+    Convierte el Salario Mínimo Mensual Legal Vigente (SMMLV) a dólares.
 
     Parámetros
     ----------
-    anio : int
-        Año de consulta (2015-2025).
+    smmlv : float
+        Valor del SMMLV en pesos colombianos.
+    trm : float
+        Tasa Representativa del Mercado (COP por USD).
+    anios_smmlv : int, opcional
+        Número de SMMLV a convertir. Por defecto 1.
 
     Retorna
     -------
-    int
-        SMMLV en pesos colombianos.
+    dict
+        Conversión con smmlv_cop, trm_usada, smmlv_usd.
 
     Ejemplo
     -------
-    >>> smmlv(2024)
-    1300000
+    >>> from colombia_data.utils import smmlv_a_usd
+    >>> resultado = smmlv_a_usd(1_300_000, 4_050)
+    >>> print(f"SMMLV en USD: ${resultado['smmlv_usd']:.0f}")
     """
-    _SMMLV = {
-        2015: 644_350,
-        2016: 689_455,
-        2017: 737_717,
-        2018: 781_242,
-        2019: 828_116,
-        2020: 877_803,
-        2021: 908_526,
-        2022: 1_000_000,
-        2023: 1_160_000,
-        2024: 1_300_000,
-        2025: 1_423_500,
+    n = anios_smmlv or 1
+    total_cop = smmlv * n
+    total_usd = total_cop / trm
+
+    return {
+        "smmlv_cop": round(total_cop, 2),
+        "trm_usada": round(trm, 2),
+        "smmlv_usd": round(total_usd, 2),
     }
-    if anio not in _SMMLV:
-        anios_disponibles = sorted(_SMMLV.keys())
-        raise ValueError(
-            f"SMMLV para {anio} no disponible. Años registrados: {anios_disponibles}"
-        )
-    return _SMMLV[anio]
 
 
-def uvt(anio: int = 2024) -> int:
+def calcular_retencion_simple(ingreso: float, uvt: float = 47065.0) -> dict:
     """
-    Retorna el valor de la Unidad de Valor Tributario (UVT) para el año dado.
+    Calcula una retención en la fuente simplificada para rentas de trabajo.
+
+    Basado en el Estatuto Tributario colombiano Art. 383.
+    Nota: para retenciones por honorarios usar el módulo factura_co.
 
     Parámetros
     ----------
-    anio : int
-        Año de consulta (2019-2025).
+    ingreso : float
+        Ingreso mensual bruto en pesos colombianos.
+    uvt : float
+        Valor de la UVT vigente. Por defecto 47.065 (UVT 2024).
 
     Retorna
     -------
-    int
-        Valor de la UVT en pesos colombianos.
-
-    Ejemplo
-    -------
-    >>> uvt(2024)
-    47065
+    dict
+        ingreso_bruto, ingreso_en_uvt, retencion_cop, ingreso_neto.
     """
-    _UVT = {
-        2019: 34_270,
-        2020: 35_607,
-        2021: 36_308,
-        2022: 38_004,
-        2023: 42_412,
-        2024: 47_065,
-        2025: 49_799,
+    ingreso_uvt = ingreso / uvt
+
+    # Tabla de retención simplificada Art. 383 ET
+    if ingreso_uvt < 95:
+        tasa = 0.0
+    elif ingreso_uvt < 150:
+        tasa = 0.19
+    elif ingreso_uvt < 360:
+        tasa = 0.28
+    elif ingreso_uvt < 640:
+        tasa = 0.33
+    elif ingreso_uvt < 945:
+        tasa = 0.35
+    elif ingreso_uvt < 2300:
+        tasa = 0.37
+    else:
+        tasa = 0.39
+
+    retencion = ingreso * tasa
+
+    return {
+        "ingreso_bruto": round(ingreso, 0),
+        "ingreso_en_uvt": round(ingreso_uvt, 2),
+        "tasa_marginal_pct": round(tasa * 100, 1),
+        "retencion_cop": round(retencion, 0),
+        "ingreso_neto": round(ingreso - retencion, 0),
     }
-    if anio not in _UVT:
-        anios_disponibles = sorted(_UVT.keys())
-        raise ValueError(
-            f"UVT para {anio} no disponible. Años registrados: {anios_disponibles}"
-        )
-    return _UVT[anio]

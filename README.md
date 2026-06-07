@@ -2,173 +2,154 @@
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-orange?logo=jupyter)](notebooks/)
-[![Fuente: DANE](https://img.shields.io/badge/Fuente-DANE-red)](https://www.dane.gov.co/)
-[![Fuente: Banrep](https://img.shields.io/badge/Fuente-Banco%20de%20la%20Rep%C3%BAblica-yellow)](https://www.banrep.gov.co/)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](https://github.com/Brausin/colombia-data-insights/actions)
+[![Jupyter](https://img.shields.io/badge/Jupyter-6%20notebooks-orange?logo=jupyter)](notebooks/)
 
-> **Análisis de datos públicos colombianos** — inflación, mercado laboral, economía y más.  
-> Datos reales de fuentes oficiales (DANE, Banco de la República) procesados con Python.
+> Datos económicos colombianos — inflación, exportaciones, mercado laboral, tasa de cambio y costo de vida — accesibles con Python en un solo `pip install`.
 
----
-
-## 📋 Tabla de Contenidos
-
-1. [Descripción](#-descripción)
-2. [Notebooks disponibles](#-notebooks-disponibles)
-3. [Estructura del proyecto](#-estructura-del-proyecto)
-4. [Instalación](#-instalación)
-5. [Uso rápido](#-uso-rápido)
-6. [Fuentes de datos](#-fuentes-de-datos)
-7. [Contribuir](#-contribuir)
-8. [Licencia](#-licencia)
+¿Cuánto vale hoy un salario de 2018? ¿Qué tan caro es vivir en Bogotá vs Medellín? ¿Cómo cambiaron las exportaciones colombianas en la última década? Este proyecto responde esas preguntas con datos oficiales (DANE, Banco de la República) y código reproducible.
 
 ---
 
-## 📊 Descripción
+## ¿Qué incluye?
 
-Este repositorio reúne análisis exploratorios y visualizaciones de datos públicos colombianos con el objetivo de:
+### Notebooks de análisis
 
-- **Entender la economía colombiana** a través de sus principales indicadores
-- **Democratizar el acceso** a datos oficiales con código reutilizable
-- **Servir como portafolio** de ciencia de datos aplicada al contexto colombiano
+| # | Notebook | Descripción |
+|---|----------|-------------|
+| 03 | [Tasa de Cambio USD/COP](notebooks/03_tasa_de_cambio.ipynb) | Evolución histórica del dólar, volatilidad y períodos de crisis cambiaria |
+| 04 | [Exportaciones Colombia](notebooks/04_exportaciones_colombia.ipynb) | Principales productos exportados, destinos y tendencias por año |
+| 05 | [Costo de Vida por Ciudades](notebooks/05_costo_de_vida_ciudades.ipynb) | Comparación del IPC entre Bogotá, Medellín, Cali, Barranquilla y otras ciudades |
+| 06 | [Calculadora de Salario Real](notebooks/06_calculadora_salario_real.ipynb) | Ajuste de salarios por inflación: cuánto poder adquisitivo se ha ganado o perdido |
+| 01 | [Exploración Inflación 2020–2024](notebooks/01_exploracion_inflacion.ipynb) | Análisis histórico del IPC y el pico inflacionario de 2022 |
+| 02 | [Mercado Laboral 2015–2024](notebooks/02_mercado_laboral_colombiano.ipynb) | Desempleo trimestral y comparación por ciudad |
 
-Los análisis están escritos en **español**, orientados a audiencias técnicas y no técnicas.
+### Datasets disponibles
 
----
+| Archivo | Descripción | Fuente |
+|---------|-------------|--------|
+| `data/processed/desempleo_colombia_2015_2024.csv` | Tasa de desempleo trimestral nacional y por ciudad | DANE GEIH |
 
-## 📓 Notebooks disponibles
+Los datos en `data/raw/` se descargan automáticamente al ejecutar los notebooks o llamar a los clientes de la librería.
 
-| Notebook | Descripción | Fuente |
-|----------|-------------|--------|
-| [01 — Exploración Inflación 2020–2024](notebooks/01_exploracion_inflacion.ipynb) | Análisis histórico del IPC, pandemia y pico inflacionario de 2022 | DANE / Banco de la República |
-| *(próximamente)* Índices de Precios Productor | IPP vs IPC, transmisión de precios | DANE |
-| [02 — Mercado Laboral 2015–2024](notebooks/02_mercado_laboral_colombiano.ipynb) | Desempleo trimestral, comparación por ciudad, impacto pandemia | DANE GEIH |
+### Librería Python `colombia_data`
 
----
+Módulos incluidos:
 
-## 🗂 Estructura del proyecto
-
-```
-colombia-data-insights/
-├── README.md                          # Este archivo
-├── LICENSE                            # MIT License
-├── requirements.txt                   # Dependencias Python
-├── setup.py                           # Configuración del paquete
-├── .gitignore
-│
-├── data/
-│   ├── raw/                           # Datos originales sin procesar
-│   └── processed/                     # Datos limpios y transformados
-│
-├── notebooks/
-│   ├── 01_exploracion_inflacion.ipynb # Análisis de inflación colombiana
-│   └── 02_mercado_laboral_colombiano.ipynb # Mercado laboral y desempleo
-│
-├── src/
-│   └── colombia_data/
-│       ├── __init__.py
-│       └── fetcher.py                 # Clientes para APIs de DANE y Banrep
-│
-├── docs/
-│   └── fuentes.md                     # Documentación de fuentes de datos
-│
-└── assets/                            # Imágenes y gráficas exportadas
-```
+- **`ipc`** — IPC mensual, variación anual, ajuste de valores por inflación
+- **`desempleo`** — Tasa de desempleo nacional y por ciudad desde 2015
+- **`trm`** — Tasa Representativa del Mercado (USD/COP) histórica
+- **`exportaciones`** — Exportaciones por producto, destino y año
+- **`utils`** — Formateo de pesos colombianos, conversión a USD, cálculo de retenciones
 
 ---
 
-## ⚙️ Instalación
+## Instalación
 
 **Requisitos:** Python 3.9+
 
 ```bash
-# Clonar el repositorio
 git clone https://github.com/Brausin/colombia-data-insights.git
 cd colombia-data-insights
 
-# Crear entorno virtual (recomendado)
+# Entorno virtual (recomendado)
 python -m venv .venv
-source .venv/bin/activate        # Linux / macOS
-.venv\Scripts\activate           # Windows
+source .venv/bin/activate   # Linux/macOS
+.venv\Scripts\activate      # Windows
 
-# Instalar dependencias
-pip install -r requirements.txt
-
-# Instalar el paquete en modo desarrollo
 pip install -e .
 ```
 
 ---
 
-## 🚀 Uso rápido
+## Ejemplos de uso
 
-### Obtener datos de inflación
+### Ajustar un salario por inflación
+
+```python
+from colombia_data import ajustar_por_inflacion, formatear_pesos
+
+# ¿Cuánto equivale un salario de $3.000.000 de 2018 en pesos de 2024?
+valor_actualizado = ajustar_por_inflacion(3_000_000, anio_origen=2018, anio_destino=2024)
+print(formatear_pesos(valor_actualizado))
+# → $ 5.241.300
+```
+
+### Obtener la TRM histórica
 
 ```python
 from colombia_data import BancoRepublicaClient
 
 cliente = BancoRepublicaClient()
-
-# Serie IPC 2020–2024
-ipc = cliente.obtener_ipc(anio_inicio=2020, anio_fin=2024)
-print(ipc.head(10))
-
-#         fecha  variacion_anual  anio  mes
-# 0  2020-01-01             3.62  2020    1
-# 1  2020-02-01             3.72  2020    2
-# ...
+trm = cliente.obtener_trm(anio_inicio=2020, anio_fin=2024)
+print(trm.tail())
+#          fecha      trm
+# 1456 2024-12-27  4441.91
+# 1457 2024-12-28  4441.91
 ```
 
-### Obtener datos de desempleo
+### Comparar desempleo entre ciudades
 
 ```python
-from colombia_data import DANEClient
+from colombia_data import comparar_ciudades
 
-dane = DANEClient()
-desempleo = dane.obtener_desempleo(anio_inicio=2020, anio_fin=2024)
-print(desempleo)
+df = comparar_ciudades(["Bogotá", "Medellín", "Cali"], anio_inicio=2022, anio_fin=2024)
+print(df.pivot(index="trimestre", columns="ciudad", values="tasa_desempleo"))
 ```
 
-### Abrir notebooks
+### Exportaciones: top productos
 
-```bash
-jupyter notebook notebooks/
+```python
+from colombia_data import top_productos
+
+productos = top_productos(anio=2023, n=10)
+print(productos[["producto", "valor_usd_millones"]])
 ```
 
 ---
 
-## 📚 Fuentes de datos
+## Estructura del proyecto
 
-| Entidad | Descripción | Enlace |
-|---------|-------------|--------|
-| **DANE** | Estadísticas oficiales — IPC, desempleo, PIB | [dane.gov.co](https://www.dane.gov.co/) |
-| **Banco de la República** | Política monetaria, inflación, tasa de cambio | [banrep.gov.co](https://www.banrep.gov.co/) |
-| **Datos Abiertos Colombia** | Portal de datos del Gobierno Nacional | [datos.gov.co](https://www.datos.gov.co/) |
-| **Ministerio de Hacienda** | Presupuesto público, deuda | [minhacienda.gov.co](https://www.minhacienda.gov.co/) |
-
-Ver documentación completa en [`docs/fuentes.md`](docs/fuentes.md).
-
----
-
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! Para contribuir:
-
-1. Haz un fork del repositorio
-2. Crea una rama: `git checkout -b feature/mi-analisis`
-3. Agrega tu análisis o mejora con documentación en español
-4. Abre un Pull Request describiendo qué datos analizas y por qué son relevantes
-
-Por favor mantén el estándar del código: docstrings en español, type hints, y notebooks con markdown explicativo.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para detalles.
+```
+colombia-data-insights/
+├── notebooks/               # 6 análisis listos para ejecutar
+│   ├── 01_exploracion_inflacion.ipynb
+│   ├── 02_mercado_laboral_colombiano.ipynb
+│   ├── 03_tasa_de_cambio.ipynb
+│   ├── 04_exportaciones_colombia.ipynb
+│   ├── 05_costo_de_vida_ciudades.ipynb
+│   └── 06_calculadora_salario_real.ipynb
+├── src/colombia_data/       # Librería instalable
+│   ├── ipc.py
+│   ├── desempleo.py
+│   ├── trm.py
+│   ├── exportaciones.py
+│   ├── utils.py
+│   └── fetcher.py           # Clientes para APIs de DANE y Banrep
+├── data/
+│   ├── raw/                 # Datos originales (ignorados por git)
+│   └── processed/           # Datos limpios versionados
+├── docs/                    # Documentación de fuentes y análisis
+├── setup.py
+└── requirements.txt
+```
 
 ---
 
-<p align="center">
-  Hecho con ❤️ para entender mejor a Colombia 🇨🇴
-</p>
+## Fuentes de datos
+
+| Entidad | Datos | Enlace |
+|---------|-------|--------|
+| **DANE** | IPC, desempleo, exportaciones, costo de vida | [dane.gov.co](https://www.dane.gov.co/) |
+| **Banco de la República** | TRM, tasas de interés, inflación | [banrep.gov.co](https://www.banrep.gov.co/) |
+| **Datos Abiertos Colombia** | Conjuntos de datos del Gobierno Nacional | [datos.gov.co](https://www.datos.gov.co/) |
+
+---
+
+## Licencia
+
+MIT — ver [LICENSE](LICENSE).
+
+---
+
+<p align="center">Hecho con ❤️ para entender mejor a Colombia 🇨🇴</p>
