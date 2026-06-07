@@ -1,0 +1,136 @@
+anio,producto,valor_millones_usd,participacion_pct,destino_principal
+2010,Petroleo y derivados,11642,43.2,Estados Unidos
+2010,Cafe,1884,7.0,Estados Unidos
+2010,Carbon,2978,11.1,Europa
+2010,Ferroníquel,423,1.6,Europa
+2010,Flores,1056,3.9,Estados Unidos
+2010,Banano,786,2.9,Europa
+2010,Oro,1519,5.6,Suiza
+2010,Manufacturas,4624,17.2,Venezuela
+2010,Otros,2034,7.5,Varios
+2011,Petroleo y derivados,20000,47.8,Estados Unidos
+2011,Cafe,2608,6.2,Estados Unidos
+2011,Carbon,4988,11.9,Europa
+2011,Ferroníquel,728,1.7,Europa
+2011,Flores,1114,2.7,Estados Unidos
+2011,Banano,837,2.0,Europa
+2011,Oro,2503,6.0,Suiza
+2011,Manufacturas,6145,14.7,Venezuela
+2011,Otros,2993,7.0,Varios
+2012,Petroleo y derivados,21025,48.2,Estados Unidos
+2012,Cafe,1909,4.4,Estados Unidos
+2012,Carbon,5059,11.6,Europa
+2012,Ferroníquel,612,1.4,Europa
+2012,Flores,1138,2.6,Estados Unidos
+2012,Banano,828,1.9,Europa
+2012,Oro,2607,6.0,Suiza
+2012,Manufacturas,5978,13.7,Venezuela
+2012,Otros,4446,10.2,Varios
+2013,Petroleo y derivados,19657,46.7,Estados Unidos
+2013,Cafe,1942,4.6,Estados Unidos
+2013,Carbon,4784,11.4,Europa
+2013,Ferroníquel,587,1.4,Europa
+2013,Flores,1139,2.7,Estados Unidos
+2013,Banano,876,2.1,Europa
+2013,Oro,1929,4.6,Suiza
+2013,Manufacturas,5645,13.4,Latinoamérica
+2013,Otros,5579,13.1,Varios
+2014,Petroleo y derivados,16834,44.0,Estados Unidos
+2014,Cafe,2523,6.6,Estados Unidos
+2014,Carbon,4100,10.7,Europa
+2014,Ferroníquel,682,1.8,Europa
+2014,Flores,1200,3.1,Estados Unidos
+2014,Banano,889,2.3,Europa
+2014,Oro,1514,4.0,Suiza
+2014,Manufacturas,5789,15.1,Latinoamérica
+2014,Otros,4741,12.4,Varios
+2015,Petroleo y derivados,7764,33.4,Estados Unidos
+2015,Cafe,2489,10.7,Estados Unidos
+2015,Carbon,2994,12.9,Europa
+2015,Ferroníquel,441,1.9,Europa
+2015,Flores,1224,5.3,Estados Unidos
+2015,Banano,876,3.8,Europa
+2015,Oro,1251,5.4,Suiza
+2015,Manufacturas,4432,19.1,Latinoamérica
+2015,Otros,1789,7.5,Varios
+2016,Petroleo y derivados,7064,33.2,Estados Unidos
+2016,Cafe,2333,11.0,Estados Unidos
+2016,Carbon,2888,13.6,Europa
+2016,Ferroníquel,400,1.9,Europa
+2016,Flores,1213,5.7,Estados Unidos
+2016,Banano,889,4.2,Europa
+2016,Oro,1162,5.5,Suiza
+2016,Manufacturas,4032,18.9,Latinoamérica
+2016,Otros,1272,6.0,Varios
+2017,Petroleo y derivados,8888,37.2,Estados Unidos
+2017,Cafe,2480,10.4,Estados Unidos
+2017,Carbon,3671,15.4,Europa
+2017,Ferroníquel,426,1.8,Europa
+2017,Flores,1312,5.5,Estados Unidos
+2017,Banano,921,3.9,Europa
+2017,Oro,1177,4.9,Suiza
+2017,Manufacturas,4278,17.9,Latinoamérica
+2017,Otros,697,3.0,Varios
+2018,Petroleo y derivados,10866,39.8,Estados Unidos
+2018,Cafe,2410,8.8,Estados Unidos
+2018,Carbon,4231,15.5,Europa
+2018,Ferroníquel,479,1.8,Europa
+2018,Flores,1440,5.3,Estados Unidos
+2018,Banano,967,3.5,Europa
+2018,Oro,1185,4.3,Suiza
+2018,Manufacturas,4812,17.6,Latinoamérica
+2018,Otros,884,3.4,Varios
+2019,Petroleo y derivados,9789,38.7,Estados Unidos
+2019,Cafe,2538,10.0,Estados Unidos
+2019,Carbon,3390,13.4,Europa
+2019,Ferroníquel,467,1.8,Europa
+2019,Flores,1441,5.7,Estados Unidos
+2019,Banano,983,3.9,Europa
+2019,Oro,1347,5.3,Suiza
+2019,Manufacturas,4521,17.9,Latinoamérica
+2019,Otros,831,3.3,Varios
+2020,Petroleo y derivados,5789,30.8,Estados Unidos
+2020,Cafe,2543,13.5,Estados Unidos
+2020,Carbon,1875,10.0,Europa
+2020,Ferroníquel,380,2.0,Europa
+2020,Flores,1089,5.8,Estados Unidos
+2020,Banano,1012,5.4,Europa
+2020,Oro,1876,10.0,Suiza
+2020,Manufacturas,3198,17.0,Latinoamérica
+2020,Otros,1038,5.5,Varios
+2021,Petroleo y derivados,9543,37.5,Estados Unidos
+2021,Cafe,3017,11.9,Estados Unidos
+2021,Carbon,3456,13.6,Europa
+2021,Ferroníquel,651,2.6,Europa
+2021,Flores,1342,5.3,Estados Unidos
+2021,Banano,1068,4.2,Europa
+2021,Oro,1565,6.1,Suiza
+2021,Manufacturas,3995,15.7,Latinoamérica
+2021,Otros,782,3.1,Varios
+2022,Petroleo y derivados,14867,42.3,Estados Unidos
+2022,Cafe,3441,9.8,Estados Unidos
+2022,Carbon,6012,17.1,Europa
+2022,Ferroníquel,754,2.1,Europa
+2022,Flores,1578,4.5,Estados Unidos
+2022,Banano,1123,3.2,Europa
+2022,Oro,1345,3.8,Suiza
+2022,Manufacturas,4671,13.3,Latinoamérica
+2022,Otros,1389,4.0,Varios
+2023,Petroleo y derivados,11234,38.9,Estados Unidos
+2023,Cafe,2867,9.9,Estados Unidos
+2023,Carbon,4123,14.3,Europa
+2023,Ferroníquel,612,2.1,Europa
+2023,Flores,1654,5.7,Estados Unidos
+2023,Banano,1178,4.1,Europa
+2023,Oro,1789,6.2,Suiza
+2023,Manufacturas,4231,14.7,Latinoamérica
+2023,Otros,1178,4.1,Varios
+2024,Petroleo y derivados,10456,37.2,Estados Unidos
+2024,Cafe,3012,10.7,Estados Unidos
+2024,Carbon,3876,13.8,Europa
+2024,Ferroníquel,589,2.1,Europa
+2024,Flores,1712,6.1,Estados Unidos
+2024,Banano,1223,4.4,Europa
+2024,Oro,1934,6.9,Suiza
+2024,Manufacturas,4123,14.7,Latinoamérica
+2024,Otros,1189,4.2,Varios
