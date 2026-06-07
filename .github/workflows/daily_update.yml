@@ -1,0 +1,67 @@
+name: Actualización Diaria de Datos
+
+on:
+  schedule:
+    # 9:00 AM hora Colombia (UTC-5) = 14:00 UTC
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    inputs:
+      razon:
+        description: 'Razón de la ejecución manual'
+        required: false
+        default: 'Ejecución manual del pipeline'
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-datos:
+    name: Generar y confirmar actualizaciones
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install pandas matplotlib seaborn requests jupyter nbconvert
+
+      - name: Configurar identidad de Git
+        run: |
+          git config user.name "Brausin"
+          git config user.email "juansvargasb@gmail.com"
+
+      - name: Ejecutar script de actualización diaria
+        run: python scripts/daily_update.py
+
+      - name: Leer mensaje de commit
+        id: msg
+        run: |
+          if [ -f .commit_msg ]; then
+            MSG=$(cat .commit_msg)
+            rm -f .commit_msg
+          else
+            MSG="Actualización automática de datos — $(date +'%Y-%m-%d')"
+          fi
+          echo "message=$MSG" >> $GITHUB_OUTPUT
+
+      - name: Confirmar y publicar cambios
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Sin cambios que confirmar."
+          else
+            git commit -m "${{ steps.msg.outputs.message }}"
+            git push
+            echo "✅ Cambios publicados: ${{ steps.msg.outputs.message }}"
+          fi
