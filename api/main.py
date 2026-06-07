@@ -27,7 +27,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from colombia_data.trm_live import get_trm_hoy, get_historico_trm
 from colombia_data.ipc import get_ipc, variacion_ipc
-from colombia_data.desempleo import get_desempleo
+from colombia_data.desempleo import get_desempleo, comparar_ciudades, CIUDADES_DISPONIBLES
 from colombia_data.exportaciones import get_exportaciones, top_productos
 from colombia_data.utils import smmlv_a_usd, calcular_poder_adquisitivo
 
@@ -158,27 +158,44 @@ def obtener_ipc(
 
 @app.get("/desempleo", tags=["Mercado laboral"])
 def obtener_desempleo(
-    ciudad: Optional[str] = Query(None, description="Ciudad (bogota, medellin, cali). Sin acento."),
-    trimestre: Optional[str] = Query(None, description="Período YYYY-QN (ej. 2024-Q1)"),
+    ciudad: Optional[str] = Query(
+        None,
+        description="Ciudad (bogota, medellin, cali, barranquilla, bucaramanga, "
+                    "manizales, ibague, pereira, cucuta, cartagena). Sin acento.",
+    ),
+    anio_inicio: int = Query(2015, description="Año de inicio del período"),
+    anio_fin: int = Query(2024, description="Año de fin del período"),
 ):
     """
-    Tasa de desempleo trimestral nacional.
+    Tasa de desempleo trimestral por período.
+
+    Sin parámetros: serie nacional 2015-2024.
+    Con `ciudad`: serie de esa ciudad específica.
 
     Fuente: DANE — Gran Encuesta Integrada de Hogares (GEIH).
-    """
-    df = get_desempleo()
-    datos = df.to_dict(orient="records")
-    for d in datos:
-        d["fecha"] = str(d["fecha"])
 
-    resultado = {
+    Ciudades disponibles: bogota, medellin, cali, barranquilla, bucaramanga,
+    manizales, ibague, pereira, cucuta, cartagena.
+    """
+    try:
+        df = get_desempleo(anio_inicio=anio_inicio, anio_fin=anio_fin, ciudad=ciudad)
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc) + f". Ciudades disponibles: {', '.join(CIUDADES_DISPONIBLES)}",
+        )
+
+    datos = df.to_dict(orient="records")
+
+    return {
+        "ambito": ciudad if ciudad else "nacional",
+        "anio_inicio": anio_inicio,
+        "anio_fin": anio_fin,
         "registros": len(datos),
         "datos": datos,
         "fuente": "DANE — Gran Encuesta Integrada de Hogares",
+        "ciudades_disponibles": CIUDADES_DISPONIBLES,
     }
-    if ciudad:
-        resultado["nota"] = f"Filtro por ciudad en desarrollo. Se muestran datos nacionales."
-    return resultado
 
 
 @app.get("/smmlv", tags=["Salario"])
