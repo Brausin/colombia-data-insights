@@ -46,3 +46,6 @@ secrets.yaml
 .pytest_cache/
 htmlcov/
 .coverage
+
+# Herramientas internas de desarrollo
+.claude/
