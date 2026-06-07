@@ -20,7 +20,7 @@ import plotly.graph_objects as go
 
 from colombia_data.trm_live import get_trm_hoy, get_historico_trm
 from colombia_data.ipc import get_ipc, variacion_ipc, ajustar_por_inflacion
-from colombia_data.desempleo import get_desempleo
+from colombia_data.desempleo import get_desempleo, comparar_ciudades, CIUDADES_DISPONIBLES
 from colombia_data.exportaciones import get_exportaciones, top_productos
 from colombia_data.utils import (
     formatear_pesos,
@@ -244,12 +244,13 @@ with tab_desempleo:
         min_des = df_des["tasa_desempleo"].min()
         st.metric("Mínimo histórico", f"{min_des:.1f}%")
 
+    # Gráfico de evolución nacional — usa columna "periodo" (formato YYYY-TN)
     fig_des = px.bar(
         df_des,
-        x="fecha",
+        x="periodo",
         y="tasa_desempleo",
         title="Tasa de desempleo trimestral nacional (%)",
-        labels={"fecha": "Trimestre", "tasa_desempleo": "Tasa (%)"},
+        labels={"periodo": "Trimestre", "tasa_desempleo": "Tasa (%)"},
         color="tasa_desempleo",
         color_continuous_scale="RdYlGn_r",
     )
@@ -258,17 +259,72 @@ with tab_desempleo:
         paper_bgcolor="rgba(0,0,0,0)",
         coloraxis_showscale=False,
         yaxis=dict(ticksuffix="%"),
+        xaxis=dict(tickangle=-45),
     )
     fig_des.update_traces(
-        hovertemplate="<b>%{x|%b %Y}</b><br>Desempleo: %{y:.1f}%<extra></extra>"
+        hovertemplate="<b>%{x}</b><br>Desempleo: %{y:.1f}%<extra></extra>"
     )
     st.plotly_chart(fig_des, use_container_width=True)
 
-    # Tabla por ciudades si hay datos
+    # ── Comparador de ciudades ─────────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("### 🏙️ Comparar ciudades")
+    st.markdown(
+        "Compara el desempleo entre distintas ciudades para un año específico. "
+        "Los datos provienen de la Gran Encuesta Integrada de Hogares (GEIH) del DANE."
+    )
+
+    col_cit, col_yr = st.columns([3, 1])
+    with col_cit:
+        ciudades_sel = st.multiselect(
+            "Selecciona ciudades",
+            options=CIUDADES_DISPONIBLES,
+            default=["bogota", "medellin", "cali", "barranquilla", "bucaramanga"],
+            help="Puedes seleccionar entre 2 y 10 ciudades para comparar",
+        )
+    with col_yr:
+        anio_comp = st.selectbox(
+            "Año",
+            options=list(range(2015, 2025)),
+            index=8,  # 2023
+            help="Año de la comparación (promedio anual de los 4 trimestres)",
+        )
+
+    if len(ciudades_sel) >= 2:
+        try:
+            df_comp = comparar_ciudades(ciudades_sel, anio_comp)
+            fig_comp = px.bar(
+                df_comp,
+                x="ciudad",
+                y="tasa_desempleo_pct",
+                title=f"Desempleo por ciudad — {anio_comp} (promedio anual, %)",
+                labels={"ciudad": "Ciudad", "tasa_desempleo_pct": "Tasa (%)"},
+                color="tasa_desempleo_pct",
+                color_continuous_scale="RdYlGn_r",
+                text="tasa_desempleo_pct",
+            )
+            fig_comp.update_traces(
+                texttemplate="%{text:.1f}%",
+                textposition="outside",
+                hovertemplate="<b>%{x}</b><br>Desempleo: %{y:.1f}%<extra></extra>",
+            )
+            fig_comp.update_layout(
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                coloraxis_showscale=False,
+                yaxis=dict(ticksuffix="%"),
+                showlegend=False,
+            )
+            st.plotly_chart(fig_comp, use_container_width=True)
+        except Exception as e:
+            st.error(f"Error al comparar ciudades: {e}")
+    else:
+        st.info("Selecciona al menos 2 ciudades para ver la comparación.")
+
     st.info(
         "💡 **Contexto:** Colombia tiene una de las tasas de desempleo más altas "
         "de América Latina. El desempleo juvenil (18-28 años) duplica la tasa nacional. "
-        "Ciudades como Quibdó, Cúcuta y Florencia superan históricamente el 20%."
+        "Ciudades como Ibagué y Cúcuta superan históricamente el 15%."
     )
 
 # ============================================================
