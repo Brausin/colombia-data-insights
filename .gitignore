@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Datos sensibles / grandes
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.parquet
+data/processed/*.csv
+data/processed/*.parquet
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Entorno
+.env
+.env.local
+secrets.yaml
+
+# Tests
+.pytest_cache/
+htmlcov/
+.coverage
