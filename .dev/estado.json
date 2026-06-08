@@ -1,0 +1,17 @@
+{
+  "fecha": "2026-06-08T05:00:08.384335+00:00",
+  "ultimo_commit": "dbe51f9",
+  "modulos_completados": [
+    "app/ui.py — sistema de diseño BI oscuro: paleta, CSS, KPI cards/ticker, template Plotly oscuro registrado (registrar_tema)",
+    "app/main.py — REESCRITO: corrige app que crasheaba en pestaña IPC. Arregla contratos rotos (IPC año/variacion_anual/fecha, exportaciones valor_millones_usd + top_productos(anio,n) + 'Petroleo y derivados', calculadoras calcular_poder_adquisitivo/smmlv_a_usd). Tema oscuro en todos los charts (item H), KPI ticker superior con datos reales (item I), 0 st.metric, width='stretch'.",
+    "tests/test_dashboard.py — pruebas de regresión: contratos de datos + smoke test AppTest del dashboard (9 tests)"
+  ],
+  "en_progreso": "",
+  "siguiente_paso": "Item J (actualizar_ipc.yml): NO se implementó porque no existe una API JSON mensual de IPC limpia (DANE publica vía web/Excel; datos.gov.co no expone el índice mensual nacional). Opciones honestas: (a) parsear los anexos Excel del DANE (frágil), (b) usar inflación anual del World Bank API (FP.CPI.TOTL.ZG, verificado funcionando) en un CSV nuevo data/processed/inflacion_anual.csv con cron anual. actualizar_trm.yml ya cumple la parte TRM del item J.",
+  "tests_pasando": 109,
+  "notas_tecnicas": "El app estaba ROTO (nunca corrió más allá de la pestaña TRM): KeyError 'anio' en linea 158 + multiples firmas/columnas equivocadas vs la libreria. Verificado con streamlit.testing.v1.AppTest (0 excepciones, 5 subheaders). Streamlit 1.58. matplotlib permanece solo en scripts/daily_update.py (pipeline de PNGs estaticos para assets/, uso correcto). /tmp == C:/Users/juans/AppData/Local/Temp (Git Bash MINGW64).",
+  "pendiente_diseno": [
+    "Opcional: wire de un dataset de inflación anual (World Bank) si se quiere automatización mensual real",
+    "Opcional: aplicar la paleta BI también a scripts/daily_update.py (PNGs) o migrarlos a kaleido/Plotly"
+  ]
+}
