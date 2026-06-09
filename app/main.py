@@ -72,6 +72,14 @@ def cargar_ipc() -> pd.DataFrame:
 
 
 @st.cache_data(show_spinner=False)
+def cargar_inflacion_anual() -> pd.DataFrame:
+    """Inflación anual del Banco Mundial (data/processed/inflacion_anual.csv)."""
+    ruta = _REPO_ROOT / "data" / "processed" / "inflacion_anual.csv"
+    df = pd.read_csv(ruta)
+    return df.sort_values("anio").reset_index(drop=True)
+
+
+@st.cache_data(show_spinner=False)
 def cargar_desempleo() -> pd.DataFrame:
     return get_desempleo().rename(columns={"año": "anio"}).reset_index(drop=True)
 
@@ -256,6 +264,27 @@ with tab_ipc:
         "anual. En 2022 Colombia alcanzó 13.1%, la más alta en más de 20 años, "
         "impulsada por la pandemia, la guerra en Ucrania y el alza global de alimentos."
     )
+
+    # ---- Comparación anual de largo plazo (Banco Mundial) -------------------
+    st.markdown("#### Inflación anual de largo plazo")
+    st.caption(
+        "Variación anual del IPC según el Banco Mundial "
+        "(indicador FP.CPI.TOTL.ZG), un único dato por año para ver la "
+        "tendencia de la última década. Se actualiza con un cron mensual."
+    )
+    df_inf_anual = cargar_inflacion_anual()
+    fig_anual = px.bar(
+        df_inf_anual, x="anio", y="inflacion_pct",
+        title="Inflación anual de Colombia (Banco Mundial)",
+        labels={"anio": "Año", "inflacion_pct": "Inflación (%)"},
+        color_discrete_sequence=[C["c3"]],
+    )
+    fig_anual.add_hline(y=3.0, line_dash="dash", line_color=C["red"],
+                        annotation_text="Meta BR 3%",
+                        annotation_position="top left")
+    fig_anual.update_layout(yaxis=dict(ticksuffix="%"), hovermode="x unified",
+                            xaxis=dict(dtick=1))
+    st.plotly_chart(fig_anual, width="stretch", config=PLOTLY_CFG)
 
 # ============================================================
 # TAB 3 — DESEMPLEO
