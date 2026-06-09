@@ -1,155 +1,131 @@
+<div align="center">
+
 # 🇨🇴 Colombia Data Insights
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](https://github.com/Brausin/colombia-data-insights/actions)
-[![Jupyter](https://img.shields.io/badge/Jupyter-6%20notebooks-orange?logo=jupyter)](notebooks/)
+*Los datos económicos públicos de Colombia, por fin usables: dashboard, librería y API REST.*
 
-> Datos económicos colombianos — inflación, exportaciones, mercado laboral, tasa de cambio y costo de vida — accesibles con Python en un solo `pip install`.
+![Tests](https://img.shields.io/badge/tests-109%20passing-brightgreen?style=flat-square&logo=pytest)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue?style=flat-square&logo=python&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+![API](https://img.shields.io/badge/API-FastAPI-009688?style=flat-square&logo=fastapi)
+![Fuente](https://img.shields.io/badge/datos-Banco%20Rep%C3%BAblica%20%C2%B7%20DANE-yellow?style=flat-square)
 
-¿Cuánto vale hoy un salario de 2018? ¿Qué tan caro es vivir en Bogotá vs Medellín? ¿Cómo cambiaron las exportaciones colombianas en la última década? Este proyecto responde esas preguntas con datos oficiales (DANE, Banco de la República) y código reproducible.
-
----
-
-## ¿Qué incluye?
-
-### Notebooks de análisis
-
-| # | Notebook | Descripción |
-|---|----------|-------------|
-| 03 | [Tasa de Cambio USD/COP](notebooks/03_tasa_de_cambio.ipynb) | Evolución histórica del dólar, volatilidad y períodos de crisis cambiaria |
-| 04 | [Exportaciones Colombia](notebooks/04_exportaciones_colombia.ipynb) | Principales productos exportados, destinos y tendencias por año |
-| 05 | [Costo de Vida por Ciudades](notebooks/05_costo_de_vida_ciudades.ipynb) | Comparación del IPC entre Bogotá, Medellín, Cali, Barranquilla y otras ciudades |
-| 06 | [Calculadora de Salario Real](notebooks/06_calculadora_salario_real.ipynb) | Ajuste de salarios por inflación: cuánto poder adquisitivo se ha ganado o perdido |
-| 01 | [Exploración Inflación 2020–2024](notebooks/01_exploracion_inflacion.ipynb) | Análisis histórico del IPC y el pico inflacionario de 2022 |
-| 02 | [Mercado Laboral 2015–2024](notebooks/02_mercado_laboral_colombiano.ipynb) | Desempleo trimestral y comparación por ciudad |
-
-### Datasets disponibles
-
-| Archivo | Descripción | Fuente |
-|---------|-------------|--------|
-| `data/processed/desempleo_colombia_2015_2024.csv` | Tasa de desempleo trimestral nacional y por ciudad | DANE GEIH |
-
-Los datos en `data/raw/` se descargan automáticamente al ejecutar los notebooks o llamar a los clientes de la librería.
-
-### Librería Python `colombia_data`
-
-Módulos incluidos:
-
-- **`ipc`** — IPC mensual, variación anual, ajuste de valores por inflación
-- **`desempleo`** — Tasa de desempleo nacional y por ciudad desde 2015
-- **`trm`** — Tasa Representativa del Mercado (USD/COP) histórica
-- **`exportaciones`** — Exportaciones por producto, destino y año
-- **`utils`** — Formateo de pesos colombianos, conversión a USD, cálculo de retenciones
+</div>
 
 ---
+
+## El problema
+
+Colombia publica una montaña de datos económicos —inflación del DANE, TRM del Banco de la República, exportaciones, desempleo, salario mínimo— pero viven dispersos en PDFs, anexos de Excel y portales lentos. Para responder algo tan simple como *"¿cuánto se devaluó el peso este año?"* o *"¿la inflación de 2023 superó la meta del Banco de la República?"* toca descargar planillas y pelear con ellas. **Colombia Data Insights** toma esas fuentes oficiales y las entrega de tres formas listas para usar: un **dashboard** interactivo, una **librería** de Python y una **API REST** pública.
+
+## Dashboard
+
+Construido en Streamlit, con tema oscuro de BI y gráficas Plotly:
+
+| Pestaña | Qué muestra |
+|---------|-------------|
+| 💵 **TRM** | Evolución histórica del dólar, devaluación anual y calculadora USD → COP en vivo. |
+| 📈 **Inflación** | IPC anual vs. la meta del 3 % del Banco de la República, con lectura automática del año. |
+| 👔 **Desempleo** | Tasa trimestral nacional y comparación entre las principales ciudades. |
+| 🛢️ **Exportaciones** | Top de productos exportados y composición de la canasta exportadora. |
+| 🧮 **Calculadoras** | Poder adquisitivo histórico y conversión de SMMLV a dólares. |
+
+## API REST
+
+`FastAPI` con documentación interactiva en `/docs`. Sin autenticación — datos públicos. Respuestas reales:
+
+| Endpoint | Devuelve | Ejemplo de respuesta |
+|----------|----------|----------------------|
+| `GET /trm` | TRM vigente COP/USD | `{"fecha":"vigente","trm_cop_usd":3588.09,"fuente":"datos.gov.co / Banco de la República"}` |
+| `GET /ipc?anio=2023` | Inflación anual + serie mensual | `{"anio":2023,"variacion_promedio_anual_pct":11.58,"registros_mensuales":12}` |
+| `GET /desempleo` | Tasa trimestral por ciudad/nacional | `{"ambito":"nacional","registros":40,"datos":[{"año":2015,"trimestre":1,"tasa_desempleo":10.8}]}` |
+| `GET /smmlv?anio=2024` | Salario mínimo en COP y USD | `{"anio":2024,"smmlv_cop":1300000,"smmlv_usd":362.31,"incremento_vs_anio_anterior_pct":12.07}` |
+| `GET /exportaciones/top?n=3` | Top productos exportados | `{"top_n":3,"productos":[{"producto":"Petroleo y derivados","promedio_millones_usd":12361.2}]}` |
+| `GET /health` | Estado del servicio | `{"status":"ok","version":"1.0.0","fuentes":["DANE","Banco de la República","datos.gov.co"]}` |
+
+```bash
+curl http://localhost:8000/ipc?anio=2023
+```
+
+```json
+{
+  "anio": 2023,
+  "variacion_promedio_anual_pct": 11.58,
+  "registros_mensuales": 12,
+  "datos_mensuales": [
+    {"periodo": "2023-01", "mes": 1, "ipc": 330.67, "variacion_mensual": 0.97, "variacion_anual": 13.48}
+  ],
+  "fuente": "DANE — Índice de Precios al Consumidor"
+}
+```
 
 ## Instalación
 
-**Requisitos:** Python 3.9+
-
 ```bash
+# 1. Clonar e instalar
 git clone https://github.com/Brausin/colombia-data-insights.git
 cd colombia-data-insights
-
-# Entorno virtual (recomendado)
-python -m venv .venv
-source .venv/bin/activate   # Linux/macOS
-.venv\Scripts\activate      # Windows
-
 pip install -e .
 ```
 
----
-
-## Ejemplos de uso
-
-### Ajustar un salario por inflación
-
-```python
-from colombia_data import ajustar_por_inflacion, formatear_pesos
-
-# ¿Cuánto equivale un salario de $3.000.000 de 2018 en pesos de 2024?
-valor_actualizado = ajustar_por_inflacion(3_000_000, anio_origen=2018, anio_destino=2024)
-print(formatear_pesos(valor_actualizado))
-# → $ 5.241.300
+```bash
+# 2. Dashboard interactivo (Streamlit)
+streamlit run app/main.py
 ```
 
-### Obtener la TRM histórica
-
-```python
-from colombia_data import BancoRepublicaClient
-
-cliente = BancoRepublicaClient()
-trm = cliente.obtener_trm(anio_inicio=2020, anio_fin=2024)
-print(trm.tail())
-#          fecha      trm
-# 1456 2024-12-27  4441.91
-# 1457 2024-12-28  4441.91
+```bash
+# 3. API REST (FastAPI + Uvicorn) → http://localhost:8000/docs
+uvicorn api.main:app --reload
 ```
 
-### Comparar desempleo entre ciudades
-
-```python
-from colombia_data import comparar_ciudades
-
-df = comparar_ciudades(["Bogotá", "Medellín", "Cali"], anio_inicio=2022, anio_fin=2024)
-print(df.pivot(index="trimestre", columns="ciudad", values="tasa_desempleo"))
+```bash
+# 4. Pruebas
+pytest -q          # 109 passing
 ```
-
-### Exportaciones: top productos
-
-```python
-from colombia_data import top_productos
-
-productos = top_productos(anio=2023, n=10)
-print(productos[["producto", "valor_usd_millones"]])
-```
-
----
-
-## Estructura del proyecto
-
-```
-colombia-data-insights/
-├── notebooks/               # 6 análisis listos para ejecutar
-│   ├── 01_exploracion_inflacion.ipynb
-│   ├── 02_mercado_laboral_colombiano.ipynb
-│   ├── 03_tasa_de_cambio.ipynb
-│   ├── 04_exportaciones_colombia.ipynb
-│   ├── 05_costo_de_vida_ciudades.ipynb
-│   └── 06_calculadora_salario_real.ipynb
-├── src/colombia_data/       # Librería instalable
-│   ├── ipc.py
-│   ├── desempleo.py
-│   ├── trm.py
-│   ├── exportaciones.py
-│   ├── utils.py
-│   └── fetcher.py           # Clientes para APIs de DANE y Banrep
-├── data/
-│   ├── raw/                 # Datos originales (ignorados por git)
-│   └── processed/           # Datos limpios versionados
-├── docs/                    # Documentación de fuentes y análisis
-├── setup.py
-└── requirements.txt
-```
-
----
 
 ## Fuentes de datos
 
-| Entidad | Datos | Enlace |
-|---------|-------|--------|
-| **DANE** | IPC, desempleo, exportaciones, costo de vida | [dane.gov.co](https://www.dane.gov.co/) |
-| **Banco de la República** | TRM, tasas de interés, inflación | [banrep.gov.co](https://www.banrep.gov.co/) |
-| **Datos Abiertos Colombia** | Conjuntos de datos del Gobierno Nacional | [datos.gov.co](https://www.datos.gov.co/) |
+| Indicador | Fuente | Frecuencia | Enlace oficial |
+|-----------|--------|------------|----------------|
+| TRM (COP/USD) | Superintendencia Financiera vía datos.gov.co | Diaria | [datos.gov.co](https://www.datos.gov.co/resource/32sa-8pi3.json) |
+| Inflación (IPC) | DANE | Mensual | [dane.gov.co/ipc](https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc) |
+| Desempleo (GEIH) | DANE | Trimestral | [dane.gov.co/mercado-laboral](https://www.dane.gov.co/index.php/estadisticas-por-tema/mercado-laboral) |
+| Exportaciones | DANE — Comercio Exterior | Anual | [dane.gov.co/exportaciones](https://www.dane.gov.co/index.php/estadisticas-por-tema/comercio-internacional/exportaciones) |
+| Salario mínimo (SMMLV) | Ministerio de Trabajo | Anual | [mintrabajo.gov.co](https://www.mintrabajo.gov.co/) |
+
+## Estructura
+
+```
+colombia-data-insights/
+├── src/colombia_data/
+│   ├── trm_live.py        # TRM en tiempo real
+│   ├── trm.py             # histórico de tasa de cambio
+│   ├── ipc.py             # inflación / IPC
+│   ├── desempleo.py       # mercado laboral por ciudad
+│   ├── exportaciones.py   # comercio exterior
+│   ├── utils.py           # SMMLV y poder adquisitivo
+│   └── fetcher.py         # descarga de fuentes oficiales
+├── api/
+│   └── main.py            # API REST (FastAPI)
+├── app/
+│   ├── main.py            # dashboard (Streamlit)
+│   └── ui.py              # sistema de diseño BI oscuro
+├── data/processed/        # CSVs limpios (IPC, desempleo, exportaciones…)
+├── notebooks/             # 6 notebooks de análisis
+├── assets/visualizaciones/# PNGs generados
+└── tests/                 # 109 pruebas
+```
+
+## Stack
+
+| Capa | Tecnología | Para qué |
+|------|-----------|----------|
+| Datos | **pandas / numpy** | limpieza y análisis de las series |
+| Dashboard | **Streamlit + Plotly** | visualización interactiva |
+| API | **FastAPI + Uvicorn** | endpoints REST públicos |
+| Calidad | **pytest** | 109 pruebas automatizadas |
+| Fuentes | **DANE · Banco de la República · datos.gov.co** | datos oficiales |
 
 ---
 
-## Licencia
-
-MIT — ver [LICENSE](LICENSE).
-
----
-
-<p align="center">Hecho con ❤️ para entender mejor a Colombia 🇨🇴</p>
+MIT © 2024 Brausin
