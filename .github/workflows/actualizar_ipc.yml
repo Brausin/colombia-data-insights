@@ -1,0 +1,31 @@
+name: Actualizar IPC anual
+
+on:
+  schedule:
+    - cron: "0 12 15 * *"   # día 15 de cada mes, 7AM Colombia (UTC-5)
+  workflow_dispatch:
+
+jobs:
+  actualizar-ipc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Descargar inflación anual del Banco Mundial
+        run: python scripts/actualizar_ipc_anual.py
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/processed/inflacion_anual.csv
+          git diff --staged --quiet || git commit -m "Actualiza inflación anual: $(date +%Y-%m-%d)"
+          git push
