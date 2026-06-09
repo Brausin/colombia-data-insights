@@ -15,6 +15,7 @@ Uso::
 
 from __future__ import annotations
 
+import logging
 import sys
 from pathlib import Path
 from typing import Optional
@@ -53,6 +54,32 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+_log = logging.getLogger("colombia_data.api")
+
+_FUENTE_NO_DISPONIBLE = (
+    "Fuente de datos no disponible temporalmente. Intente de nuevo más tarde."
+)
+
+
+def _fuente_no_disponible(exc: Exception) -> HTTPException:
+    """
+    Convierte un fallo de carga de datos en un 503 limpio.
+
+    El error real (que puede incluir rutas del servidor) se registra solo en
+    los logs; al cliente se le devuelve un mensaje genérico que no expone la
+    estructura interna del servidor.
+    """
+    _log.error("Fallo al cargar fuente de datos: %s", exc)
+    return HTTPException(status_code=503, detail=_FUENTE_NO_DISPONIBLE)
+
+
+def _col_anio(df) -> Optional[str]:
+    """Localiza la columna de año del dataset (acepta 'anio', 'año' o 'year')."""
+    return next(
+        (c for c in df.columns if c.lower() in ("anio", "año", "year")),
+        None,
+    )
+
 
 @app.get("/health", tags=["Sistema"])
 def health_check():
@@ -76,31 +103,36 @@ def obtener_trm(
 
     Sin parámetros: TRM vigente. Con `fecha`: histórico más cercano.
     """
-    trm = get_trm_hoy()
-    historico = get_historico_trm(meses=60)
+    try:
+        trm = get_trm_hoy()
+        historico = get_historico_trm(meses=60)
 
-    if fecha:
-        mes = fecha[:7]
-        coincidencia = [h for h in historico if h["fecha"] == mes]
-        if coincidencia:
-            return {
-                "fecha": fecha,
-                "mes": mes,
-                "trm_cop_usd": coincidencia[0]["trm"],
-                "fuente": "Banco de la República",
-                "nota": "Promedio mensual",
-            }
-        raise HTTPException(
-            status_code=404,
-            detail=f"Sin datos de TRM para {mes}.",
-        )
+        if fecha:
+            mes = fecha[:7]
+            coincidencia = [h for h in historico if h["fecha"] == mes]
+            if coincidencia:
+                return {
+                    "fecha": fecha,
+                    "mes": mes,
+                    "trm_cop_usd": coincidencia[0]["trm"],
+                    "fuente": "Banco de la República",
+                    "nota": "Promedio mensual",
+                }
+            raise HTTPException(
+                status_code=404,
+                detail=f"Sin datos de TRM para {mes}.",
+            )
 
-    return {
-        "fecha": "vigente",
-        "trm_cop_usd": trm,
-        "fuente": "datos.gov.co / Banco de la República",
-        "nota": "TRM vigente. Días no hábiles usan el último valor disponible.",
-    }
+        return {
+            "fecha": "vigente",
+            "trm_cop_usd": trm,
+            "fuente": "datos.gov.co / Banco de la República",
+            "nota": "TRM vigente. Días no hábiles usan el último valor disponible.",
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
 
 
 @app.get("/trm/historico", tags=["TRM"])
@@ -108,52 +140,71 @@ def historico_trm(
     meses: int = Query(12, ge=1, le=60, description="Meses a retornar (1-60)")
 ):
     """Histórico mensual de TRM para los últimos N meses."""
-    datos = get_historico_trm(meses=meses)
-    return {
-        "meses": meses,
-        "registros": len(datos),
-        "datos": datos,
-        "fuente": "Banco de la República de Colombia",
-    }
+    try:
+        datos = get_historico_trm(meses=meses)
+        return {
+            "meses": meses,
+            "registros": len(datos),
+            "datos": datos,
+            "fuente": "Banco de la República de Colombia",
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
 
 
 @app.get("/ipc", tags=["Inflación"])
 def obtener_ipc(
-    anio: Optional[int] = Query(None, description="Año (2010-2024). Sin parámetro retorna todos.")
+    anio: Optional[int] = Query(None, description="Año (2015-2024). Sin parámetro retorna todos.")
 ):
     """
-    Variación anual del IPC (inflación mensual).
+    Variación anual del IPC (inflación).
 
     Fuente: DANE — Índice de Precios al Consumidor.
     """
-    df = get_ipc()
-    if anio:
-        df_anio = df[df["anio"] == anio]
-        if df_anio.empty:
-            raise HTTPException(
-                status_code=404,
-                detail=f"Sin datos de IPC para {anio}.",
+    try:
+        df = get_ipc()
+        col = _col_anio(df)
+        if col is None:
+            raise _fuente_no_disponible(
+                ValueError("Dataset de IPC sin columna de año reconocible.")
             )
-        var = variacion_ipc(df, anio)
+
+        if anio:
+            df_anio = df[df[col] == anio]
+            if df_anio.empty:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Sin datos de IPC para {anio}.",
+                )
+            cols_mensuales = [
+                c
+                for c in ("periodo", "mes", "ipc", "variacion_mensual", "variacion_anual")
+                if c in df_anio.columns
+            ]
+            return {
+                "anio": anio,
+                "variacion_promedio_anual_pct": round(variacion_ipc(anio, anio), 2),
+                "registros_mensuales": len(df_anio),
+                "datos_mensuales": df_anio[cols_mensuales].to_dict(orient="records"),
+                "fuente": "DANE — Índice de Precios al Consumidor",
+            }
+
+        anios = sorted(int(a) for a in df[col].unique())
+        resumen = [
+            {"anio": a, "variacion_promedio_pct": round(variacion_ipc(a, a), 2)}
+            for a in anios
+        ]
         return {
-            "anio": anio,
-            "variacion_promedio_anual_pct": round(var, 2),
-            "registros_mensuales": len(df_anio),
-            "datos_mensuales": df_anio[["fecha", "mes", "variacion_ipc"]]
-                .assign(fecha=df_anio["fecha"].astype(str))
-                .to_dict(orient="records"),
+            "anios_disponibles": anios,
+            "resumen_anual": resumen,
             "fuente": "DANE — Índice de Precios al Consumidor",
         }
-
-    resumen = []
-    for a in sorted(df["anio"].unique()):
-        resumen.append({"anio": int(a), "variacion_promedio_pct": round(variacion_ipc(df, a), 2)})
-
-    return {
-        "anios_disponibles": sorted(df["anio"].unique().tolist()),
-        "resumen_anual": resumen,
-        "fuente": "DANE — Índice de Precios al Consumidor",
-    }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
 
 
 @app.get("/desempleo", tags=["Mercado laboral"])
@@ -178,24 +229,29 @@ def obtener_desempleo(
     manizales, ibague, pereira, cucuta, cartagena.
     """
     try:
-        df = get_desempleo(anio_inicio=anio_inicio, anio_fin=anio_fin, ciudad=ciudad)
-    except ValueError as exc:
-        raise HTTPException(
-            status_code=400,
-            detail=str(exc) + f". Ciudades disponibles: {', '.join(CIUDADES_DISPONIBLES)}",
-        )
+        try:
+            df = get_desempleo(anio_inicio=anio_inicio, anio_fin=anio_fin, ciudad=ciudad)
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=400,
+                detail=str(exc) + f". Ciudades disponibles: {', '.join(CIUDADES_DISPONIBLES)}",
+            )
 
-    datos = df.to_dict(orient="records")
+        datos = df.to_dict(orient="records")
 
-    return {
-        "ambito": ciudad if ciudad else "nacional",
-        "anio_inicio": anio_inicio,
-        "anio_fin": anio_fin,
-        "registros": len(datos),
-        "datos": datos,
-        "fuente": "DANE — Gran Encuesta Integrada de Hogares",
-        "ciudades_disponibles": CIUDADES_DISPONIBLES,
-    }
+        return {
+            "ambito": ciudad if ciudad else "nacional",
+            "anio_inicio": anio_inicio,
+            "anio_fin": anio_fin,
+            "registros": len(datos),
+            "datos": datos,
+            "fuente": "DANE — Gran Encuesta Integrada de Hogares",
+            "ciudades_disponibles": CIUDADES_DISPONIBLES,
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
 
 
 @app.get("/smmlv", tags=["Salario"])
@@ -217,21 +273,26 @@ def obtener_smmlv(
             status_code=404,
             detail=f"Sin datos para {anio}. Disponibles: {sorted(smmlv_por_anio.keys())}",
         )
-    smmlv_cop = smmlv_por_anio[anio]
-    trm = get_trm_hoy()
-    anio_ant = anio - 1
-    incremento = (
-        round((smmlv_cop / smmlv_por_anio[anio_ant] - 1) * 100, 2)
-        if anio_ant in smmlv_por_anio else None
-    )
-    return {
-        "anio": anio,
-        "smmlv_cop": smmlv_cop,
-        "smmlv_usd": round(smmlv_cop / trm, 2),
-        "trm_usada": trm,
-        "incremento_vs_anio_anterior_pct": incremento,
-        "fuente": "Ministerio de Trabajo de Colombia",
-    }
+    try:
+        smmlv_cop = smmlv_por_anio[anio]
+        trm = get_trm_hoy()
+        anio_ant = anio - 1
+        incremento = (
+            round((smmlv_cop / smmlv_por_anio[anio_ant] - 1) * 100, 2)
+            if anio_ant in smmlv_por_anio else None
+        )
+        return {
+            "anio": anio,
+            "smmlv_cop": smmlv_cop,
+            "smmlv_usd": round(smmlv_cop / trm, 2),
+            "trm_usada": trm,
+            "incremento_vs_anio_anterior_pct": incremento,
+            "fuente": "Ministerio de Trabajo de Colombia",
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
 
 
 @app.get("/exportaciones", tags=["Comercio exterior"])
@@ -245,22 +306,30 @@ def obtener_exportaciones(
 
     Fuente: DANE — Estadísticas de Comercio Exterior.
     """
-    df = get_exportaciones(anio_inicio=desde or 2010, anio_fin=hasta or 2024)
-    if producto:
-        termino = producto.lower().replace("é", "e").replace("ó", "o")
-        mask = df["producto"].str.lower().str.contains(termino, na=False)
-        df = df[mask]
-        if df.empty:
-            raise HTTPException(
-                status_code=404,
-                detail={"mensaje": f"No encontrado: '{producto}'", "disponibles": get_exportaciones()["producto"].unique().tolist()},
-            )
-    return {
-        "registros": len(df),
-        "datos": df.to_dict(orient="records"),
-        "fuente": "DANE — Estadísticas de Comercio Exterior",
-        "unidad": "Millones USD FOB",
-    }
+    try:
+        df = get_exportaciones(anio_inicio=desde or 2010, anio_fin=hasta or 2024)
+        if producto:
+            termino = producto.lower().replace("é", "e").replace("ó", "o")
+            mask = df["producto"].str.lower().str.contains(termino, na=False)
+            df = df[mask]
+            if df.empty:
+                raise HTTPException(
+                    status_code=404,
+                    detail={
+                        "mensaje": f"No encontrado: '{producto}'",
+                        "disponibles": get_exportaciones()["producto"].unique().tolist(),
+                    },
+                )
+        return {
+            "registros": len(df),
+            "datos": df.to_dict(orient="records"),
+            "fuente": "DANE — Estadísticas de Comercio Exterior",
+            "unidad": "Millones USD FOB",
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
 
 
 @app.get("/exportaciones/top", tags=["Comercio exterior"])
@@ -269,11 +338,15 @@ def top_exportaciones(
     anio: Optional[int] = Query(None, description="Año de consulta"),
 ):
     """Top N productos de exportación por año."""
-    df = get_exportaciones()
-    top = top_productos(df, n=n, anio=anio)
-    return {
-        "anio": anio or "último disponible",
-        "top_n": n,
-        "productos": top.to_dict(orient="records"),
-        "fuente": "DANE — Estadísticas de Comercio Exterior",
-    }
+    try:
+        top = top_productos(anio=anio, n=n)
+        return {
+            "anio": anio or "promedio histórico",
+            "top_n": n,
+            "productos": top.to_dict(orient="records"),
+            "fuente": "DANE — Estadísticas de Comercio Exterior",
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise _fuente_no_disponible(exc) from exc
