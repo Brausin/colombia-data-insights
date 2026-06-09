@@ -94,14 +94,25 @@ with st.spinner("Cargando indicadores..."):
     trm_hoy = cargar_trm_hoy()
     df_ipc = cargar_ipc()
     df_des = cargar_desempleo()
+    df_trm_tick = cargar_historico_trm(meses=18)
 
 ult_ipc = df_ipc.iloc[-1]
 ult_des = df_des.iloc[-1]
 smmlv_usd = SMMLV_REF / trm_hoy
 
+# Delta de la TRM frente al valor de hace ~30 días (CSV histórico)
+_fecha_ult_trm = df_trm_tick["fecha"].max()
+_prev = df_trm_tick[df_trm_tick["fecha"] <= _fecha_ult_trm - pd.Timedelta(days=30)]
+trm_30d = _prev.iloc[-1]["trm"] if len(_prev) else df_trm_tick.iloc[0]["trm"]
+diff_trm = trm_hoy - trm_30d
+if diff_trm >= 0:
+    trm_delta, trm_delta_color = f"▲ +{diff_trm:,.0f} vs hace 30 días", C["red"]
+else:
+    trm_delta, trm_delta_color = f"▼ -{abs(diff_trm):,.0f} vs hace 30 días", C["c2"]
+
 md(kpis_row([
-    {"label": "TRM hoy", "valor": f"${trm_hoy:,.0f}", "delta": "COP / USD",
-     "color": C["yellow"], "ayuda": "Tasa Representativa del Mercado vigente"},
+    {"label": "TRM hoy", "valor": f"${trm_hoy:,.0f}", "delta": trm_delta,
+     "color": trm_delta_color, "ayuda": "Variación de la TRM frente a hace 30 días"},
     {"label": f"Inflación anual ({ult_ipc['periodo']})",
      "valor": f"{ult_ipc['variacion_ipc']:.2f}%", "delta": "variación 12 meses",
      "color": C["c3"], "ayuda": "IPC: variación anual del último mes disponible"},
@@ -162,7 +173,28 @@ with tab_trm:
                           hovermode="x unified")
     fig_trm.update_traces(
         hovertemplate="<b>%{x|%b %Y}</b><br>TRM: $%{y:,.2f}<extra></extra>")
+
+    # Marca "Hoy": línea vertical punteada + punto en el valor más reciente
+    fecha_ult_trm = df_trm["fecha"].max()
+    trm_ult = df_trm.iloc[-1]["trm"]
+    fig_trm.add_scatter(
+        x=[fecha_ult_trm, fecha_ult_trm],
+        y=[df_trm["trm"].min(), df_trm["trm"].max()],
+        mode="lines", line=dict(color=C["muted"], dash="dot", width=1),
+        showlegend=False, hoverinfo="skip")
+    fig_trm.add_scatter(
+        x=[fecha_ult_trm], y=[trm_ult], mode="markers+text",
+        marker=dict(color=C["yellow"], size=11, line=dict(color=C["bg"], width=1)),
+        text=["Hoy"], textposition="top center", showlegend=False,
+        hovertemplate="Hoy: $%{y:,.0f}<extra></extra>")
     st.plotly_chart(fig_trm, width="stretch", config=PLOTLY_CFG)
+
+    # Conversor integrado USD → COP (en vivo, sin botón)
+    st.markdown("#### 🔄 Conversor USD → COP")
+    usd_conv = st.number_input("Dólares a convertir (USD)", min_value=0.0,
+                               value=1_000.0, step=100.0, key="trm_conv")
+    md(kpi("Equivalen en pesos", formatear_pesos(usd_conv * trm_hoy),
+           f"a la TRM de hoy (${trm_hoy:,.0f})", C["c2"]))
 
     st.info(
         f"💡 **¿Qué significa hoy?** Con TRM de ${trm_hoy:,.0f}, USD 1.000 "
@@ -206,11 +238,18 @@ with tab_ipc:
         labels={"fecha": "Mes", "variacion_ipc": "Variación anual (%)"},
         color_discrete_sequence=[C["red"]],
     )
-    fig_ipc.add_hline(y=3.0, line_dash="dash", line_color=C["c2"],
-                      annotation_text="Meta Banrep 3%",
+    fig_ipc.add_hline(y=3.0, line_dash="dash", line_color=C["red"],
+                      annotation_text="Meta BR 3%",
                       annotation_position="bottom right")
     fig_ipc.update_layout(yaxis=dict(ticksuffix="%"), hovermode="x unified")
     st.plotly_chart(fig_ipc, width="stretch", config=PLOTLY_CFG)
+
+    _posicion = "por encima" if inflacion_anual > 3 else "por debajo"
+    md(f"<div style='background:{C['card']};border:1px solid {C['border']};"
+       f"border-left:3px solid {C['red'] if inflacion_anual > 3 else C['c2']};"
+       f"border-radius:10px;padding:12px 16px;margin:6px 0'>"
+       f"La inflación de <b>{anio_sel}</b> fue <b>{inflacion_anual:.1f}%</b> — "
+       f"{_posicion} de la meta del 3% del Banco de la República.</div>")
 
     st.info(
         "💡 **Contexto:** La meta de inflación del Banco de la República es 3% "
@@ -254,6 +293,15 @@ with tab_desempleo:
                           xaxis=dict(tickangle=-45))
     fig_des.update_traces(
         hovertemplate="<b>%{x}</b><br>Desempleo: %{y:.1f}%<extra></extra>")
+
+    # Anotación COVID-19 en el pico histórico si cae en 2020
+    idx_pico = df_des["tasa_desempleo"].idxmax()
+    periodo_pico = str(df_des.loc[idx_pico, "periodo"])
+    if "2020" in periodo_pico:
+        fig_des.add_annotation(
+            x=periodo_pico, y=df_des.loc[idx_pico, "tasa_desempleo"],
+            text="COVID-19 ▲", showarrow=True, arrowhead=2, ay=-40,
+            font=dict(color=C["red"], size=12), arrowcolor=C["red"])
     st.plotly_chart(fig_des, width="stretch", config=PLOTLY_CFG)
 
     st.markdown("---")
@@ -274,7 +322,11 @@ with tab_desempleo:
         anio_comp = st.selectbox("Año", options=list(range(2015, 2025)), index=8,
                                  help="Promedio anual de los 4 trimestres")
 
-    if len(ciudades_sel) >= 2:
+    if not ciudades_sel:
+        st.info("Selecciona al menos una ciudad para comparar")
+    elif len(ciudades_sel) < 2:
+        st.info("Selecciona al menos 2 ciudades para ver la comparación.")
+    else:
         try:
             df_comp = comparar_ciudades(ciudades_sel, anio_comp)
             fig_comp = px.bar(
@@ -292,8 +344,6 @@ with tab_desempleo:
             st.plotly_chart(fig_comp, width="stretch", config=PLOTLY_CFG)
         except Exception as e:
             st.error(f"Error al comparar ciudades: {e}")
-    else:
-        st.info("Selecciona al menos 2 ciudades para ver la comparación.")
 
     st.info(
         "💡 **Contexto:** Colombia tiene una de las tasas de desempleo más altas "
