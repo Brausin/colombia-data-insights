@@ -1,20 +1,20 @@
 {
-  "fecha": "2026-06-09T00:00:00Z",
-  "ultimo_commit": "ab33fdf",
+  "fecha": "2026-06-10T00:00:00Z",
+  "ultimo_commit": "e763302",
   "modulos_completados": [
-    "scripts/actualizar_ipc_anual.py — descarga la variación anual del IPC (indicador FP.CPI.TOTL.ZG) del Banco Mundial y escribe data/processed/inflacion_anual.csv (anio, inflacion_pct, fuente)",
-    "data/processed/inflacion_anual.csv — 15 años (2010-2024) de inflación anual real del Banco Mundial",
-    ".github/workflows/actualizar_ipc.yml — Action mensual (cron '0 12 15 * *') + workflow_dispatch que regenera el CSV y commitea si hay cambios",
-    "app/main.py — pestaña Inflación: gráfico de barras de inflación anual de largo plazo (Banco Mundial) con línea de meta BR 3%, alimentado por cargar_inflacion_anual()",
-    "tests/test_inflacion_anual.py — valida columnas, datos plausibles, años únicos/ordenados y el formato del CSV que produce el script"
+    "Rediseño dashboard 2026 (skill ui-ux-pro-max, estilo 'Data-Dense Dashboard'): Fira Sans + Fira Code para cifras, ui.header_app con franja tricolor, KPIs .cdi-kpi con hover, tabs sin emojis, focus-visible, prefers-reduced-motion; paleta: blue #3B82F6 y c3 ámbar #F59E0B (CTA), border #243047",
+    "Filtro de período (6/12/18/24 meses) en la pestaña TRM",
+    "Botones de descarga CSV: histórico TRM, serie IPC, desempleo trimestral y exportaciones anuales",
+    "SMMLV_REF actualizado a 1.750.905 (SMMLV 2026, Decreto 1469 de 2025)",
+    "pytest.ini con testpaths=tests y norecursedirs para no recoger el clon anidado factura-co/ (sus app/ui.py chocan en sys.path); factura-co/ añadido a .gitignore"
   ],
   "ya_existian": [
-    "src/colombia_data/* (ipc, desempleo, exportaciones, trm_live, utils), api/main.py (FastAPI), app/main.py + app/ui.py (dashboard BI oscuro Plotly), Action TRM diaria"
+    "src/colombia_data/* (ipc, desempleo, exportaciones, trm_live, utils), api/main.py (FastAPI), inflacion_anual.csv del Banco Mundial + Action mensual, Action TRM diaria"
   ],
   "en_progreso": "",
   "siguiente_paso": "Automatizar otros indicadores anuales desde el Banco Mundial (PIB, desempleo) con el mismo patrón script + Action; comparar la inflación anual del Banco Mundial con el cierre de diciembre del DANE en la pestaña Inflación.",
   "tests_pasando": 113,
-  "notas_tecnicas": "Verificado con pytest (PYTHONPATH=src) -> 113 passed, incluye smoke AppTest del dashboard. El item J (IPC anual) queda cubierto con World Bank FP.CPI.TOTL.ZG; la parte TRM ya estaba en factura-co (actualizar_trm.yml). /tmp == C:/Users/juans/AppData/Local/Temp (Git Bash MINGW64).",
+  "notas_tecnicas": "pytest (PYTHONPATH=src) -> 113 passed (con pytest.ini ya no se cuelan los 152 tests del clon anidado). OJO: este working copy vive en C:/Users/juans/propuesta-co/colombia-data-insights (anidado dentro del clon de propuesta-co). La skill de diseño vive en ~/.claude/skills/ui-ux-pro-max.",
   "pendiente_diseno": [
     "Indicadores anuales adicionales (PIB, desempleo) vía World Bank",
     "Comparativa World Bank vs DANE en la pestaña Inflación"
