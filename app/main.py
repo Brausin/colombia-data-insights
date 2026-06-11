@@ -32,7 +32,7 @@ from colombia_data.utils import (
 import ui
 from ui import COLORS as C, kpi, kpis_row, badge, md
 
-SMMLV_REF = 1_300_000  # SMMLV de referencia (COP/mes)
+SMMLV_REF = 1_750_905  # SMMLV 2026 (Decreto 1469 de 2025, COP/mes)
 
 # ---------------------------------------------------------------------------
 # Configuración de página + tema
@@ -92,10 +92,10 @@ def cargar_exportaciones() -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 # Header + KPI ticker (datos reales de los CSV procesados)
 # ---------------------------------------------------------------------------
-st.title("🇨🇴 Colombia Data Insights")
-st.caption(
+ui.header_app(
+    "Colombia Data Insights",
     "Datos económicos colombianos de fuentes oficiales: "
-    "DANE · Banco de la República · Superintendencia Financiera · datos.gov.co"
+    "DANE · Banco de la República · Superintendencia Financiera · datos.gov.co",
 )
 
 with st.spinner("Cargando indicadores..."):
@@ -136,11 +136,11 @@ md(kpis_row([
 # Tabs
 # ---------------------------------------------------------------------------
 tab_trm, tab_ipc, tab_desempleo, tab_exportaciones, tab_calculadoras = st.tabs([
-    "📈 TRM hoy",
-    "📊 Inflación",
-    "💼 Desempleo",
-    "🌍 Exportaciones",
-    "🧮 Calculadoras",
+    "TRM hoy",
+    "Inflación",
+    "Desempleo",
+    "Exportaciones",
+    "Calculadoras",
 ])
 
 # ============================================================
@@ -155,7 +155,12 @@ with tab_trm:
         "moneda extranjera."
     )
 
-    df_trm = cargar_historico_trm(meses=18)
+    # Filtro de período: cuántos meses de histórico mostrar
+    meses_trm = st.select_slider(
+        "Período del histórico (meses)", options=[6, 12, 18, 24],
+        value=18, key="trm_meses",
+    )
+    df_trm = cargar_historico_trm(meses=meses_trm)
     trm_anterior = df_trm.iloc[-2]["trm"] if len(df_trm) >= 2 else trm_hoy
     variacion_trm = trm_hoy - trm_anterior
 
@@ -196,16 +201,21 @@ with tab_trm:
         text=["Hoy"], textposition="top center", showlegend=False,
         hovertemplate="Hoy: $%{y:,.0f}<extra></extra>")
     st.plotly_chart(fig_trm, width="stretch", config=PLOTLY_CFG)
+    st.download_button(
+        "Descargar histórico TRM (CSV)",
+        data=df_trm.to_csv(index=False).encode("utf-8-sig"),
+        file_name=f"trm_historico_{meses_trm}m.csv", mime="text/csv",
+    )
 
     # Conversor integrado USD → COP (en vivo, sin botón)
-    st.markdown("#### 🔄 Conversor USD → COP")
+    st.markdown("#### Conversor USD → COP")
     usd_conv = st.number_input("Dólares a convertir (USD)", min_value=0.0,
                                value=1_000.0, step=100.0, key="trm_conv")
     md(kpi("Equivalen en pesos", formatear_pesos(usd_conv * trm_hoy),
            f"a la TRM de hoy (${trm_hoy:,.0f})", C["c2"]))
 
     st.info(
-        f"💡 **¿Qué significa hoy?** Con TRM de ${trm_hoy:,.0f}, USD 1.000 "
+        f"**¿Qué significa hoy?** Con TRM de ${trm_hoy:,.0f}, USD 1.000 "
         f"equivalen a **{formatear_pesos(trm_hoy * 1000)}**. Si recibes ingresos "
         f"en dólares, el nivel de la TRM afecta directamente tu poder de compra "
         f"en Colombia."
@@ -260,9 +270,15 @@ with tab_ipc:
        f"{_posicion} de la meta del 3% del Banco de la República.</div>")
 
     st.info(
-        "💡 **Contexto:** La meta de inflación del Banco de la República es 3% "
+        "**Contexto:** La meta de inflación del Banco de la República es 3% "
         "anual. En 2022 Colombia alcanzó 13.1%, la más alta en más de 20 años, "
         "impulsada por la pandemia, la guerra en Ucrania y el alza global de alimentos."
+    )
+    st.download_button(
+        "Descargar serie IPC (CSV)",
+        data=df_ipc[["periodo", "ipc", "variacion_ipc"]]
+            .to_csv(index=False).encode("utf-8-sig"),
+        file_name="ipc_historico.csv", mime="text/csv",
     )
 
     # ---- Comparación anual de largo plazo (Banco Mundial) -------------------
@@ -333,8 +349,14 @@ with tab_desempleo:
             font=dict(color=C["red"], size=12), arrowcolor=C["red"])
     st.plotly_chart(fig_des, width="stretch", config=PLOTLY_CFG)
 
+    st.download_button(
+        "Descargar serie de desempleo (CSV)",
+        data=df_des.to_csv(index=False).encode("utf-8-sig"),
+        file_name="desempleo_trimestral.csv", mime="text/csv",
+    )
+
     st.markdown("---")
-    st.markdown("### 🏙️ Comparar ciudades")
+    st.markdown("### Comparar ciudades")
     st.markdown(
         "Compara el desempleo entre ciudades para un año específico. Los datos "
         "provienen de la Gran Encuesta Integrada de Hogares (GEIH) del DANE."
@@ -375,7 +397,7 @@ with tab_desempleo:
             st.error(f"Error al comparar ciudades: {e}")
 
     st.info(
-        "💡 **Contexto:** Colombia tiene una de las tasas de desempleo más altas "
+        "**Contexto:** Colombia tiene una de las tasas de desempleo más altas "
         "de América Latina. El desempleo juvenil (18-28 años) casi duplica la tasa "
         "nacional."
     )
@@ -429,8 +451,13 @@ with tab_exportaciones:
         )
         st.plotly_chart(fig_pet, width="stretch", config=PLOTLY_CFG)
 
+    st.download_button(
+        "Descargar exportaciones (CSV)",
+        data=df_exp.to_csv(index=False).encode("utf-8-sig"),
+        file_name="exportaciones_anuales.csv", mime="text/csv",
+    )
     st.warning(
-        "⚠️ **Dependencia petrolera:** El petróleo representa entre el 40-55% de "
+        "**Dependencia petrolera:** El petróleo representa entre el 40-55% de "
         "las exportaciones. Cuando el precio del crudo cae, Colombia recibe menos "
         "dólares → el peso se devalúa → las importaciones suben."
     )
@@ -443,7 +470,7 @@ with tab_calculadoras:
     st.markdown("Herramientas para entender el impacto de la economía en tu bolsillo.")
 
     calc1, calc2, calc3 = st.tabs([
-        "💰 Poder adquisitivo", "💵 Tu salario en USD", "📅 Devaluación histórica",
+        "Poder adquisitivo", "Tu salario en USD", "Devaluación histórica",
     ])
 
     # ---- Calculadora 1: Poder adquisitivo ----
@@ -481,7 +508,7 @@ with tab_calculadoras:
         ]))
 
         st.info(
-            f"💡 Con inflación de {inflacion_prom}% anual durante {anios_calc} años "
+            f"Con inflación de {inflacion_prom}% anual durante {anios_calc} años "
             f"(acumulada {infl_acumulada:.1f}%), {formatear_pesos(monto)} de hoy "
             f"tendrán el poder de compra de **{formatear_pesos(r['salario_real'])}**. "
             f"Necesitarías **{formatear_pesos(r['se_necesita_para_mantener'])}** "
@@ -542,13 +569,13 @@ with tab_calculadoras:
 
             if devaluacion > 0:
                 st.warning(
-                    f"⚠️ El peso perdió **{devaluacion:.1f}%** de su valor frente al "
+                    f"El peso perdió **{devaluacion:.1f}%** de su valor frente al "
                     f"dólar. Lo que costaba USD 100 (${trm_inicio_val:,.0f}), ahora "
                     f"cuesta ${trm_fin_val:,.0f}."
                 )
             else:
                 st.success(
-                    f"✅ El peso se fortaleció **{abs(devaluacion):.1f}%** frente al "
+                    f"El peso se fortaleció **{abs(devaluacion):.1f}%** frente al "
                     "dólar. Las importaciones se abaratan y los ingresos en dólares "
                     "valen menos en pesos."
                 )
