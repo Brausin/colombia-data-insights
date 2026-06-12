@@ -18,7 +18,7 @@ httpx>=0.24.0
 
 # Utilidades
 python-dotenv>=1.0.0
-tqdm>=4.65.0
+tqdm>=4.68.2
 
 # Calidad de código
 black>=23.0.0
