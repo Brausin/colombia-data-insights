@@ -8,7 +8,6 @@ Fuente: DANE - Encuesta Nacional de Presupuestos de los Hogares
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from typing import Optional
 
@@ -25,7 +24,11 @@ def _cargar_ipc() -> pd.DataFrame:
             f"No se encontró el archivo de IPC en {ruta}. "
             "Asegúrese de haber descargado los datos."
         )
-    df = pd.read_csv(ruta, parse_dates=["fecha"] if "fecha" in pd.read_csv(ruta, nrows=0).columns else [])
+    # Leer solo el encabezado primero para decidir si hay columna de fecha,
+    # y luego el archivo completo una única vez.
+    columnas = pd.read_csv(ruta, nrows=0).columns
+    parse_dates = ["fecha"] if "fecha" in columnas else False
+    df = pd.read_csv(ruta, parse_dates=parse_dates)
     return df
 
 

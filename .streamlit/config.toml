@@ -1,0 +1,12 @@
+# Tema base del dashboard (design system "Data-Dense Dashboard" · ui-ux-pro-max).
+# Hace que los widgets nativos (slider, toggle, selectbox, alertas, dataframes)
+# hereden el tema oscuro en lugar del tema claro por defecto.
+[theme]
+base = "dark"
+primaryColor = "#22C55E"
+backgroundColor = "#020617"
+secondaryBackgroundColor = "#0F172A"
+textColor = "#F8FAFC"
+
+[browser]
+gatherUsageStats = false

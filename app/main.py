@@ -1,8 +1,10 @@
 """
 colombia-data-insights — Dashboard principal
 ============================================
-Inteligencia económica colombiana con estética BI oscura.
-Datos procesados de fuentes oficiales: DANE, Banco de la República, datos.gov.co.
+Inteligencia económica colombiana con estética BI oscura ("Data-Dense
+Dashboard", ui-ux-pro-max — ver app/ui.py y design-system/).
+Datos procesados de fuentes oficiales: DANE, Banco de la República,
+datos.gov.co.
 
 Ejecutar:
     streamlit run app/main.py
@@ -30,16 +32,16 @@ from colombia_data.utils import (
 )
 
 import ui
-from ui import COLORS as C, kpi, kpis_row, badge, md
+from ui import COLORS as C, kpi, kpis_row, badge, md, callout, empty_state
 
-SMMLV_REF = 1_750_905  # SMMLV 2026 (Decreto 1469 de 2025, COP/mes)
+SMMLV_REF = 1_300_000  # SMMLV de referencia (COP/mes)
 
 # ---------------------------------------------------------------------------
 # Configuración de página + tema
 # ---------------------------------------------------------------------------
 st.set_page_config(
     page_title="Colombia Data Insights",
-    page_icon="🇨🇴",
+    page_icon=":material/monitoring:",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -47,6 +49,15 @@ ui.apply_styles()
 ui.registrar_tema()
 
 PLOTLY_CFG = {"displayModeBar": False}
+
+
+def _clamp(valor: float, minimo: float, maximo: float) -> float:
+    """Acota un valor al rango [minimo, maximo] para defaults de widgets.
+
+    Evita StreamlitAPIException cuando un dato en vivo (p. ej. la TRM)
+    queda fuera del rango permitido del number_input.
+    """
+    return float(min(max(valor, minimo), maximo))
 
 
 # ---------------------------------------------------------------------------
@@ -92,21 +103,43 @@ def cargar_exportaciones() -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 # Header + KPI ticker (datos reales de los CSV procesados)
 # ---------------------------------------------------------------------------
-ui.header_app(
+md(ui.header_app(
     "Colombia Data Insights",
-    "Datos económicos colombianos de fuentes oficiales: "
-    "DANE · Banco de la República · Superintendencia Financiera · datos.gov.co",
-)
+    "Datos económicos colombianos de fuentes oficiales: DANE · Banco de la "
+    "República · Superintendencia Financiera · datos.gov.co",
+))
 
-with st.spinner("Cargando indicadores..."):
-    trm_hoy = cargar_trm_hoy()
-    df_ipc = cargar_ipc()
-    df_des = cargar_desempleo()
-    df_trm_tick = cargar_historico_trm(meses=18)
+try:
+    with st.spinner("Cargando indicadores..."):
+        trm_hoy = cargar_trm_hoy()
+        df_ipc = cargar_ipc()
+        df_des = cargar_desempleo()
+        df_trm_tick = cargar_historico_trm(meses=18)
+except Exception as exc:  # CSV ausente, columnas inesperadas, sin red…
+    empty_state(
+        "No fue posible cargar los indicadores",
+        "Verifica que los CSV de <code>data/processed/</code> existan "
+        "(ejecuta el pipeline de datos) y que haya conexión para la TRM. "
+        f"Detalle técnico: <code>{type(exc).__name__}: {exc}</code>",
+        icn="alert-circle",
+    )
+    if st.button("Reintentar carga"):
+        st.cache_data.clear()
+        st.rerun()
+    st.stop()
+
+if df_ipc.empty or df_des.empty or df_trm_tick.empty:
+    empty_state(
+        "Los archivos de datos están vacíos",
+        "Los CSV de <code>data/processed/</code> no contienen filas. "
+        "Vuelve a generar los datos con el pipeline del repositorio.",
+        icn="database",
+    )
+    st.stop()
 
 ult_ipc = df_ipc.iloc[-1]
 ult_des = df_des.iloc[-1]
-smmlv_usd = SMMLV_REF / trm_hoy
+smmlv_usd = SMMLV_REF / trm_hoy if trm_hoy else 0.0
 
 # Delta de la TRM frente al valor de hace ~30 días (CSV histórico)
 _fecha_ult_trm = df_trm_tick["fecha"].max()
@@ -133,14 +166,14 @@ md(kpis_row([
 ]))
 
 # ---------------------------------------------------------------------------
-# Tabs
+# Tabs (Material Symbols — vector, nunca emoji)
 # ---------------------------------------------------------------------------
 tab_trm, tab_ipc, tab_desempleo, tab_exportaciones, tab_calculadoras = st.tabs([
-    "TRM hoy",
-    "Inflación",
-    "Desempleo",
-    "Exportaciones",
-    "Calculadoras",
+    ":material/payments: TRM hoy",
+    ":material/monitoring: Inflación",
+    ":material/work: Desempleo",
+    ":material/public: Exportaciones",
+    ":material/calculate: Calculadoras",
 ])
 
 # ============================================================
@@ -155,12 +188,7 @@ with tab_trm:
         "moneda extranjera."
     )
 
-    # Filtro de período: cuántos meses de histórico mostrar
-    meses_trm = st.select_slider(
-        "Período del histórico (meses)", options=[6, 12, 18, 24],
-        value=18, key="trm_meses",
-    )
-    df_trm = cargar_historico_trm(meses=meses_trm)
+    df_trm = cargar_historico_trm(meses=18)
     trm_anterior = df_trm.iloc[-2]["trm"] if len(df_trm) >= 2 else trm_hoy
     variacion_trm = trm_hoy - trm_anterior
 
@@ -201,24 +229,22 @@ with tab_trm:
         text=["Hoy"], textposition="top center", showlegend=False,
         hovertemplate="Hoy: $%{y:,.0f}<extra></extra>")
     st.plotly_chart(fig_trm, width="stretch", config=PLOTLY_CFG)
-    st.download_button(
-        "Descargar histórico TRM (CSV)",
-        data=df_trm.to_csv(index=False).encode("utf-8-sig"),
-        file_name=f"trm_historico_{meses_trm}m.csv", mime="text/csv",
-    )
+    md(ui.fuente_dato("Superintendencia Financiera vía datos.gov.co · serie mensual"))
 
     # Conversor integrado USD → COP (en vivo, sin botón)
     st.markdown("#### Conversor USD → COP")
     usd_conv = st.number_input("Dólares a convertir (USD)", min_value=0.0,
+                               max_value=1_000_000_000.0,
                                value=1_000.0, step=100.0, key="trm_conv")
     md(kpi("Equivalen en pesos", formatear_pesos(usd_conv * trm_hoy),
            f"a la TRM de hoy (${trm_hoy:,.0f})", C["c2"]))
 
-    st.info(
-        f"**¿Qué significa hoy?** Con TRM de ${trm_hoy:,.0f}, USD 1.000 "
-        f"equivalen a **{formatear_pesos(trm_hoy * 1000)}**. Si recibes ingresos "
+    callout(
+        "info",
+        f"<b>¿Qué significa hoy?</b> Con TRM de ${trm_hoy:,.0f}, USD 1.000 "
+        f"equivalen a <b>{formatear_pesos(trm_hoy * 1000)}</b>. Si recibes ingresos "
         f"en dólares, el nivel de la TRM afecta directamente tu poder de compra "
-        f"en Colombia."
+        f"en Colombia.",
     )
 
 # ============================================================
@@ -236,50 +262,57 @@ with tab_ipc:
     anio_sel = st.selectbox("Año de referencia", anios_ipc, index=0, key="ipc_anio")
 
     ipc_anio = df_ipc[df_ipc["anio"] == anio_sel].sort_values("mes")
-    inflacion_anual = ipc_anio["variacion_ipc"].iloc[-1]   # YoY de diciembre
-    mes_alto = ipc_anio.loc[ipc_anio["variacion_ipc"].idxmax()]
-    indice_dic = ipc_anio["ipc"].iloc[-1]
+    ipc_anio_valido = ipc_anio.dropna(subset=["variacion_ipc"])
 
-    md(kpis_row([
-        {"label": f"Inflación anual {anio_sel}", "valor": f"{inflacion_anual:.2f}%",
-         "delta": "variación 12 meses a diciembre", "color": C["c3"],
-         "ayuda": "Variación anual del IPC al cierre del año"},
-        {"label": "Mes más alto", "valor": f"{mes_alto['variacion_ipc']:.2f}%",
-         "delta": f"mes {int(mes_alto['mes'])}", "color": C["red"]},
-        {"label": "Índice IPC (dic)", "valor": f"{indice_dic:,.1f}",
-         "delta": "base dic-2018 = 100", "color": C["c1"]},
-    ]))
+    if ipc_anio_valido.empty:
+        empty_state(
+            f"Sin datos de IPC para {anio_sel}",
+            "El CSV procesado no tiene filas con variación anual para este año. "
+            "Elige otro año en el selector.",
+        )
+    else:
+        inflacion_anual = ipc_anio_valido["variacion_ipc"].iloc[-1]   # YoY al cierre
+        mes_alto = ipc_anio_valido.loc[ipc_anio_valido["variacion_ipc"].idxmax()]
+        indice_dic = ipc_anio_valido["ipc"].iloc[-1]
 
-    fig_ipc = px.line(
-        df_ipc, x="fecha", y="variacion_ipc",
-        title="Inflación mensual histórica (variación anual %)",
-        labels={"fecha": "Mes", "variacion_ipc": "Variación anual (%)"},
-        color_discrete_sequence=[C["red"]],
-    )
-    fig_ipc.add_hline(y=3.0, line_dash="dash", line_color=C["red"],
-                      annotation_text="Meta BR 3%",
-                      annotation_position="bottom right")
-    fig_ipc.update_layout(yaxis=dict(ticksuffix="%"), hovermode="x unified")
-    st.plotly_chart(fig_ipc, width="stretch", config=PLOTLY_CFG)
+        md(kpis_row([
+            {"label": f"Inflación anual {anio_sel}", "valor": f"{inflacion_anual:.2f}%",
+             "delta": "variación 12 meses al cierre", "color": C["c3"],
+             "ayuda": "Variación anual del IPC al último mes disponible del año"},
+            {"label": "Mes más alto", "valor": f"{mes_alto['variacion_ipc']:.2f}%",
+             "delta": f"mes {int(mes_alto['mes'])}", "color": C["red"]},
+            {"label": "Índice IPC (cierre)", "valor": f"{indice_dic:,.1f}",
+             "delta": "base dic-2018 = 100", "color": C["c1"]},
+        ]))
 
-    _posicion = "por encima" if inflacion_anual > 3 else "por debajo"
-    md(f"<div style='background:{C['card']};border:1px solid {C['border']};"
-       f"border-left:3px solid {C['red'] if inflacion_anual > 3 else C['c2']};"
-       f"border-radius:10px;padding:12px 16px;margin:6px 0'>"
-       f"La inflación de <b>{anio_sel}</b> fue <b>{inflacion_anual:.1f}%</b> — "
-       f"{_posicion} de la meta del 3% del Banco de la República.</div>")
+        fig_ipc = px.line(
+            df_ipc, x="fecha", y="variacion_ipc",
+            title="Inflación mensual histórica (variación anual %)",
+            labels={"fecha": "Mes", "variacion_ipc": "Variación anual (%)"},
+            color_discrete_sequence=[C["red_chart"]],
+        )
+        fig_ipc.add_hline(y=3.0, line_dash="dash", line_color=C["c2"],
+                          annotation_text="Meta BR 3%",
+                          annotation_position="bottom right")
+        fig_ipc.update_layout(yaxis=dict(ticksuffix="%"), hovermode="x unified")
+        st.plotly_chart(fig_ipc, width="stretch", config=PLOTLY_CFG)
+        md(ui.fuente_dato("DANE · IPC mensual, variación anual"))
 
-    st.info(
-        "**Contexto:** La meta de inflación del Banco de la República es 3% "
-        "anual. En 2022 Colombia alcanzó 13.1%, la más alta en más de 20 años, "
-        "impulsada por la pandemia, la guerra en Ucrania y el alza global de alimentos."
-    )
-    st.download_button(
-        "Descargar serie IPC (CSV)",
-        data=df_ipc[["periodo", "ipc", "variacion_ipc"]]
-            .to_csv(index=False).encode("utf-8-sig"),
-        file_name="ipc_historico.csv", mime="text/csv",
-    )
+        _sobre_meta = inflacion_anual > 3
+        callout(
+            "alerta" if _sobre_meta else "exito",
+            f"La inflación de <b>{anio_sel}</b> fue <b>{inflacion_anual:.1f}%</b> — "
+            f"{'por encima' if _sobre_meta else 'por debajo'} de la meta del 3% "
+            f"del Banco de la República.",
+        )
+
+        callout(
+            "dato",
+            "<b>Contexto:</b> La meta de inflación del Banco de la República es "
+            "3% anual. En 2022 Colombia alcanzó 13.1%, la más alta en más de 20 "
+            "años, impulsada por la pandemia, la guerra en Ucrania y el alza "
+            "global de alimentos.",
+        )
 
     # ---- Comparación anual de largo plazo (Banco Mundial) -------------------
     st.markdown("#### Inflación anual de largo plazo")
@@ -288,19 +321,34 @@ with tab_ipc:
         "(indicador FP.CPI.TOTL.ZG), un único dato por año para ver la "
         "tendencia de la última década. Se actualiza con un cron mensual."
     )
-    df_inf_anual = cargar_inflacion_anual()
-    fig_anual = px.bar(
-        df_inf_anual, x="anio", y="inflacion_pct",
-        title="Inflación anual de Colombia (Banco Mundial)",
-        labels={"anio": "Año", "inflacion_pct": "Inflación (%)"},
-        color_discrete_sequence=[C["c3"]],
-    )
-    fig_anual.add_hline(y=3.0, line_dash="dash", line_color=C["red"],
-                        annotation_text="Meta BR 3%",
-                        annotation_position="top left")
-    fig_anual.update_layout(yaxis=dict(ticksuffix="%"), hovermode="x unified",
-                            xaxis=dict(dtick=1))
-    st.plotly_chart(fig_anual, width="stretch", config=PLOTLY_CFG)
+    try:
+        df_inf_anual = cargar_inflacion_anual()
+    except FileNotFoundError:
+        df_inf_anual = pd.DataFrame()
+    except Exception:
+        df_inf_anual = pd.DataFrame()
+
+    if df_inf_anual.empty:
+        empty_state(
+            "No se encontró la serie anual del Banco Mundial",
+            "Falta <code>data/processed/inflacion_anual.csv</code>. Genera el "
+            "archivo con el cron/pipeline del repo para ver esta gráfica.",
+            icn="database",
+        )
+    else:
+        fig_anual = px.bar(
+            df_inf_anual, x="anio", y="inflacion_pct",
+            title="Inflación anual de Colombia (Banco Mundial)",
+            labels={"anio": "Año", "inflacion_pct": "Inflación (%)"},
+            color_discrete_sequence=[C["c3"]],
+        )
+        fig_anual.add_hline(y=3.0, line_dash="dash", line_color=C["c2"],
+                            annotation_text="Meta BR 3%",
+                            annotation_position="top left")
+        fig_anual.update_layout(yaxis=dict(ticksuffix="%"), hovermode="x unified",
+                                xaxis=dict(dtick=1))
+        st.plotly_chart(fig_anual, width="stretch", config=PLOTLY_CFG)
+        md(ui.fuente_dato("Banco Mundial · FP.CPI.TOTL.ZG"))
 
 # ============================================================
 # TAB 3 — DESEMPLEO
@@ -348,14 +396,9 @@ with tab_desempleo:
             text="COVID-19 ▲", showarrow=True, arrowhead=2, ay=-40,
             font=dict(color=C["red"], size=12), arrowcolor=C["red"])
     st.plotly_chart(fig_des, width="stretch", config=PLOTLY_CFG)
+    md(ui.fuente_dato("DANE · GEIH, tasa de desempleo trimestral"))
 
-    st.download_button(
-        "Descargar serie de desempleo (CSV)",
-        data=df_des.to_csv(index=False).encode("utf-8-sig"),
-        file_name="desempleo_trimestral.csv", mime="text/csv",
-    )
-
-    st.markdown("---")
+    st.divider()
     st.markdown("### Comparar ciudades")
     st.markdown(
         "Compara el desempleo entre ciudades para un año específico. Los datos "
@@ -374,32 +417,51 @@ with tab_desempleo:
                                  help="Promedio anual de los 4 trimestres")
 
     if not ciudades_sel:
-        st.info("Selecciona al menos una ciudad para comparar")
+        empty_state("Sin ciudades seleccionadas",
+                    "Elige al menos 2 ciudades en el selector para ver la "
+                    "comparación.")
     elif len(ciudades_sel) < 2:
-        st.info("Selecciona al menos 2 ciudades para ver la comparación.")
+        callout("info", "Selecciona al menos <b>2 ciudades</b> para ver la "
+                        "comparación.")
     else:
         try:
             df_comp = comparar_ciudades(ciudades_sel, anio_comp)
-            fig_comp = px.bar(
-                df_comp, x="ciudad", y="tasa_desempleo_pct",
-                title=f"Desempleo por ciudad — {anio_comp} (promedio anual, %)",
-                labels={"ciudad": "Ciudad", "tasa_desempleo_pct": "Tasa (%)"},
-                color="tasa_desempleo_pct", color_continuous_scale="RdYlGn_r",
-                text="tasa_desempleo_pct",
-            )
-            fig_comp.update_traces(
-                texttemplate="%{text:.1f}%", textposition="outside",
-                hovertemplate="<b>%{x}</b><br>Desempleo: %{y:.1f}%<extra></extra>")
-            fig_comp.update_layout(coloraxis_showscale=False,
-                                   yaxis=dict(ticksuffix="%"), showlegend=False)
-            st.plotly_chart(fig_comp, width="stretch", config=PLOTLY_CFG)
+            if df_comp.empty:
+                empty_state(
+                    f"Sin datos GEIH para {anio_comp}",
+                    "No hay registros para esa combinación de ciudades y año. "
+                    "Prueba con un año entre 2015 y 2023.",
+                )
+            else:
+                fig_comp = px.bar(
+                    df_comp, x="ciudad", y="tasa_desempleo_pct",
+                    title=f"Desempleo por ciudad — {anio_comp} (promedio anual, %)",
+                    labels={"ciudad": "Ciudad", "tasa_desempleo_pct": "Tasa (%)"},
+                    color="tasa_desempleo_pct", color_continuous_scale="RdYlGn_r",
+                    text="tasa_desempleo_pct",
+                )
+                fig_comp.update_traces(
+                    texttemplate="%{text:.1f}%", textposition="outside",
+                    cliponaxis=False,
+                    hovertemplate="<b>%{x}</b><br>Desempleo: %{y:.1f}%<extra></extra>")
+                fig_comp.update_layout(coloraxis_showscale=False,
+                                       yaxis=dict(ticksuffix="%"), showlegend=False)
+                st.plotly_chart(fig_comp, width="stretch", config=PLOTLY_CFG)
+                md(ui.fuente_dato("DANE · GEIH por ciudad, promedio anual"))
+        except KeyError as e:
+            callout("error",
+                    f"No hay datos para el año o ciudad seleccionados ({e}). "
+                    f"Prueba con un año entre 2015 y 2023.")
         except Exception as e:
-            st.error(f"Error al comparar ciudades: {e}")
+            callout("error",
+                    "No fue posible generar la comparación de ciudades. "
+                    f"Detalle: <code>{type(e).__name__}: {e}</code>")
 
-    st.info(
-        "**Contexto:** Colombia tiene una de las tasas de desempleo más altas "
-        "de América Latina. El desempleo juvenil (18-28 años) casi duplica la tasa "
-        "nacional."
+    callout(
+        "dato",
+        "<b>Contexto:</b> Colombia tiene una de las tasas de desempleo más "
+        "altas de América Latina. El desempleo juvenil (18-28 años) casi "
+        "duplica la tasa nacional.",
     )
 
 # ============================================================
@@ -414,53 +476,62 @@ with tab_exportaciones:
     )
 
     df_exp = cargar_exportaciones()
-    anios_exp = sorted(df_exp["anio"].unique(), reverse=True)
-    anio_exp = st.selectbox("Año", anios_exp, index=0, key="exp_anio")
+    if df_exp.empty:
+        empty_state("Sin datos de exportaciones",
+                    "El CSV procesado de exportaciones está vacío o no se generó.",
+                    icn="database")
+    else:
+        anios_exp = sorted(df_exp["anio"].unique(), reverse=True)
+        anio_exp = st.selectbox("Año", anios_exp, index=0, key="exp_anio")
 
-    top = top_productos(anio=anio_exp, n=8)
+        top = top_productos(anio=anio_exp, n=8)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        fig_pie = px.pie(
-            top, values="valor_millones_usd", names="producto",
-            title=f"Composición de exportaciones {anio_exp}", hole=0.45,
+        if top.empty:
+            empty_state(f"Sin exportaciones registradas en {anio_exp}",
+                        "Elige otro año del selector.")
+        else:
+            col1, col2 = st.columns(2)
+            with col1:
+                fig_pie = px.pie(
+                    top, values="valor_millones_usd", names="producto",
+                    title=f"Composición de exportaciones {anio_exp}", hole=0.45,
+                )
+                fig_pie.update_traces(
+                    textposition="inside", textinfo="percent+label",
+                    hovertemplate="<b>%{label}</b><br>USD %{value:.0f}M "
+                                  "(%{percent})<extra></extra>")
+                st.plotly_chart(fig_pie, width="stretch", config=PLOTLY_CFG)
+
+            with col2:
+                fig_bar = px.bar(
+                    top.sort_values("valor_millones_usd"),
+                    x="valor_millones_usd", y="producto", orientation="h",
+                    title=f"Top exportaciones {anio_exp} (USD millones)",
+                    labels={"valor_millones_usd": "USD millones", "producto": ""},
+                    color="valor_millones_usd", color_continuous_scale="YlGnBu",
+                )
+                fig_bar.update_layout(coloraxis_showscale=False)
+                st.plotly_chart(fig_bar, width="stretch", config=PLOTLY_CFG)
+
+            md(ui.fuente_dato("DANE · exportaciones FOB por producto"))
+
+        petroleo_df = df_exp[df_exp["producto"] == "Petroleo y derivados"]
+        if len(petroleo_df) > 1:
+            fig_pet = px.area(
+                petroleo_df.sort_values("anio"), x="anio", y="valor_millones_usd",
+                title="Exportaciones de petróleo y derivados por año",
+                labels={"anio": "Año", "valor_millones_usd": "USD millones"},
+                color_discrete_sequence=[C["c1"]],
+            )
+            st.plotly_chart(fig_pet, width="stretch", config=PLOTLY_CFG)
+
+        callout(
+            "alerta",
+            "<b>Dependencia petrolera:</b> el petróleo representa entre el "
+            "40-55% de las exportaciones. Cuando el precio del crudo cae, "
+            "Colombia recibe menos dólares → el peso se devalúa → las "
+            "importaciones suben.",
         )
-        fig_pie.update_traces(
-            textposition="inside", textinfo="percent+label",
-            hovertemplate="<b>%{label}</b><br>USD %{value:.0f}M (%{percent})<extra></extra>")
-        st.plotly_chart(fig_pie, width="stretch", config=PLOTLY_CFG)
-
-    with col2:
-        fig_bar = px.bar(
-            top.sort_values("valor_millones_usd"),
-            x="valor_millones_usd", y="producto", orientation="h",
-            title=f"Top exportaciones {anio_exp} (USD millones)",
-            labels={"valor_millones_usd": "USD millones", "producto": ""},
-            color="valor_millones_usd", color_continuous_scale="YlGnBu",
-        )
-        fig_bar.update_layout(coloraxis_showscale=False)
-        st.plotly_chart(fig_bar, width="stretch", config=PLOTLY_CFG)
-
-    petroleo_df = df_exp[df_exp["producto"] == "Petroleo y derivados"]
-    if len(petroleo_df) > 1:
-        fig_pet = px.area(
-            petroleo_df.sort_values("anio"), x="anio", y="valor_millones_usd",
-            title="Exportaciones de petróleo y derivados por año",
-            labels={"anio": "Año", "valor_millones_usd": "USD millones"},
-            color_discrete_sequence=[C["c1"]],
-        )
-        st.plotly_chart(fig_pet, width="stretch", config=PLOTLY_CFG)
-
-    st.download_button(
-        "Descargar exportaciones (CSV)",
-        data=df_exp.to_csv(index=False).encode("utf-8-sig"),
-        file_name="exportaciones_anuales.csv", mime="text/csv",
-    )
-    st.warning(
-        "**Dependencia petrolera:** El petróleo representa entre el 40-55% de "
-        "las exportaciones. Cuando el precio del crudo cae, Colombia recibe menos "
-        "dólares → el peso se devalúa → las importaciones suben."
-    )
 
 # ============================================================
 # TAB 5 — CALCULADORAS
@@ -470,7 +541,9 @@ with tab_calculadoras:
     st.markdown("Herramientas para entender el impacto de la economía en tu bolsillo.")
 
     calc1, calc2, calc3 = st.tabs([
-        "Poder adquisitivo", "Tu salario en USD", "Devaluación histórica",
+        ":material/savings: Poder adquisitivo",
+        ":material/attach_money: Tu salario en USD",
+        ":material/history: Devaluación histórica",
     ])
 
     # ---- Calculadora 1: Poder adquisitivo ----
@@ -507,12 +580,14 @@ with tab_calculadoras:
              "color": C["red"]},
         ]))
 
-        st.info(
+        callout(
+            "info",
             f"Con inflación de {inflacion_prom}% anual durante {anios_calc} años "
             f"(acumulada {infl_acumulada:.1f}%), {formatear_pesos(monto)} de hoy "
-            f"tendrán el poder de compra de **{formatear_pesos(r['salario_real'])}**. "
-            f"Necesitarías **{formatear_pesos(r['se_necesita_para_mantener'])}** "
-            f"para mantener el mismo nivel de vida."
+            f"tendrán el poder de compra de "
+            f"<b>{formatear_pesos(r['salario_real'])}</b>. Necesitarías "
+            f"<b>{formatear_pesos(r['se_necesita_para_mantener'])}</b> "
+            f"para mantener el mismo nivel de vida.",
         )
 
     # ---- Calculadora 2: Salario en USD ----
@@ -527,8 +602,8 @@ with tab_calculadoras:
             salario_cop = st.number_input("Tu salario mensual (COP)", 0, 100_000_000,
                                           3_000_000, 100_000)
         with col2:
-            trm_calc = st.number_input("TRM a usar (COP/USD)", 1_000.0, 10_000.0,
-                                       float(trm_hoy), 10.0)
+            trm_calc = st.number_input("TRM a usar (COP/USD)", 1_000.0, 30_000.0,
+                                       _clamp(trm_hoy, 1_000.0, 30_000.0), 10.0)
 
         res_usd = smmlv_a_usd(salario_cop, trm_calc)
         smmlv_usd_calc = SMMLV_REF / trm_calc
@@ -552,10 +627,10 @@ with tab_calculadoras:
         col1, col2 = st.columns(2)
         with col1:
             trm_inicio_val = st.number_input("TRM de referencia (pasado)", 500.0,
-                                             20_000.0, 3_200.0, 50.0)
+                                             30_000.0, 3_200.0, 50.0)
         with col2:
-            trm_fin_val = st.number_input("TRM actual", 500.0, 20_000.0,
-                                          float(trm_hoy), 50.0)
+            trm_fin_val = st.number_input("TRM actual", 500.0, 30_000.0,
+                                          _clamp(trm_hoy, 500.0, 30_000.0), 50.0)
 
         if trm_inicio_val > 0:
             devaluacion = (trm_fin_val / trm_inicio_val - 1) * 100
@@ -568,24 +643,27 @@ with tab_calculadoras:
             ]))
 
             if devaluacion > 0:
-                st.warning(
-                    f"El peso perdió **{devaluacion:.1f}%** de su valor frente al "
-                    f"dólar. Lo que costaba USD 100 (${trm_inicio_val:,.0f}), ahora "
-                    f"cuesta ${trm_fin_val:,.0f}."
+                callout(
+                    "alerta",
+                    f"El peso perdió <b>{devaluacion:.1f}%</b> de su valor frente "
+                    f"al dólar. Lo que costaba USD 100 (${trm_inicio_val:,.0f}), "
+                    f"ahora cuesta ${trm_fin_val:,.0f}.",
                 )
             else:
-                st.success(
-                    f"El peso se fortaleció **{abs(devaluacion):.1f}%** frente al "
-                    "dólar. Las importaciones se abaratan y los ingresos en dólares "
-                    "valen menos en pesos."
+                callout(
+                    "exito",
+                    f"El peso se fortaleció <b>{abs(devaluacion):.1f}%</b> frente "
+                    "al dólar. Las importaciones se abaratan y los ingresos en "
+                    "dólares valen menos en pesos.",
                 )
 
 # ---------------------------------------------------------------------------
 # Footer
 # ---------------------------------------------------------------------------
 st.divider()
-st.caption(
-    "Fuentes oficiales: DANE · Banco de la República · Superintendencia "
-    "Financiera · datos.gov.co  \n"
-    "Los valores de respaldo corresponden a series históricas documentadas."
-)
+md(f"<div style='display:flex;gap:8px;align-items:flex-start;"
+   f"color:{C['muted']};font-size:12px;line-height:1.6'>"
+   f"{ui.icono('database', 14, C['muted'])}"
+   f"<span>Fuentes oficiales: DANE · Banco de la República · Superintendencia "
+   f"Financiera · datos.gov.co<br>Los valores de respaldo corresponden a "
+   f"series históricas documentadas.</span></div>")
