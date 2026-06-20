@@ -1,0 +1,31 @@
+name: Actualizar PIB per cápita
+
+on:
+  schedule:
+    - cron: "0 13 1 * *"   # día 1 de cada mes, 8AM Colombia (UTC-5)
+  workflow_dispatch:
+
+jobs:
+  actualizar-pib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Descargar PIB per cápita del Banco Mundial
+        run: python scripts/actualizar_pib_percapita.py
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/processed/pib_percapita.csv
+          git diff --staged --quiet || git commit -m "Actualiza PIB per cápita: $(date +%Y-%m-%d)"
+          git push
