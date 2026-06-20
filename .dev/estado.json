@@ -1,22 +1,23 @@
 {
-  "fecha": "2026-06-10T00:00:00Z",
-  "ultimo_commit": "e763302",
+  "fecha": "2026-06-20T00:00:00Z",
+  "ultimo_commit": "e613f4d",
   "modulos_completados": [
     "Rediseño dashboard 2026 (skill ui-ux-pro-max, estilo 'Data-Dense Dashboard'): Fira Sans + Fira Code para cifras, ui.header_app con franja tricolor, KPIs .cdi-kpi con hover, tabs sin emojis, focus-visible, prefers-reduced-motion; paleta: blue #3B82F6 y c3 ámbar #F59E0B (CTA), border #243047",
     "Filtro de período (6/12/18/24 meses) en la pestaña TRM",
     "Botones de descarga CSV: histórico TRM, serie IPC, desempleo trimestral y exportaciones anuales",
     "SMMLV_REF actualizado a 1.750.905 (SMMLV 2026, Decreto 1469 de 2025)",
-    "pytest.ini con testpaths=tests y norecursedirs para no recoger el clon anidado factura-co/ (sus app/ui.py chocan en sys.path); factura-co/ añadido a .gitignore"
+    "pytest.ini con testpaths=tests y norecursedirs para no recoger el clon anidado factura-co/ (sus app/ui.py chocan en sys.path); factura-co/ añadido a .gitignore",
+    "PIB per cápita Colombia (NY.GDP.PCAP.CD): script actualizar_pib_percapita.py, CSV data/processed/pib_percapita.csv con datos reales 2010-2024 ($7.919 USD en 2024), GitHub Action mensual (.github/workflows/actualizar_pib.yml, día 1 de cada mes 8AM Colombia)"
   ],
   "ya_existian": [
     "src/colombia_data/* (ipc, desempleo, exportaciones, trm_live, utils), api/main.py (FastAPI), inflacion_anual.csv del Banco Mundial + Action mensual, Action TRM diaria"
   ],
   "en_progreso": "",
-  "siguiente_paso": "Automatizar otros indicadores anuales desde el Banco Mundial (PIB, desempleo) con el mismo patrón script + Action; comparar la inflación anual del Banco Mundial con el cierre de diciembre del DANE en la pestaña Inflación.",
+  "siguiente_paso": "Integrar pib_percapita.csv en el dashboard (pestaña nueva o sección en Economía); comparar la inflación anual del Banco Mundial con el cierre de diciembre del DANE en la pestaña Inflación.",
   "tests_pasando": 113,
-  "notas_tecnicas": "pytest (PYTHONPATH=src) -> 113 passed (con pytest.ini ya no se cuelan los 152 tests del clon anidado). OJO: este working copy vive en C:/Users/juans/propuesta-co/colombia-data-insights (anidado dentro del clon de propuesta-co). La skill de diseño vive en ~/.claude/skills/ui-ux-pro-max.",
+  "notas_tecnicas": "pytest (PYTHONPATH=src) -> 113 passed (con pytest.ini ya no se cuelan los tests de otros repos). OJO: este working copy vive en C:/Users/juans/Desktop/colombia-data-insights (clon fresco). La skill de diseño vive en ~/.claude/skills/ui-ux-pro-max.",
   "pendiente_diseno": [
-    "Indicadores anuales adicionales (PIB, desempleo) vía World Bank",
+    "Pestaña o sección de PIB per cápita en el dashboard",
     "Comparativa World Bank vs DANE en la pestaña Inflación"
   ]
 }
